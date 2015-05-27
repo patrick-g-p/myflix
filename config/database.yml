@@ -4,8 +4,8 @@ development:
   database: myflix_dev
   host: localhost
   pool: 5
-  username: 'patrick_tealeaf'
-  password: 'myflix'
+  username: <%= ENV["MFUSER"] %>
+  password: <%= ENV["MFPASSWORD"] %>
 
 test:
   adapter: postgresql
@@ -13,5 +13,5 @@ test:
   database: myflix_test
   host: localhost
   pool: 5
-  username: 'patrick_tealeaf'
-  password: 'myflix'
+  username: <%= ENV["MFUSER"] %>
+  password: <%= ENV["MFPASSWORD"] %>
