@@ -1,0 +1,17 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: myapp_dev
+  host: localhost
+  pool: 5
+  username: 'patrick_tealeaf'
+  password: 'myflix'
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: myapp_test
+  host: localhost
+  pool: 5
+  username: 'patrick_tealeaf'
+  password: 'myflix'
