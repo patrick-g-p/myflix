@@ -1,7 +1,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: myapp_dev
+  database: myflix_dev
   host: localhost
   pool: 5
   username: 'patrick_tealeaf'
@@ -10,7 +10,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: myapp_test
+  database: myflix_test
   host: localhost
   pool: 5
   username: 'patrick_tealeaf'
