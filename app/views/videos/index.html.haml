@@ -1,8 +1,10 @@
 %article.video_category
   %header
     - @category.each do |category|
-      %h3= category.name if category.videos.size > 0
+      = link_to category_path(category) do
+        %h3= category.name if category.videos.size > 0
       .videos.row
         - category.videos.each do |video|
           .video.col-sm-2
-            = image_tag video.small_cover_url
+            = link_to video_path(video) do
+              = image_tag video.small_cover_url
