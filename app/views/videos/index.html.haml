@@ -1,7 +1,8 @@
 %article.video_category
   %header
-    %h3= link_to "TV Comedies"
-  .videos.row
-    - @videos.each do |video|
-      .video.col-sm-2
-        = image_tag video.small_cover_url
+    - @category.each do |category|
+      %h3= category.name if category.videos.size > 0
+      .videos.row
+        - category.videos.each do |video|
+          .video.col-sm-2
+            = image_tag video.small_cover_url
