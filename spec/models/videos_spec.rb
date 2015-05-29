@@ -33,4 +33,14 @@ describe Video do
     video.valid?
     expect(video.errors).to have_key(:description)
   end
+
+  it "does not save a video without a title" do
+    video = Video.create(description: 'The greatest description EVER')
+    expect(Video.count).to eq(0)
+  end
+
+  it "does not save a video without a description" do
+    video = Video.create(title: 'Video 2: Electric Boogaloo')
+    expect(Video.count).to eq(0)
+  end
 end
