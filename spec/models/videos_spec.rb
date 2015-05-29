@@ -10,6 +10,6 @@ describe Video do
                       large_cover_url: "firefly_large.jpg",
                       category_id: 1)
     video.save
-    video.title.should == "Firefly"
+    expect(Video.first.title).to eq("Firefly")
   end
 end
