@@ -15,4 +15,10 @@ describe Video do
     video = Video.reflect_on_association(:category)
     expect(video.macro).to eq(:belongs_to)
   end
+
+  it 'really has a category' do
+    category = Category.create(name: 'Marvel')
+    video = Video.create(title: 'Captain America: Winter Solider', description: 'One of the few superhero films that could\'ve stood on its own', category: category)
+    expect(video.category).to eq(category)
+  end
 end
