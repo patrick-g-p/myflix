@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-#1. set up data 2. perform action 3. verify results
-
 describe Video do
   it 'saves to the database' do
     video = Video.new(title: "Firefly",
@@ -11,5 +9,10 @@ describe Video do
                       category_id: 1)
     video.save
     expect(Video.first.title).to eq("Firefly")
+  end
+
+  it 'has a category' do
+    video = Video.reflect_on_association(:category)
+    expect(video.macro).to eq(:belongs_to)
   end
 end
