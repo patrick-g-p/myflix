@@ -21,4 +21,16 @@ describe Video do
     video = Video.create(title: 'Captain America: Winter Solider', description: 'One of the few superhero films that could\'ve stood on its own', category: category)
     expect(video.category).to eq(category)
   end
+
+  it 'has an error with no title' do
+    video = Video.create(title: '')
+    video.valid?
+    expect(video.errors).to have_key(:title)
+  end
+
+  it 'has an error with no description' do
+    video = Video.create(description: '')
+    video.valid?
+    expect(video.errors).to have_key(:description)
+  end
 end
