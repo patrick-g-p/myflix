@@ -39,7 +39,7 @@ Video.create!(title: "Archer",
 Video.create!(title: "Bob's Burgers",
               description: "A hysterical comedy about a family and their burger joint.",
               small_cover_url: "bobs_burgers.jpg",
-              large_cover_url: "bobs_burgers.jpg",
+              large_cover_url: "bobs_burgers_large.jpg",
               category: categories[1])
 
 Video.create!(title: "Batman Beyond",
