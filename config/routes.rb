@@ -1,7 +1,12 @@
 Myflix::Application.routes.draw do
   get 'ui(/:action)', controller: 'ui'
 
-  get '/home', to: 'videos#index'
+  root to: 'pages#welcome'
+
+  get '/register', to: 'users#new'
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  get '/logout', to: 'sessions#destroy'
 
   resources :videos, only: [:index, :show] do
     collection do
@@ -9,4 +14,5 @@ Myflix::Application.routes.draw do
     end
   end
   resources :categories, only: [:show]
+  resources :users, only: [:new, :create]
 end
