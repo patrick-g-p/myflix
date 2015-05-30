@@ -12,6 +12,12 @@ categories = []
   categories << Category.find_or_create_by(name: category)
 end
 
+Video.create!(title: "Family Guy",
+             description: "An average comedy that you'll watch at 3am on Adult Swim when you can't sleep.",
+             small_cover_url: "family_guy.jpg",
+             large_cover_url: "family_guy_large.jpg",
+             category: categories[1])
+
 Video.create!(title: "Futurama",
              description: "A pizza dilvery boy is flung into the year 3000! One of the best animated comedies ever made.",
              small_cover_url: "futurama.jpg",
@@ -22,12 +28,6 @@ Video.create!(title: "South Park",
              description: "The legendary animated series by Matt Stone and Trey Parker.",
              small_cover_url: "south_park.jpg",
              large_cover_url: "south_park_large.jpg",
-             category: categories[1])
-
-Video.create!(title: "Family Guy",
-             description: "An average comedy that you'll watch at 3am on Adult Swim when you can't sleep.",
-             small_cover_url: "family_guy.jpg",
-             large_cover_url: "family_guy_large.jpg",
              category: categories[1])
 
 Video.create!(title: "Archer",
