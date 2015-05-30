@@ -8,7 +8,7 @@
         = link_to category do
           %h3= category.name
       .videos.row
-        - category.videos.each do |video|
+        - category.recent_videos.each do |video|
           .video.col-sm-2
             = link_to video do
               = image_tag video.small_cover_url
