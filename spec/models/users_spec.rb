@@ -1,6 +1,7 @@
 require 'spec_helper'
 
-decribe User do
+describe User do
   it { should have_secure_password }
-  it { should validate_presence_of(:email, :full_name) }
+  it { should validate_presence_of(:email) }
+  it { should validate_presence_of(:full_name) }
 end
