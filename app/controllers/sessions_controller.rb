@@ -1,6 +1,8 @@
 class SessionsController < ApplicationController
   def new
-
+    if logged_in?
+      redirect_to home_path
+    end
   end
 
   def create
@@ -9,7 +11,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:success] = 'Welcome back to MyFliX!'
-      redirect_to videos_path
+      redirect_to home_path
     else
       flash[:danger] = 'Something was wrong with either your email or password.'
       redirect_to login_path
