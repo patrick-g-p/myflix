@@ -7,7 +7,6 @@ describe Category do
 
     let(:category) {Category.create(name: 'Science Fiction')}
 
-
     it 'returns an empty array if there are no videos in the category' do
       expect(category.recent_videos).to eq([])
     end
