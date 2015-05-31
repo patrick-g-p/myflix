@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def no_access
-    flash[:danger] = "You don't have permission to do that action"
-    redirect_to root_path
+    flash[:danger] = "You need to be logged in to do that."
+    redirect_to login_path
   end
 end
