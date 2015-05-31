@@ -1,0 +1,11 @@
+%section.register.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      = bootstrap_form_tag url: '/login' do |f|
+        = f.label 'Login to your account:'
+        = f.email_field :email
+        = f.password_field :password
+        = f.submit 'Login'
+  .row
+    .col-sm-10.col-sm-offset-1
+      = link_to 'Need to register an account?', register_path

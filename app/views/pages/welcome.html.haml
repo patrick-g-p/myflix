@@ -1,0 +1,16 @@
+%section.site_title
+  .row
+    .col-md-6
+      %h1
+        MyFliX - Unlimited movies for just 9.99 a month
+        %br
+        = link_to "Sign Up Now!", register_path
+        %hr
+        Already have an account? Please
+        = link_to "Sign In", login_path
+    .col-md-6
+      %h1 A few of our most popular titles:
+      = image_tag('futurama.jpg')
+      = image_tag('firefly.jpg')
+      = image_tag('batman_beyond.jpg')
+      = image_tag('monk.jpg')
