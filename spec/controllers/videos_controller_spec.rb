@@ -37,7 +37,7 @@ describe VideosController do
   end
 
   context "user isn't logged in" do
-    let(:star_wars) {Fabricate(:video, title: 'Star Wars: A New Hope')}
+    let!(:star_wars) {Fabricate(:video, title: 'Star Wars: A New Hope')}
 
     describe 'GET show' do
       it 'redirects to login page when not authenticated' do
@@ -48,7 +48,7 @@ describe VideosController do
 
     describe 'GET search' do
       it 'redirects to login page when not authenticated' do
-        get :search, id: star_wars.title
+        get :search, search: 'st'
         expect(response).to redirect_to(login_path)
       end
     end
