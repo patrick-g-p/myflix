@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       flash[:success] = 'Your account was set up. Welcome to MyFliX!'
       redirect_to home_path
     else
-      render 'new'
+      render :new
     end
   end
 
