@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Video do
   it { should belong_to(:category) }
+  it { should have_many(:reviews)}
 
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:description) }
@@ -31,4 +32,25 @@ describe Video do
     end
 
   end
+
+  describe 'total_reviews' do
+    it 'returns the exact number of reviews for the video' do
+      video = Fabricate(:video)
+      video.reviews << Fabricate(:review) << Fabricate(:review)
+      expect(video.total_reviews).to eq(2)
+    end
+  end
+
+  describe 'average_rating' do
+    it 'returns nil if there are 0 reviews' do
+      video = Fabricate(:video)
+      expect(video.average_rating).to be_nil
+    end
+    it 'returns the average in integer form' do
+      video = Fabricate(:video)
+      video.reviews << Fabricate(:review) << Fabricate(:review)
+      expect(video.average_rating).to be_a(Fixnum)
+    end
+  end
+
 end

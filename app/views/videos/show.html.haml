@@ -6,8 +6,23 @@
       .video_info.col-sm-3
         %header
           %h3= @video.title
-          %span Rating: #/5.0
+          %span= proper_rating(@video.average_rating)
         %p= @video.description
         .actions
           %a.btn.btn-primary(href="") Watch Now
           %a.btn.btn-default(href="") + My Queue
+
+%section.reviews.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      %header
+        %h3= "User Reviews: (#{@video.total_reviews}) "
+      %ul
+        %article.review
+          - @video.reviews.each do |review|
+            %li.row
+              .col-sm-3
+                %span= "Rating: #{review.rating}"
+                %p= "by #{review.creator.full_name}" #TODO make this a link to user page
+              .col-sm-8.col-sm-offset-1
+                %p= review.body
