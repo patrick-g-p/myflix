@@ -33,14 +33,6 @@ describe Video do
 
   end
 
-  describe 'total_reviews' do
-    it 'returns the exact number of reviews for the video' do
-      video = Fabricate(:video)
-      video.reviews << Fabricate(:review) << Fabricate(:review)
-      expect(video.total_reviews).to eq(2)
-    end
-  end
-
   describe 'average_rating' do
     it 'returns nil if there are 0 reviews' do
       video = Fabricate(:video)

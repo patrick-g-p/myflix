@@ -16,10 +16,10 @@
   .row
     .col-sm-10.col-sm-offset-1
       %header
-        %h3= "User Reviews: (#{@video.total_reviews}) "
+        %h3= "User Reviews: (#{@reviews.count}) "
       %ul
         %article.review
-          - @video.reviews.each do |review|
+          - @reviews.each do |review|
             %li.row
               .col-sm-3
                 %span= "Rating: #{review.rating}"
