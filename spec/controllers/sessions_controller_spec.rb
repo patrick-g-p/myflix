@@ -27,8 +27,8 @@ describe SessionsController do
         expect(session[:user_id]).to eq(geralt.id)
       end
 
-      it 'redirects to home when a valid session is set' do
-        expect(response).to redirect_to :home
+      it 'redirects to home when a session is set' do
+        expect(response).to redirect_to home_path
       end
     end
 
@@ -42,7 +42,7 @@ describe SessionsController do
       end
 
       it 'redirects to login' do
-        expect(response).to redirect_to :login
+        expect(response).to redirect_to login_path
       end
     end
   end
@@ -56,8 +56,8 @@ describe SessionsController do
     it 'sets the session user_id to nil' do
       expect(session[:user_id]).to be nil
     end
-    it 'redirects to the welcome page/root path' do
-      expect(response).to redirect_to :root
+    it 'redirects to the welcome page/root' do
+      expect(response).to redirect_to root_path
     end
   end
 
