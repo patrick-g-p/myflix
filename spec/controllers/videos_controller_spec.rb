@@ -13,9 +13,10 @@ describe VideosController do
 
     it 'sets the @reviews instance variable if logged in' do
       session[:user_id] = Fabricate(:user).id
+      robo_review = Fabricate(:review)
+      robocop.reviews << robo_review
       get :show, id: robocop.id
-      robocop.reviews << Fabricate(:review)
-      expect(assigns(:reviews)).to eq(robocop.reviews)
+      expect(assigns(:reviews)).to eq([robo_review])
     end
 
     it 'redirects to login page when not authenticated' do
