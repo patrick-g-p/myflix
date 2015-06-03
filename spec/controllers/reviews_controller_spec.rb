@@ -7,9 +7,12 @@ describe ReviewsController do
     context 'user is logged in' do
       let!(:current_user) {Fabricate(:user)}
 
+      before(:each) do
+        session[:user_id] = current_user.id
+      end
+
       context 'the input is valid' do
         before(:each) do
-          session[:user_id] = current_user.id
           post :create, video_id: video.id, review: Fabricate.attributes_for(:review)
         end
 
@@ -31,15 +34,16 @@ describe ReviewsController do
       end
 
       context 'the input is not valid' do
-        before(:each) do
-          session[:user_id] = current_user.id
-          post :create, video_id: video.id, review: Fabricate.attributes_for(:review, body: '')
-        end
         it 'renders the videos/show page' do
+          post :create, video_id: video.id, review: Fabricate.attributes_for(:review, body: '')
           expect(response).to render_template 'videos/show'
         end
+
         it 'sets the @reviews instance variable' do
-          expect(assigns(:reviews)).to eq([])
+          movie_critique = Fabricate(:review)
+          video.reviews << movie_critique
+          post :create, video_id: video.id, review: Fabricate.attributes_for(:review, body: '')
+          expect(assigns(:reviews)).to eq([movie_critique])
         end
       end
     end
