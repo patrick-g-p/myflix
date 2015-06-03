@@ -7,10 +7,10 @@ class ReviewsController < ApplicationController
     review.creator = current_user
 
     if review.save
-      flash[:success] = "Your review was added"
+      flash[:success] = "Your review was added! Thanks for contributing!"
       redirect_to @video
     else
-      flash[:danger] = "You can't submit a blank review!"
+      flash[:danger] = "You cannot submit a blank review"
       @reviews = @video.reviews.reload
       render 'videos/show'
     end
