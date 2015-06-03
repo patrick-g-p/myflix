@@ -11,15 +11,8 @@ class Video < ActiveRecord::Base
   end
 
   def average_rating
-    number_of_ratings = reviews.count
-    return nil if number_of_ratings == 0
+    return nil if reviews.count == 0
 
-    sum_of_ratings = 0
-
-    reviews.each do |review|
-      sum_of_ratings += review.rating
-    end
-
-    sum_of_ratings / number_of_ratings
+    reviews.pluck(:rating).reduce(:+) / reviews.count
   end
 end

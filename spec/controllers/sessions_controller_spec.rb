@@ -16,7 +16,7 @@ describe SessionsController do
   end
 
   describe 'POST create' do
-    let!(:geralt) {Fabricate(:user)}
+    let(:geralt) {Fabricate(:user)}
 
     context 'when valid' do
       before(:each) do
@@ -27,7 +27,7 @@ describe SessionsController do
         expect(session[:user_id]).to eq(geralt.id)
       end
 
-      it 'redirects to home when a session is set' do
+      it 'redirects to home' do
         expect(response).to redirect_to home_path
       end
     end

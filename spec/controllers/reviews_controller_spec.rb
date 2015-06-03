@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe ReviewsController do
   describe 'POST create' do
-    let!(:video) {Fabricate(:video)}
+    let(:video) {Fabricate(:video)}
 
     context 'user is logged in' do
-      let!(:current_user) {Fabricate(:user)}
+      let(:current_user) {Fabricate(:user)}
 
       before(:each) do
         session[:user_id] = current_user.id
@@ -40,8 +40,7 @@ describe ReviewsController do
         end
 
         it 'sets the @reviews instance variable' do
-          movie_critique = Fabricate(:review)
-          video.reviews << movie_critique
+          movie_critique = Fabricate(:review, video_id: video.id)
           post :create, video_id: video.id, review: Fabricate.attributes_for(:review, body: '')
           expect(assigns(:reviews)).to eq([movie_critique])
         end

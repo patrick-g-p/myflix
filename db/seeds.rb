@@ -66,11 +66,4 @@ Video.create!(title: "Firefly",
               large_cover_url: "firefly_large.jpg",
               category: categories[0])
 
-geralt = Fabricate(:user, full_name: 'Geralt of Rivia')
-
-Review.create!(rating: 5,
-              body: '<Green Arrow3',
-              creator: geralt,
-              video: jlu)
-
-6.times {Fabricate(:review, creator: Fabricate(:user), video: jlu )}
+7.times {Fabricate(:review, creator: Fabricate(:user), video: jlu )}
