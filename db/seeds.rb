@@ -48,11 +48,11 @@ Video.create!(title: "Batman Beyond",
               large_cover_url: "batman_beyond_large.jpg",
               category: categories[1])
 
-Video.create!(title: "Justice League Unlimited",
-              description: "The pinnacle of the DC animated universe.",
-              small_cover_url: "jlu.jpg",
-              large_cover_url: "jlu_large.jpg",
-              category: categories[1])
+jlu = Video.create!(title: "Justice League Unlimited",
+                    description: "The pinnacle of the DC animated universe.",
+                    small_cover_url: "jlu.jpg",
+                    large_cover_url: "jlu_large.jpg",
+                    category: categories[1])
 
 Video.create!(title: "Monk",
              description: "That guy from Glaxy Quest is akward and solves mysteries.",
@@ -65,3 +65,5 @@ Video.create!(title: "Firefly",
               small_cover_url: "firefly.jpg",
               large_cover_url: "firefly_large.jpg",
               category: categories[0])
+
+7.times {Fabricate(:review, creator: Fabricate(:user), video: jlu )}

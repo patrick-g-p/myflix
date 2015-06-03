@@ -1,5 +1,6 @@
 class Video < ActiveRecord::Base
   belongs_to :category
+  has_many :reviews, -> { order('created_at DESC') }
 
   validates_presence_of :title, :description
   validates_uniqueness_of :title
@@ -7,5 +8,11 @@ class Video < ActiveRecord::Base
   def self.search_by_title(search)
     return [] if search.blank?
     self.where("title LIKE ?", "%#{search.titleize}%" ).order('created_at DESC')
+  end
+
+  def average_rating
+    return nil if reviews.count == 0
+
+    reviews.pluck(:rating).reduce(:+) / reviews.count
   end
 end
