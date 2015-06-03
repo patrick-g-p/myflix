@@ -13,6 +13,6 @@ class Video < ActiveRecord::Base
   def average_rating
     return nil if reviews.count == 0
 
-    reviews.pluck(:rating).reduce(:+) / reviews.count
+    reviews.average(:rating).to_f.round(1)
   end
 end

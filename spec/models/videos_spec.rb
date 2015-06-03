@@ -41,7 +41,7 @@ describe Video do
     it 'returns the average in integer form' do
       video = Fabricate(:video)
       video.reviews << Fabricate(:review) << Fabricate(:review)
-      expect(video.average_rating).to be_a(Fixnum)
+      expect(video.average_rating).to be_a(Float)
     end
   end
 
