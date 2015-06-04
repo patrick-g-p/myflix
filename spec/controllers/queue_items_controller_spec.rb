@@ -18,52 +18,77 @@ describe QueueItemsController do
   end
 
   describe 'POST create' do
-    it 'redirects to the queue path when successful' do
-      current_user = Fabricate(:user)
-      session[:user_id] = current_user.id
-      video = Fabricate(:video)
-      post :create, video_id: video.id
-      expect(response).to redirect_to my_queue_path
+    context 'logged in' do
+      let(:current_user) {Fabricate(:user)}
+      let(:video) {Fabricate(:video)}
+
+      before(:each) do
+        session[:user_id] = current_user.id
+      end
+
+      it 'redirects to the queue path when successful' do
+        post :create, video_id: video.id
+        expect(response).to redirect_to my_queue_path
+      end
+
+      it 'creates a queue item' do
+        post :create, video_id: video.id
+        expect(QueueItem.count).to eq(1)
+      end
+
+      it 'creates a queue item associated with the video' do
+        post :create, video_id: video.id
+        expect(QueueItem.first.video).to eq(video)
+      end
+
+      it 'creates a queue item associated with the current_user' do
+        post :create, video_id: video.id
+        expect(QueueItem.first.user).to eq(current_user)
+      end
+
+      it 'adds the video at the end of the queue list' do
+        Fabricate(:queue_item, video: video, user: current_user, list_position: 1)
+        another_video = Fabricate(:video)
+        post :create, video_id: another_video.id
+        expect(QueueItem.last.list_position).to be 2
+      end
     end
 
-    it 'creates a queue item' do
-      current_user = Fabricate(:user)
-      session[:user_id] = current_user.id
-      video = Fabricate(:video)
-      post :create, video_id: video.id
-      expect(QueueItem.count).to eq(1)
+    context 'not logged in' do
+      it 'redirects to login' do
+        video = Fabricate(:video)
+        post :create, video_id: 42
+        expect(response).to redirect_to login_path
+      end
+    end
+  end
+
+  describe 'DELETE destroy' do
+    let(:current_user) {Fabricate(:user)}
+    let(:video) {Fabricate(:video)}
+    let!(:a_queue_item) {QueueItem.create(list_position: 1, video: video, user: current_user)}
+
+    it 'redirects back to my queue' do
+      session[:user_id] = current_user
+      delete :destroy, id: a_queue_item.id
+      expect(:response).to redirect_to my_queue_path
     end
 
-    it 'creates a queue item associated with the video' do
-      current_user = Fabricate(:user)
-      session[:user_id] = current_user.id
-      video = Fabricate(:video)
-      post :create, video_id: video.id
-      expect(QueueItem.first.video).to eq(video)
+    it 'removes the queue item' do
+      session[:user_id] = current_user
+      delete :destroy, id: a_queue_item.id
+      expect(current_user.queue_items).not_to include(a_queue_item)
     end
 
-    it 'creates a queue item associated with the current_user' do
-      current_user = Fabricate(:user)
-      session[:user_id] = current_user.id
-      video = Fabricate(:video)
-      post :create, video_id: video.id
-      expect(QueueItem.first.user).to eq(current_user)
+    it 'does not remove the item if the queue item is not in the queue' do
+      session[:user_id] = current_user
+      delete :destroy, id: 42
+      expect(current_user.queue_items).to eq([a_queue_item])
     end
 
-    it 'adds the video at the end of the queue list' do
-      current_user = Fabricate(:user)
-      session[:user_id] = current_user.id
-      video = Fabricate(:video)
-      Fabricate(:queue_item, video: video, user: current_user, list_position: 1)
-      another_video = Fabricate(:video)
-      post :create, video_id: another_video.id
-      expect(QueueItem.last.list_position).to be 2
-    end
-
-    it 'redirects to login is the user isn\'t logged in' do
-      video = Fabricate(:video)
-      post :create, video_id: video.id
-      expect(response).to redirect_to login_path
+    it 'redirects to login, if user is not logged in' do
+      delete :destroy, id: 42
+      expect(:response).to redirect_to login_path
     end
   end
 

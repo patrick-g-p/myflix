@@ -29,5 +29,5 @@
                 %td
                   = link_to "#{item.category_name}", item.category
                 %td
-                  = link_to "", method: :post do
+                  = link_to item, method: :delete do
                     %i.glyphicon.glyphicon-remove
