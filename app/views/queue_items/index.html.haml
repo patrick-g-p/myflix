@@ -19,7 +19,7 @@
             - @queue_items.each do |item|
               %tr
                 %td
-                  %input.form-control(type="text" value="1")
+                  %input.form-control(type="text" value="#{item.list_position}")
                 %td
                   = link_to "#{item.video_title}", item.video
                 %td
