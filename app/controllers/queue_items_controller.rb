@@ -7,18 +7,22 @@ class QueueItemsController < ApplicationController
 
   def create
     video = Video.find(params[:video_id])
-    list_num = current_user.queue_items.count + 1
-    new_queue_item = QueueItem.new(video: video, user: current_user)
-
-    if new_queue_item.save
-      flash[:success] = "#{video.title} was added to your queue!"
-      redirect_to my_queue_path
-    else
-      flash[:error] = 'Nothing to see here. Move along.'
-      redirect_to video
-    end
+    queue_video(video) unless video_in_queue?(video)
+    redirect_to my_queue_path
   end
 
   private
+
+  def queue_video(video)
+    QueueItem.create(list_position: new_queue_item_position, video: video, user: current_user)
+  end
+
+  def new_queue_item_position
+   current_user.queue_items.count + 1
+  end
+
+  def video_in_queue?(video)
+    current_user.queue_items.map(&:video).include?(video)
+  end
 
 end
