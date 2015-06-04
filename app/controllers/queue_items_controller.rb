@@ -13,10 +13,8 @@ class QueueItemsController < ApplicationController
   end
 
   def destroy
-    unless queue_item_blank?
-      queue_item = QueueItem.find(params[:id])
-      queue_item.destroy
-    end
+    queue_item = QueueItem.find(params[:id])
+    queue_item.destroy if current_user.queue_items.include?(queue_item)
     flash[:danger] = "Title removed from queue"
     redirect_to my_queue_path
   end
@@ -34,9 +32,4 @@ class QueueItemsController < ApplicationController
   def video_in_queue?(video)
     current_user.queue_items.map(&:video).include?(video)
   end
-
-  def queue_item_blank?
-    QueueItem.where(id: params[:id]).blank?
-  end
-
 end

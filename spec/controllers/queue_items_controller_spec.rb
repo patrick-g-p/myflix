@@ -80,9 +80,10 @@ describe QueueItemsController do
       expect(current_user.queue_items).not_to include(a_queue_item)
     end
 
-    it 'does not remove the item if the queue item is not in the queue' do
-      session[:user_id] = current_user
-      delete :destroy, id: 42
+    it 'does not remove the item if the queue item does not belong to that user' do
+      ganondorf = Fabricate(:user)
+      session[:user_id] = ganondorf.id
+      delete :destroy, id: a_queue_item.id
       expect(current_user.queue_items).to eq([a_queue_item])
     end
 
