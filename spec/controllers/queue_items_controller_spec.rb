@@ -66,7 +66,7 @@ describe QueueItemsController do
   describe 'DELETE destroy' do
     let(:current_user) {Fabricate(:user)}
     let(:video) {Fabricate(:video)}
-    let!(:a_queue_item) {QueueItem.create(list_position: 1, video: video, user: current_user)}
+    let(:a_queue_item) {QueueItem.create(list_position: 1, video: video, user: current_user)}
 
     it 'redirects back to my queue' do
       session[:user_id] = current_user
