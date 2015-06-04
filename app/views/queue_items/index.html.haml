@@ -3,9 +3,9 @@
     .col-sm-10.col-sm-offset-1
       %article
         %header
-          %h2= "Your Movie Queue"
-        = button_to "Update Instant Queue", nil, class: "btn btn-info"
-        %hr
+          %h2 Your Movie Queue
+          %hr
+          = link_to "Update Instant Queue", nil, class: "btn btn-info"
         %table.table
           %thead
             %tr
@@ -21,13 +21,13 @@
                 %td
                   %input.form-control(type="text" value="#{item.list_position}")
                 %td
-                  = link_to "#{item.video_title}", item.video
+                  = link_to item.video_title, item.video
                 %td
                   = button_to "Play", nil, class: "btn btn-default"
                 %td
                   = item.rating
                 %td
-                  = link_to "#{item.category_name}", item.category
+                  = link_to item.category_name, item.category
                 %td
                   = link_to item, method: :delete do
                     %i.glyphicon.glyphicon-remove

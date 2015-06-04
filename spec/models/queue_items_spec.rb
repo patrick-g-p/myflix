@@ -3,20 +3,13 @@ require 'spec_helper'
 describe QueueItem do
   it { should belong_to(:user) }
   it { should belong_to(:video) }
-  it { should validate_presence_of(:user_id) }
-  it { should validate_presence_of(:video_id) }
-  it { should validate_presence_of(:list_position) }
 
   let(:user) {Fabricate(:user)}
   let(:category) {Fabricate(:category)}
   let(:video) {Fabricate(:video, category: category, title:'Mad Max: Fury Road')}
   let(:queue_item) {Fabricate(:queue_item, user: user, video: video)}
 
-  describe '#video_title' do
-    it 'returns the title of the associated video' do
-      expect(queue_item.video_title).to eq('Mad Max: Fury Road')
-    end
-  end
+  it { should delegate_method(:title).to(:video).with_prefix(:video) }
 
   describe '#rating' do
     it 'returns the reviews rating' do
@@ -35,9 +28,6 @@ describe QueueItem do
     end
   end
 
-  describe '#category' do
-    it 'returns the associated videos category' do
-      expect(queue_item.category).to be(category)
-    end
-  end
+  it { should delegate_method(:category).to(:video) }
+
 end
