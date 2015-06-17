@@ -4,30 +4,25 @@
       %article
         %header
           %h2 Your Movie Queue
-          %hr
-          = link_to "Update Instant Queue", nil, class: "btn btn-info"
-        %table.table
-          %thead
-            %tr
-              %th(width="10%") List Order
-              %th(width="30%") Video Title
-              %th(width="10%") Play
-              %th(width="20%") Rating
-              %th(width="15%") Genre
-              %th(width="15%") Remove
-          %tbody
-            - @queue_items.each do |item|
+        = form_tag update_queue_path do
+          %table.table
+            %thead
               %tr
-                %td
-                  %input.form-control(type="text" value="#{item.list_position}")
-                %td
-                  = link_to item.video_title, item.video
-                %td
-                  = button_to "Play", nil, class: "btn btn-default"
-                %td
-                  = item.rating
-                %td
-                  = link_to item.category_name, item.category
-                %td
-                  = link_to item, method: :delete do
-                    %i.glyphicon.glyphicon-remove
+                %th(width="10%") List Order
+                %th(width="30%") Video Title
+                %th(width="10%") Play
+                %th(width="20%") Rating
+                %th(width="15%") Genre
+                %th(width="15%") Remove
+            %tbody
+              - @queue_items.each do |item|
+                %tr
+                  %td= text_field_tag :list_position, item.list_position
+                  %td= link_to item.video_title, item.video
+                  %td= button_to "Play", nil, class: "btn btn-default"
+                  %td= item.rating
+                  %td= link_to item.category_name, item.category
+                  %td
+                    = link_to item, method: :delete do
+                      %i.glyphicon.glyphicon-remove
+          = submit_tag 'Update your queue', class: 'btn btn-info'
