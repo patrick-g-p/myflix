@@ -17,7 +17,8 @@
             %tbody
               - @queue_items.each do |item|
                 %tr
-                  %td= text_field_tag :list_position, item.list_position
+                  = hidden_field_tag 'queue_items[][id]', item.id
+                  %td= text_field_tag 'queue_items[][list_position]', item.list_position
                   %td= link_to item.video_title, item.video
                   %td= button_to "Play", nil, class: "btn btn-default"
                   %td= item.rating
