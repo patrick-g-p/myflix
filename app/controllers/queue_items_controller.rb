@@ -24,7 +24,7 @@ class QueueItemsController < ApplicationController
       update_queue_items
       normalize_queue_list
     rescue ActiveRecord::RecordInvalid
-      flash[:error] = "Something horrible has happened"
+      flash[:danger] = "Invalid list number"
     end
     redirect_to my_queue_path
   end

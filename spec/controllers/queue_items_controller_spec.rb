@@ -132,7 +132,7 @@ describe QueueItemsController do
           queue_item1 = Fabricate(:queue_item, user: samus, list_position: 1)
           queue_item2 = Fabricate(:queue_item, user: samus, list_position: 2)
           post :update_queue, queue_items: [{id: queue_item1.id, list_position: 1.9}, {id: queue_item2.id, list_position: 2}]
-          expect(flash[:error]).to be_present
+          expect(flash[:danger]).to be_present
         end
         it 'does not update the queue items' do
           queue_item1 = Fabricate(:queue_item, user: samus, list_position: 1)
