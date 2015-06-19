@@ -7,23 +7,23 @@ class QueueItemsController < ApplicationController
 
   def create
     video = Video.find(params[:video_id])
-    queue_video(video) unless video_in_queue?(video)
+    queue_video(video) unless current_user.video_in_queue?(video)
     flash[:success] = "#{video.title} was added to your queue!"
     redirect_to my_queue_path
   end
 
   def destroy
     queue_item = QueueItem.find(params[:id])
-    queue_item.destroy if queue_item_in_users_queue?(queue_item)
+    queue_item.destroy if current_user.item_in_queue?(queue_item)
     flash[:danger] = "Title removed from queue"
-    normalize_queue_list
+    current_user.normalize_queue_list
     redirect_to my_queue_path
   end
 
   def update_queue
     begin
       update_queue_items
-      normalize_queue_list
+      current_user.normalize_queue_list
     rescue ActiveRecord::RecordInvalid
       flash[:danger] = "Invalid list number"
     end
@@ -33,19 +33,7 @@ class QueueItemsController < ApplicationController
   private
 
   def queue_video(video)
-    QueueItem.create(list_position: new_queue_item_position, video: video, user: current_user)
-  end
-
-  def new_queue_item_position
-   current_user.queue_items.count + 1
-  end
-
-  def video_in_queue?(video)
-    current_user.queue_items.map(&:video).include?(video)
-  end
-
-  def queue_item_in_users_queue?(queue_item)
-    current_user.queue_items.include?(queue_item)
+    QueueItem.create(list_position: current_user.new_list_position, video: video, user: current_user)
   end
 
   def update_queue_items
@@ -54,12 +42,6 @@ class QueueItemsController < ApplicationController
         item = QueueItem.find(item_data['id'])
         item.update!(list_position: item_data['list_position']) if item.user == current_user
       end
-    end
-  end
-
-  def normalize_queue_list
-    current_user.queue_items.each_with_index do |item, index_num|
-      item.update(list_position: index_num + 1)
     end
   end
 end
