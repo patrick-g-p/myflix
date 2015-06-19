@@ -80,6 +80,14 @@ describe QueueItemsController do
       expect(current_user.queue_items).not_to include(a_queue_item)
     end
 
+    it 'normalizes the queue item list after removing an item' do
+      session[:user_id] = current_user
+      queue_item1 = Fabricate(:queue_item, user: current_user, list_position: 1)
+      queue_item2 = Fabricate(:queue_item, user: current_user, list_position: 2)
+      delete :destroy, id: queue_item1.id
+      expect(queue_item2.reload.list_position).to eq(1)
+    end
+
     it 'does not remove the item if the queue item does not belong to that user' do
       ganondorf = Fabricate(:user)
       session[:user_id] = ganondorf.id

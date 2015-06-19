@@ -16,6 +16,7 @@ class QueueItemsController < ApplicationController
     queue_item = QueueItem.find(params[:id])
     queue_item.destroy if queue_item_in_users_queue?(queue_item)
     flash[:danger] = "Title removed from queue"
+    normalize_queue_list
     redirect_to my_queue_path
   end
 
