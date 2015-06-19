@@ -20,6 +20,13 @@ class QueueItemsController < ApplicationController
   end
 
   def update_queue
+    begin
+      update_queue_items
+      normalize_queue_list
+    rescue ActiveRecord::RecordInvalid
+      flash[:error] = "Something horrible has happened"
+    end
+    redirect_to my_queue_path
   end
 
   private
@@ -38,5 +45,20 @@ class QueueItemsController < ApplicationController
 
   def queue_item_in_users_queue?(queue_item)
     current_user.queue_items.include?(queue_item)
+  end
+
+  def update_queue_items
+    ActiveRecord::Base.transaction do
+      params[:queue_items].each do |item_data|
+        item = QueueItem.find(item_data['id'])
+        item.update!(list_position: item_data['list_position']) if item.user == current_user
+      end
+    end
+  end
+
+  def normalize_queue_list
+    current_user.queue_items.each_with_index do |item, index_num|
+      item.update(list_position: index_num + 1)
+    end
   end
 end
