@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   validates :password, presence: true, on: :create, length: {minimum: 5}
   validates :full_name, presence: true, length: {maximum: 30}
 
-  def item_in_queue?(queue_item)
+  def owns_queue_item?(queue_item)
     queue_items.include?(queue_item)
   end
 

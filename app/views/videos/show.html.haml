@@ -15,7 +15,7 @@
 %section.reviews.container
   .row
     .col-sm-10.col-sm-offset-1
-      - unless already_reviewed(@video, current_user)
+      - unless already_reviewed?(@video, current_user)
         = bootstrap_form_for([@video, Review.new]) do |f|
           %fieldset
             .form-group

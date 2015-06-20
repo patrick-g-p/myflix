@@ -6,11 +6,11 @@
       %li= link_to "Videos", videos_path
       %li= link_to "My Queue", my_queue_path
       %li= link_to "People"
-    = form_tag search_videos_path, method: 'get', class:'col-md-5 navbar-form' do
+    = bootstrap_form_tag url: '/search', method: 'get', class:'col-md-5 navbar-form' do
       .form-group
         = text_field_tag :search, params[:search], class: 'form-control', placeholder: "Search for a video!"
         = submit_tag 'Submit Search', class: 'btn'
-    #user_links.pull-right
+    #user_links.pull-right.name_dropdown
       %ul
         %li.dropdown
           %a(href="#" id="dlabel" role="button" data-toggle="dropdown" class="dropdown-toggle" data-target="#")

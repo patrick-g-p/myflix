@@ -14,7 +14,7 @@ class QueueItemsController < ApplicationController
 
   def destroy
     queue_item = QueueItem.find(params[:id])
-    queue_item.destroy if current_user.item_in_queue?(queue_item)
+    queue_item.destroy if current_user.owns_queue_item?(queue_item)
     flash[:danger] = "Title removed from queue"
     current_user.normalize_queue_list
     redirect_to my_queue_path

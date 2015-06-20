@@ -1,9 +1,9 @@
 module VideosHelper
   def proper_rating(average_rating)
-    average_rating ? "#{average_rating} / 5" : "Has not been rated yet"
+    average_rating ? "#{average_rating} / 5.0" : "Has not been rated yet"
   end
 
-  def already_reviewed(video, user)
+  def already_reviewed?(video, user)
     if Review.where(video: video, creator: user).count >= 1
       true
     else
