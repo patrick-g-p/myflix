@@ -18,3 +18,8 @@
 #flash_messages {
   text-align: center;
 }
+
+.name_dropdown {
+  position: relative;
+  top: -15px;
+}

@@ -3,6 +3,7 @@ require 'spec_helper'
 describe QueueItem do
   it { should belong_to(:user) }
   it { should belong_to(:video) }
+  it { should validate_numericality_of(:list_position).only_integer }
 
   let(:user) {Fabricate(:user)}
   let(:category) {Fabricate(:category)}
@@ -19,6 +20,24 @@ describe QueueItem do
 
     it 'returns nil if there is no review' do
       expect(queue_item.rating).to be_nil
+    end
+  end
+
+  describe '#rating=' do
+    it 'updates the rating if the rating already exists' do
+      rating = Fabricate(:review, creator: user, video: video, rating: 4)
+      queue_item.rating = 5
+      expect(queue_item.reload.rating).to eq(5)
+    end
+
+    it 'creates a new rating if there was none' do
+      queue_item.rating = 5
+      expect(queue_item.reload.rating).to eq(5)
+    end
+
+    it 'resets the rating if new rating is nil' do
+      queue_item.rating = nil
+      expect(queue_item.reload.rating).to be_nil
     end
   end
 
