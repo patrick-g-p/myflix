@@ -1,9 +1,11 @@
 require 'spec_helper'
 
 describe QueueItemsController do
+  let(:adam) {Fabricate(:user, full_name: "Adam Jensen")}
+
   describe 'GET index' do
     context 'authenticated user' do
-      before {set_current_user}
+      before {set_current_user(adam)}
 
       it 'sets the @queue_items variable' do
         video = Fabricate(:video)
@@ -20,7 +22,7 @@ describe QueueItemsController do
 
   describe 'POST create' do
     context 'authenticated_user' do
-      before(:each) {set_current_user}
+      before(:each) {set_current_user(adam)}
 
       let(:video) {Fabricate(:video)}
 
@@ -59,7 +61,7 @@ describe QueueItemsController do
 
   describe 'DELETE destroy' do
     context 'authenticated_user' do
-      before(:each) {set_current_user}
+      before(:each) {set_current_user(adam)}
 
       let(:video) {Fabricate(:video)}
       let(:a_queue_item) {Fabricate(:queue_item, list_position: 1, video: video, user: current_user)}
@@ -75,7 +77,6 @@ describe QueueItemsController do
       end
 
       it 'normalizes the queue item list after removing an item' do
-        session[:user_id] = current_user
         queue_item1 = Fabricate(:queue_item, user: current_user, list_position: 1)
         queue_item2 = Fabricate(:queue_item, user: current_user, list_position: 2)
         delete :destroy, id: queue_item1.id
@@ -97,7 +98,7 @@ describe QueueItemsController do
 
   describe 'POST update_queue' do
     context 'authenticated user' do
-      before(:each) {set_current_user}
+      before(:each) {set_current_user(adam)}
 
       let(:queue_item1) {Fabricate(:queue_item, user: current_user, list_position: 1)}
       let(:queue_item2) {Fabricate(:queue_item, user: current_user, list_position: 2)}
