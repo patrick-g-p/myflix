@@ -9,7 +9,7 @@ describe QueueItemsController do
 
       it 'sets the @queue_items variable' do
         video = Fabricate(:video)
-        queue_item = Fabricate(:queue_item, user: current_user, video: video)
+        queue_item = Fabricate(:queue_item, user: adam, video: video)
         get :index
         expect(assigns(:queue_items)).to eq([queue_item])
       end
@@ -47,7 +47,7 @@ describe QueueItemsController do
       end
 
       it 'adds the video at the end of the queue list' do
-        Fabricate(:queue_item, video: video, user: current_user, list_position: 1)
+        Fabricate(:queue_item, video: video, user: adam, list_position: 1)
         another_video = Fabricate(:video)
         post :create, video_id: another_video.id
         expect(QueueItem.last.list_position).to be 2
@@ -64,7 +64,7 @@ describe QueueItemsController do
       before(:each) {set_current_user(adam)}
 
       let(:video) {Fabricate(:video)}
-      let(:a_queue_item) {Fabricate(:queue_item, list_position: 1, video: video, user: current_user)}
+      let(:a_queue_item) {Fabricate(:queue_item, list_position: 1, video: video, user: adam)}
 
       it 'redirects back to my queue' do
         delete :destroy, id: a_queue_item.id
@@ -73,12 +73,12 @@ describe QueueItemsController do
 
       it 'removes the queue item' do
         delete :destroy, id: a_queue_item.id
-        expect(current_user.queue_items).not_to include(a_queue_item)
+        expect(adam.queue_items).not_to include(a_queue_item)
       end
 
       it 'normalizes the queue item list after removing an item' do
-        queue_item1 = Fabricate(:queue_item, user: current_user, list_position: 1)
-        queue_item2 = Fabricate(:queue_item, user: current_user, list_position: 2)
+        queue_item1 = Fabricate(:queue_item, user: adam, list_position: 1)
+        queue_item2 = Fabricate(:queue_item, user: adam, list_position: 2)
         delete :destroy, id: queue_item1.id
         expect(queue_item2.reload.list_position).to eq(1)
       end
@@ -100,8 +100,8 @@ describe QueueItemsController do
     context 'authenticated user' do
       before(:each) {set_current_user(adam)}
 
-      let(:queue_item1) {Fabricate(:queue_item, user: current_user, list_position: 1)}
-      let(:queue_item2) {Fabricate(:queue_item, user: current_user, list_position: 2)}
+      let(:queue_item1) {Fabricate(:queue_item, user: adam, list_position: 1)}
+      let(:queue_item2) {Fabricate(:queue_item, user: adam, list_position: 2)}
 
       context 'with valid input' do
         it 'redirects to my queue' do
@@ -110,11 +110,11 @@ describe QueueItemsController do
         end
         it 'updates the list position of the queue items' do
           post :update_queue, queue_items: [{id: queue_item1.id, list_position: 2}, {id: queue_item2.id, list_position: 1}]
-          expect(current_user.queue_items).to eq([queue_item2, queue_item1])
+          expect(adam.queue_items).to eq([queue_item2, queue_item1])
         end
         it 'normalizes the list position numbers' do
           post :update_queue, queue_items: [{id: queue_item1.id, list_position: 1}, {id: queue_item2.id, list_position: 11}]
-          expect(current_user.queue_items.map(&:list_position)).to eq([1, 2])
+          expect(adam.queue_items.map(&:list_position)).to eq([1, 2])
         end
       end
 
