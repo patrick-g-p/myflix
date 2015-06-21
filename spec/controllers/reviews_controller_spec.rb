@@ -5,11 +5,7 @@ describe ReviewsController do
     let(:video) {Fabricate(:video)}
 
     context 'user is logged in' do
-      let(:current_user) {Fabricate(:user)}
-
-      before(:each) do
-        session[:user_id] = current_user.id
-      end
+      before(:each) {set_current_user}
 
       context 'the input is valid' do
         before(:each) do
@@ -19,15 +15,19 @@ describe ReviewsController do
         it 'redirects to the videos page' do
           expect(response).to redirect_to video
         end
+
         it 'sets the @video instance variable' do
           expect(assigns(:video)).to eq(video)
         end
+
         it 'creates a new review' do
           expect(Review.count).not_to be 0
         end
+
         it 'creates a review associated with the video' do
           expect(Review.first.video).to eq(video)
         end
+
         it 'creates a reviews associated with the current user' do
           expect(Review.first.creator).to eq(current_user)
         end
@@ -48,15 +48,13 @@ describe ReviewsController do
     end
 
     context 'user is not logged in' do
-      before(:each) do
-        post :create, video_id: video.id, review: Fabricate.attributes_for(:review)
-      end
-
       it 'does not create a new review' do
+        post :create, video_id: video.id, review: Fabricate.attributes_for(:review)
         expect(video.reviews).to eq([])
       end
-      it 'redirects the user to the login page' do
-        expect(response).to redirect_to login_path
+
+      it_behaves_like "require_logged_in_user" do
+        let(:action) {post :create, video_id: video.id, review: Fabricate.attributes_for(:review)}
       end
     end
   end

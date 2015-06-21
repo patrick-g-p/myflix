@@ -2,29 +2,27 @@ require 'spec_helper'
 
 describe QueueItemsController do
   describe 'GET index' do
-    it 'sets the @queue_items variable' do
-      current_user = Fabricate(:user)
-      session[:user_id] = current_user.id
-      video = Fabricate(:video)
-      queue_items = Fabricate(:queue_item, user: current_user, video: video)
-      get :index
-      expect(assigns(:queue_items)).to eq([queue_items])
+    context 'authenticated user' do
+      before {set_current_user}
+
+      it 'sets the @queue_items variable' do
+        video = Fabricate(:video)
+        queue_item = Fabricate(:queue_item, user: current_user, video: video)
+        get :index
+        expect(assigns(:queue_items)).to eq([queue_item])
+      end
     end
 
-    it 'redirects to the login page when user is not logged in' do
-      get :index
-      expect(response).to redirect_to login_path
+    it_behaves_like 'require_logged_in_user' do
+      let(:action) {get :index}
     end
   end
 
   describe 'POST create' do
-    context 'logged in' do
-      let(:current_user) {Fabricate(:user)}
-      let(:video) {Fabricate(:video)}
+    context 'authenticated_user' do
+      before(:each) {set_current_user}
 
-      before(:each) do
-        session[:user_id] = current_user.id
-      end
+      let(:video) {Fabricate(:video)}
 
       it 'redirects to the queue path when successful' do
         post :create, video_id: video.id
@@ -54,61 +52,55 @@ describe QueueItemsController do
       end
     end
 
-    context 'not logged in' do
-      it 'redirects to login' do
-        video = Fabricate(:video)
-        post :create, video_id: 42
-        expect(response).to redirect_to login_path
-      end
+    it_behaves_like 'require_logged_in_user' do
+      let(:action) {post :create, video_id: 1}
     end
   end
 
   describe 'DELETE destroy' do
-    let(:current_user) {Fabricate(:user)}
-    let(:video) {Fabricate(:video)}
-    let(:a_queue_item) {Fabricate(:queue_item, list_position: 1, video: video, user: current_user)}
+    context 'authenticated_user' do
+      before(:each) {set_current_user}
 
-    it 'redirects back to my queue' do
-      session[:user_id] = current_user
-      delete :destroy, id: a_queue_item.id
-      expect(:response).to redirect_to my_queue_path
+      let(:video) {Fabricate(:video)}
+      let(:a_queue_item) {Fabricate(:queue_item, list_position: 1, video: video, user: current_user)}
+
+      it 'redirects back to my queue' do
+        delete :destroy, id: a_queue_item.id
+        expect(:response).to redirect_to my_queue_path
+      end
+
+      it 'removes the queue item' do
+        delete :destroy, id: a_queue_item.id
+        expect(current_user.queue_items).not_to include(a_queue_item)
+      end
+
+      it 'normalizes the queue item list after removing an item' do
+        session[:user_id] = current_user
+        queue_item1 = Fabricate(:queue_item, user: current_user, list_position: 1)
+        queue_item2 = Fabricate(:queue_item, user: current_user, list_position: 2)
+        delete :destroy, id: queue_item1.id
+        expect(queue_item2.reload.list_position).to eq(1)
+      end
+
+      it 'does not remove the item if the queue item does not belong to that user' do
+        another_user = Fabricate(:user)
+        another_users_queue_item = Fabricate(:queue_item, user: another_user)
+        delete :destroy, id: another_users_queue_item.id
+        expect(another_user.queue_items).to eq([another_users_queue_item])
+      end
     end
 
-    it 'removes the queue item' do
-      session[:user_id] = current_user
-      delete :destroy, id: a_queue_item.id
-      expect(current_user.queue_items).not_to include(a_queue_item)
-    end
-
-    it 'normalizes the queue item list after removing an item' do
-      session[:user_id] = current_user
-      queue_item1 = Fabricate(:queue_item, user: current_user, list_position: 1)
-      queue_item2 = Fabricate(:queue_item, user: current_user, list_position: 2)
-      delete :destroy, id: queue_item1.id
-      expect(queue_item2.reload.list_position).to eq(1)
-    end
-
-    it 'does not remove the item if the queue item does not belong to that user' do
-      ganondorf = Fabricate(:user)
-      session[:user_id] = ganondorf.id
-      delete :destroy, id: a_queue_item.id
-      expect(current_user.queue_items).to eq([a_queue_item])
-    end
-
-    it 'redirects to login, if user is not logged in' do
-      delete :destroy, id: 42
-      expect(:response).to redirect_to login_path
+    it_behaves_like 'require_logged_in_user' do
+      let(:action) {post :destroy, id: 1}
     end
   end
 
   describe 'POST update_queue' do
     context 'authenticated user' do
-      let(:samus) {Fabricate(:user)}
-      let(:queue_item1) {Fabricate(:queue_item, user: samus, list_position: 1)}
-      let(:queue_item2) {Fabricate(:queue_item, user: samus, list_position: 2)}
-      before(:each) do
-        session[:user_id] = samus.id
-      end
+      before(:each) {set_current_user}
+
+      let(:queue_item1) {Fabricate(:queue_item, user: current_user, list_position: 1)}
+      let(:queue_item2) {Fabricate(:queue_item, user: current_user, list_position: 2)}
 
       context 'with valid input' do
         it 'redirects to my queue' do
@@ -117,11 +109,11 @@ describe QueueItemsController do
         end
         it 'updates the list position of the queue items' do
           post :update_queue, queue_items: [{id: queue_item1.id, list_position: 2}, {id: queue_item2.id, list_position: 1}]
-          expect(samus.queue_items).to eq([queue_item2, queue_item1])
+          expect(current_user.queue_items).to eq([queue_item2, queue_item1])
         end
         it 'normalizes the list position numbers' do
           post :update_queue, queue_items: [{id: queue_item1.id, list_position: 1}, {id: queue_item2.id, list_position: 11}]
-          expect(samus.queue_items.map(&:list_position)).to eq([1, 2])
+          expect(current_user.queue_items.map(&:list_position)).to eq([1, 2])
         end
       end
 
@@ -148,12 +140,8 @@ describe QueueItemsController do
       end
     end
 
-    context 'user is not logged in' do
-      it 'redirects to the login path' do
-        post :update_queue, queue_items: [{id: 42, list_position: 1}, {id: 11, list_position: 2}]
-        expect(response).to redirect_to login_path
-      end
+    it_behaves_like 'require_logged_in_user' do
+      let(:action) {post :update_queue, queue_items: [{id: 1, list_position: 1}, {id: 2, list_position: 2}]}
     end
   end
-
 end

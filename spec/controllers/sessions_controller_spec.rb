@@ -33,16 +33,13 @@ describe SessionsController do
     end
 
     context 'when invalid' do
-      before(:each) do
-        post :create, {email: geralt.email, password: geralt.password + 'lovesyen'}
-      end
-
       it 'has a value of nil in the session' do
+        post :create, {email: geralt.email, password: geralt.password + 'lovesyen'}
         expect(session[:user_id]).to be_nil
       end
 
-      it 'redirects to login' do
-        expect(response).to redirect_to login_path
+      it_behaves_like "require_logged_in_user" do
+        let(:action) {post :create, {email: geralt.email, password: geralt.password + 'lovesyen'}}
       end
     end
   end
