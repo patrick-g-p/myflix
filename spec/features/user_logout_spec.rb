@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 feature "User logs out" do
-  let(:user) {Fabricate(:user)}
+  let(:adam) {Fabricate(:user)}
 
   before do
-    login(user)
+    login(adam)
   end
 
   scenario "Click the logout button" do
-    click_link("Welcome #{user.full_name.titleize}")
+    click_link("Welcome #{adam.full_name.titleize}")
     click_link("Sign Out")
     page.should have_content("You logged out successfully. Come back soon!")
   end

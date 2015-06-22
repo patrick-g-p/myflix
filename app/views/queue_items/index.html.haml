@@ -18,7 +18,7 @@
               - @queue_items.each do |item|
                 %tr
                   = hidden_field_tag 'queue_items[][id]', item.id
-                  %td= text_field_tag 'queue_items[][list_position]', item.list_position
+                  %td= text_field_tag 'queue_items[][list_position]', item.list_position, data: {video_id: item.video.id}
                   %td= link_to item.video_title, item.video
                   %td= button_to "Play", nil, class: "btn btn-default btn-success"
                   %td= select_tag 'queue_items[][rating]', options_for_select([5,4,3,2,1], item.rating), include_blank: true
@@ -26,4 +26,4 @@
                   %td
                     = link_to item, method: :delete do
                       %i.glyphicon.glyphicon-remove
-          = submit_tag 'Update your queue', class: 'btn btn-info'
+          = submit_tag 'Update Your Queue', class: 'btn btn-info'
