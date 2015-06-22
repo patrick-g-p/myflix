@@ -4,7 +4,7 @@ feature "User logs out" do
   let(:user) {Fabricate(:user)}
 
   before do
-    login(:user)
+    login(user)
   end
 
   scenario "Click the logout button" do
