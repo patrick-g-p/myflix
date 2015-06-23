@@ -39,7 +39,7 @@ describe SessionsController do
       end
 
       it_behaves_like "require_logged_in_user" do
-        let(:action) {post :create, {email: geralt.email, password: geralt.password + 'lovesyen'}}
+        let(:action) {post :create, {email: geralt.email, password: '123'}}
       end
     end
   end

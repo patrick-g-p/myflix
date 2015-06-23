@@ -13,8 +13,7 @@ describe VideosController do
       end
 
       it 'sets the @reviews instance variable if logged in' do
-        review = Fabricate(:review)
-        robocop.reviews << review
+        review = Fabricate(:review, video: robocop)
         get :show, id: robocop.id
         expect(assigns(:reviews)).to eq([review])
       end
