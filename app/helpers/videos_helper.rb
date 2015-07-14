@@ -12,6 +12,6 @@ module VideosHelper
   end
 
   def review_author(review)
-    review.creator == current_user ? 'by you!' : "by #{review.creator.full_name}"
+    review.creator == current_user ? 'you' : "#{review.creator.full_name.titleize}"
   end
 end
