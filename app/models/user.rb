@@ -26,4 +26,8 @@ class User < ActiveRecord::Base
       item.update(list_position: index_num + 1)
     end
   end
+
+  def already_following?(user)
+    following_relationships.map(&:leader).include?(user)
+  end
 end

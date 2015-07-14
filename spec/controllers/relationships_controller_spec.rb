@@ -45,4 +45,32 @@ describe RelationshipsController do
       let(:action) {delete :destroy, id: 42}
     end
   end
+
+  describe 'POST create' do
+    let(:a_user) {Fabricate(:user)}
+    let(:an_intresting_user) {Fabricate(:user)}
+
+    it 'redirects to the people path' do
+      set_current_user(a_user)
+      post :create, followed_user_id: an_intresting_user.id
+      expect(response).to redirect_to people_path
+    end
+
+    it 'creates a new relationship' do
+      set_current_user(a_user)
+      post :create, followed_user_id: an_intresting_user.id
+      expect(Relationship.count).to eq(1)
+    end
+
+    it 'does not create a new relationship if the current user is already following the user' do
+      set_current_user(a_user)
+      Fabricate(:relationship, follower: a_user, leader: an_intresting_user)
+      post :create, followed_user_id: an_intresting_user.id
+      expect(Relationship.count).to eq(1)
+    end
+
+    it_behaves_like 'require_logged_in_user' do
+      let(:action) {post :create, followed_user_id: 42}
+    end
+  end
 end
