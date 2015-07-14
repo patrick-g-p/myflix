@@ -7,7 +7,7 @@ class RelationshipsController < ApplicationController
 
   def create
     followed_user = User.find(params[:followed_user_id])
-    Relationship.create(follower: current_user, leader: followed_user) unless current_user.already_following?(followed_user)
+    Relationship.create(follower: current_user, leader: followed_user) if current_user.can_follow?(followed_user)
     flash[:info] = "User added to people you follow!"
     redirect_to people_path
   end

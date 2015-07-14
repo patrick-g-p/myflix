@@ -7,7 +7,8 @@
           %h2= "#{@user.full_name.titleize}'s Video Collection (#{@user.queue_items.count})"
           = "#{@user.leading_relationships.count} Followers"
           .pull-right
-            =link_to 'Follow', relationships_path(followed_user_id: @user.id), method: :post, class: 'btn btn-default'
+            - if current_user.can_follow?(@user)
+              = link_to 'Follow', relationships_path(followed_user_id: @user.id), method: :post, class: 'btn btn-default'
         %table.table
           %thead
             %tr

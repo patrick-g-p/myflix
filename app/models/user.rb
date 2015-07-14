@@ -27,7 +27,11 @@ class User < ActiveRecord::Base
     end
   end
 
-  def already_following?(user)
-    following_relationships.map(&:leader).include?(user)
+  def already_following?(another_user)
+    following_relationships.map(&:leader).include?(another_user)
+  end
+
+  def can_follow?(another_user)
+    !(self.already_following?(another_user) || self == another_user)
   end
 end
