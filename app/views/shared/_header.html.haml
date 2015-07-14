@@ -18,7 +18,7 @@
             %b.caret
           %ul.dropdown-menu(role="menu" aria-labelledby="dlabel")
             %li
-              %a(href="#") Account
+              = link_to 'Account', current_user
               %a(href="#") Plan and Billing
               %a(href="/logout") Sign Out
   - else
