@@ -56,10 +56,10 @@ describe RelationshipsController do
       expect(response).to redirect_to people_path
     end
 
-    it 'creates a new relationship' do
+    it 'creates a new relationship associated with the current user' do
       set_current_user(a_user)
       post :create, followed_user_id: an_intresting_user.id
-      expect(Relationship.count).to eq(1)
+      expect(a_user.following_relationships.reload.count).to eq(1)
     end
 
     it 'does not create a new relationship if the current user is already following the user' do
@@ -67,6 +67,12 @@ describe RelationshipsController do
       Fabricate(:relationship, follower: a_user, leader: an_intresting_user)
       post :create, followed_user_id: an_intresting_user.id
       expect(Relationship.count).to eq(1)
+    end
+
+    it 'does not let the user create a relationship with themselves' do
+      set_current_user(a_user)
+      post :create, followed_user_id: a_user.id
+      expect(Relationship.count).to eq(0)
     end
 
     it_behaves_like 'require_logged_in_user' do
