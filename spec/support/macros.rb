@@ -18,3 +18,7 @@ def login(a_user=nil)
   fill_in('Password', with: a_user.password)
   click_button("Login")
 end
+
+def click_video_on_the_homepage(video)
+  find("a[href='/videos/#{video.id}']").click
+end
