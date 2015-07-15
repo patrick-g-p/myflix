@@ -37,7 +37,7 @@
           - @reviews.each do |review|
             %li.row
               .col-sm-3
-                %span= "Rating: #{review.rating}"
+                %span Rating: #{review.rating} / 5
                 %p
                   by
                   = link_to_unless review.creator == current_user, review_author(review), review.creator

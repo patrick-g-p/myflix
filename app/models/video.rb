@@ -7,12 +7,11 @@ class Video < ActiveRecord::Base
 
   def self.search_by_title(search)
     return [] if search.blank?
-    self.where("LOWER(title) LIKE ?", "%#{search.downcase}%" ).order(:title)
+    where("title ILIKE ?", "%#{search}%" ).order(:title)
   end
 
   def average_rating
     return nil if reviews.count == 0
-
     reviews.average(:rating).to_f.round(1)
   end
 end
