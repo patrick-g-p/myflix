@@ -27,7 +27,7 @@ feature 'Interacts with the queue' do
 
   def add_video_to_queue(video)
     visit videos_path
-    find("a[href='/videos/#{video.id}']").click
+    click_video_on_the_homepage(video)
     click_link("Add to Queue")
   end
 
