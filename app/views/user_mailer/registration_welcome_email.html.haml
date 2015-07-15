@@ -1,0 +1,8 @@
+!!! 5
+%html(lang="en-US")
+  %body
+    %p You've successfully registered for a MyFlix account #{@user.full_name.titleize}!
+    %p We hope you enjoy our vast selection of movies and TV shows.
+    %p
+      Questions or Comments? Feel free to send us an email:
+      = mail_to ENV['TA_EMAIL'], 'MyFlix Support'
