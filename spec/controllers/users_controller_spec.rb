@@ -10,6 +10,7 @@ describe UsersController do
   end
 
   describe 'POST create' do
+    after {ActionMailer::Base.deliveries.clear}
 
     context 'when valid' do
       before(:each) do
@@ -56,6 +57,10 @@ describe UsersController do
 
       it 'renders the new template' do
         expect(response).to render_template :new
+      end
+
+      it 'does not send out an email' do
+        expect(ActionMailer::Base.deliveries).to be_empty
       end
     end
   end
