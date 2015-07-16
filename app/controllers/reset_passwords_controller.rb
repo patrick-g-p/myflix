@@ -13,13 +13,18 @@ class ResetPasswordsController < ApplicationController
   def create
     @user = User.find_by(password_reset_token: params[:password_reset_token])
 
-    if @user && @user.update(password: params[:password])
-      @user.clear_token!
-      flash[:success] = 'New password set! Login to MyFlix!'
-      redirect_to login_path
+    if @user && @user.token_valid?
+      if @user.update(password: params[:password])
+        @user.clear_token!
+        flash[:success] = 'New password set! Login to MyFlix!'
+        redirect_to login_path
+      else
+        flash[:danger] = 'There were some errors.'
+        render :show
+      end
     else
-      flash[:danger] = 'There were some errors.'
-      render :show
+      flash[:warning] = 'Password reset token is invalid. Please try again.'
+      redirect_to forgot_password_path
     end
   end
 end
