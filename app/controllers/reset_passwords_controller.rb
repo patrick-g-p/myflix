@@ -19,6 +19,7 @@ class ResetPasswordsController < ApplicationController
         flash[:success] = 'New password set! Login to MyFlix!'
         redirect_to login_path
       else
+        @token = @user.password_reset_token
         flash[:danger] = 'There were some errors.'
         render :show
       end
