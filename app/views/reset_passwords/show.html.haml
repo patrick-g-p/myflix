@@ -1,0 +1,14 @@
+%section.reset_password.container
+  .row
+    .col-sm-10.col-bg-offset-1
+      = bootstrap_form_tag url: reset_passwords_path do |f|
+        %header
+          %h1 Choose a new password:
+        - if @user.errors.any?
+          .well.text-center
+            %ul
+            - @user.errors.full_messages.each do |message|
+              %li= message
+        = f.hidden_field :password_reset_token, value: @token
+        = f.password_field :password, help: '5 character minimum'
+        = f.submit 'Submit Password'

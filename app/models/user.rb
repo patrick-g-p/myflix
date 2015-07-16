@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :leading_relationships, class_name: 'Relationship', foreign_key: 'leader_id'
 
   validates :email, presence: true, uniqueness: true
-  validates :password, presence: true, on: :create, length: {minimum: 5}
+  validates :password, presence: true, on: [:create, :update], length: {minimum: 5}
   validates :full_name, presence: true, length: {maximum: 30}
 
   def owns_queue_item?(queue_item)
@@ -33,5 +33,24 @@ class User < ActiveRecord::Base
 
   def can_follow?(another_user)
     !(self.already_following?(another_user) || self == another_user)
+  end
+
+  def send_password_reset_email
+    generate_token!
+    UserMailer.password_reset_email(self).deliver
+  end
+
+  def generate_token!
+    self.update_column(:password_reset_token, SecureRandom.urlsafe_base64)
+    self.update_column(:password_reset_token_expires_at, Time.zone.now + 2.hours)
+  end
+
+  def clear_token!
+    self.update_column(:password_reset_token, nil)
+    self.update_column(:password_reset_token_expires_at, nil)
+  end
+
+  def token_valid?
+    password_reset_token_expires_at > Time.zone.now
   end
 end
