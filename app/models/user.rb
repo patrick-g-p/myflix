@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :leading_relationships, class_name: 'Relationship', foreign_key: 'leader_id'
 
   validates :email, presence: true, uniqueness: true
-  validates :password, presence: true, on: :create, length: {minimum: 5}
+  validates :password, presence: true, on: [:create, :update], length: {minimum: 5}
   validates :full_name, presence: true, length: {maximum: 30}
 
   def owns_queue_item?(queue_item)
@@ -48,5 +48,9 @@ class User < ActiveRecord::Base
   def clear_token!
     self.update_column(:password_reset_token, nil)
     self.update_column(:password_reset_token_expires_at, nil)
+  end
+
+  def token_valid?
+    password_reset_token_expires_at > Time.zone.now
   end
 end
