@@ -9,6 +9,13 @@ Myflix::Application.routes.draw do
   get 'logout', to: 'sessions#destroy'
   get 'home', to: 'videos#index'
 
+  resources :users, only: [:new, :create, :show]
+
+  get 'forgot_password', to: 'forgotten_passwords#new'
+  get 'forgot_password/confirm', to: 'forgotten_passwords#confirm'
+  resources :forgotten_passwords, only: [:create]
+  resources :reset_passwords, only: [:show, :create]
+
   resources :videos, only: [:index, :show] do
     collection do
       get 'search', to: 'videos#search'
@@ -18,8 +25,6 @@ Myflix::Application.routes.draw do
   end
 
   resources :categories, only: [:show]
-
-  resources :users, only: [:new, :create, :show]
 
   get 'people', to: 'relationships#index'
   resources :relationships, only: [:create, :destroy]

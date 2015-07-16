@@ -34,4 +34,19 @@ class User < ActiveRecord::Base
   def can_follow?(another_user)
     !(self.already_following?(another_user) || self == another_user)
   end
+
+  def send_password_reset_email
+    generate_token!
+    UserMailer.password_reset_email(self).deliver
+  end
+
+  def generate_token!
+    self.update_column(:password_reset_token, SecureRandom.urlsafe_base64)
+    self.update_column(:password_reset_token_expires_at, Time.zone.now + 2.hours)
+  end
+
+  def clear_token!
+    self.update_column(:password_reset_token, nil)
+    self.update_column(:password_reset_token_expires_at, nil)
+  end
 end
