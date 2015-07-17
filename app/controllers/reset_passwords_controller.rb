@@ -24,7 +24,7 @@ class ResetPasswordsController < ApplicationController
         render :show
       end
     else
-      flash[:warning] = 'Password reset token is invalid. Please try again.'
+      flash[:warning] = 'Password reset token is expired and/or invalid. Please try again.'
       redirect_to forgot_password_path
     end
   end

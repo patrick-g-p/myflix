@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      flash[:success] = 'Welcome back to MyFliX!'
+      flash[:success] = 'Welcome back to MyFlix!'
       redirect_to home_path
     else
       flash[:danger] = 'Something was wrong with either your email or password.'

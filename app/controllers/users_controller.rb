@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       UserMailer.registration_welcome_email(current_user).deliver
-      flash[:success] = 'Your account was set up. Welcome to MyFliX!'
+      flash[:success] = 'Your account was set up. Welcome to MyFlix!'
       redirect_to home_path
     else
       render :new
