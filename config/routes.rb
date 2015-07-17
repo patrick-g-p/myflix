@@ -4,6 +4,7 @@ Myflix::Application.routes.draw do
   root to: 'pages#welcome'
 
   get 'register', to: 'users#new'
+  get 'register/:id', to: 'users#register_by_token'
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy'
@@ -16,8 +17,8 @@ Myflix::Application.routes.draw do
   resources :forgotten_passwords, only: [:create]
   resources :reset_passwords, only: [:show, :create]
 
-  resources :invitations, only: [:new, :create]
-  get 'register/invitation/:token', to: 'users#register_by_token'
+  resources :invitations, only: [:create]
+  get 'invite', to: 'invitations#new'
 
   resources :videos, only: [:index, :show] do
     collection do
