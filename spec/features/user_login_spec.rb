@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 feature 'User logs in' do
-  let(:adam) {Fabricate(:user)}
+  let(:adam) { Fabricate(:user) }
 
   scenario 'with correct input' do
     login

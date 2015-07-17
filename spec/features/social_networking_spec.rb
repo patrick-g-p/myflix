@@ -1,11 +1,15 @@
 require 'spec_helper'
 
 feature 'Users can view each others profiles, and follow one another' do
-  let(:arin) {Fabricate(:user)}
-  let(:danny) {Fabricate(:user)}
+  let(:arin) { Fabricate(:user) }
+  let(:danny) { Fabricate(:user) }
   let(:comic_book_movies) {Fabricate(:category, name: 'Comic Book Movies')}
-  let!(:great_video) {Fabricate(:video, title: 'Under The Red Hood', category: comic_book_movies)}
-  let!(:great_video_review) {Fabricate(:review, creator: danny, video: great_video)}
+  let!(:great_video) do
+    Fabricate(:video, title: 'Under The Red Hood', category: comic_book_movies)
+  end
+  let!(:great_video_review) do
+    Fabricate(:review, creator: danny, video: great_video)
+  end
 
   scenario 'A user sees an intresting review, decides to follow the creator, and then later unfollow them' do
     login(arin)

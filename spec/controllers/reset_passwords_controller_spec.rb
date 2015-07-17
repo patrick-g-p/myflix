@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ResetPasswordsController do
   describe 'GET show' do
     context 'valid token' do
-      let(:a_user) {Fabricate(:user)}
+      let(:a_user) { Fabricate(:user) }
 
       before(:each) do
         a_user.generate_token!
@@ -35,7 +35,7 @@ describe ResetPasswordsController do
   end
 
   describe 'POST create' do
-    let(:a_user) {Fabricate(:user)}
+    let(:a_user) { Fabricate(:user) }
 
     context 'when user is found and the token is valid' do
       context 'with valid password' do

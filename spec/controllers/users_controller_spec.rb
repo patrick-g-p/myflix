@@ -10,7 +10,7 @@ describe UsersController do
   end
 
   describe 'POST create' do
-    after {ActionMailer::Base.deliveries.clear}
+    after { ActionMailer::Base.deliveries.clear }
 
     context 'when valid' do
       before(:each) do
@@ -18,7 +18,7 @@ describe UsersController do
       end
 
       it 'creates a user' do
-        expect(User.count).to be 1
+        expect(User.count).to eq(1)
       end
 
       it 'redirects to the home path' do
@@ -27,7 +27,7 @@ describe UsersController do
 
       context 'email sending' do
         it 'sends the email' do
-          expect(ActionMailer::Base.deliveries).to_not be_empty
+          expect(ActionMailer::Base.deliveries).to be_present
         end
 
         it 'send the email to the correct user' do
@@ -74,7 +74,7 @@ describe UsersController do
     end
 
     it_behaves_like 'require_logged_in_user' do
-      let(:action) {get :show, id: 42}
+      let(:action) { get :show, id: 42 }
     end
   end
 end

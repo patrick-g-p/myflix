@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 feature 'Interacts with the queue' do
-  let(:adam) {Fabricate(:user)}
-  let!(:anime) {Fabricate(:category, name: "Anime")}
-  let!(:trigun) {Fabricate(:video, category: anime)}
-  let!(:cowboy_beebop) {Fabricate(:video, category: anime)}
+  let(:adam) { Fabricate(:user) }
+  let!(:anime) { Fabricate(:category, name: "Anime") }
+  let!(:trigun) { Fabricate(:video, category: anime) }
+  let!(:cowboy_beebop) { Fabricate(:video, category: anime) }
 
   scenario 'User adds items to the queue and reorders them' do
     login(adam)

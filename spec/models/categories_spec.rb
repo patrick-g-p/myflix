@@ -5,8 +5,7 @@ describe Category do
   it { should validate_presence_of(:name) }
 
   describe '#recent_videos' do
-
-    let(:category) {Category.create(name: 'Science Fiction')}
+    let(:category) { Category.create(name: 'Science Fiction') }
 
     it 'returns an empty array if there are no videos in the category' do
       expect(category.recent_videos).to eq([])

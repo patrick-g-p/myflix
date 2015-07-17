@@ -8,8 +8,12 @@ describe Video do
   it { should validate_presence_of(:description) }
 
   describe "search_by_title" do
-    let(:samurai_jack) {Video.create(title: 'Samurai Jack', description: 'A samurai is flung into the future.', created_at: 3.day.ago)}
-    let(:samurai_champloo) {Video.create(title: 'Samurai Champloo', description: 'Hip-hop soundtrack and the search for the samurai who smells of sunflowers.')}
+    let(:samurai_jack) do
+      Video.create(title: 'Samurai Jack', description: 'A samurai is flung into the future.', created_at: 3.day.ago)
+    end
+    let(:samurai_champloo) do
+      Video.create(title: 'Samurai Champloo', description: 'Hip-hop soundtrack and the search for the samurai who smells of sunflowers.')
+    end
 
     it 'returns an empty array if no match is found' do
       expect(Video.search_by_title('you get nothing!')).to eq([])

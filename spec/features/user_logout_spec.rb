@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 feature "User logs out" do
-  let(:adam) {Fabricate(:user)}
+  let(:adam) { Fabricate(:user) }
 
   before do
     login(adam)

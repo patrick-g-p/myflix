@@ -5,12 +5,15 @@ describe QueueItem do
   it { should belong_to(:video) }
   it { should validate_numericality_of(:list_position).only_integer }
 
-  let(:user) {Fabricate(:user)}
-  let(:category) {Fabricate(:category)}
-  let(:video) {Fabricate(:video, category: category, title:'Mad Max: Fury Road')}
-  let(:queue_item) {Fabricate(:queue_item, user: user, video: video)}
-
   it { should delegate_method(:title).to(:video).with_prefix(:video) }
+  it { should delegate_method(:category).to(:video) }
+
+  let(:user) { Fabricate(:user) }
+  let(:category) { Fabricate(:category) }
+  let(:video) do
+    Fabricate(:video, category: category, title:'Mad Max: Fury Road')
+  end
+  let(:queue_item) { Fabricate(:queue_item, user: user, video: video) }
 
   describe '#rating' do
     it 'returns the reviews rating' do
@@ -46,7 +49,4 @@ describe QueueItem do
       expect(queue_item.category_name).to be(category.name)
     end
   end
-
-  it { should delegate_method(:category).to(:video) }
-
 end
