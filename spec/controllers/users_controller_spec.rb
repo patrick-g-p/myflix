@@ -10,6 +10,7 @@ describe UsersController do
   end
 
   describe 'POST create' do
+    after {ActionMailer::Base.deliveries.clear}
 
     context 'when valid' do
       before(:each) do
@@ -22,6 +23,22 @@ describe UsersController do
 
       it 'redirects to the home path' do
         expect(response).to redirect_to home_path
+      end
+
+      context 'email sending' do
+        it 'sends the email' do
+          expect(ActionMailer::Base.deliveries).to_not be_empty
+        end
+
+        it 'send the email to the correct user' do
+          email = ActionMailer::Base.deliveries.last
+          expect(email.to).to eq([User.first.email])
+        end
+
+        it 'has the right content in the email body' do
+          email = ActionMailer::Base.deliveries.last
+          expect(email.body).to include("You've successfully registered for a MyFlix account")
+        end
       end
     end
 
@@ -40,6 +57,10 @@ describe UsersController do
 
       it 'renders the new template' do
         expect(response).to render_template :new
+      end
+
+      it 'does not send out an email' do
+        expect(ActionMailer::Base.deliveries).to be_empty
       end
     end
   end

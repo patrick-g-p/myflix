@@ -17,4 +17,14 @@ Myflix::Application.configure do
   config.i18n.fallbacks = true
 
   config.active_support.deprecation = :notify
+
+  config.action_mailer.delivery_method = :smtp
+  #gmail stmp settings
+  config.action_mailer.smtp_settings = {
+  address:              'smtp.gmail.com',
+  port:                 587,
+  user_name:            ENV['TA_EMAIL'],
+  password:             ENV['TA_EMAIL_PWD'],
+  authentication:       'plain',
+  enable_starttls_auto: true  }
 end
