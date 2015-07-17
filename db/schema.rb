@@ -11,13 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150716192451) do
+ActiveRecord::Schema.define(version: 20150717204121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "categories", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "invitations", force: true do |t|
+    t.integer  "inviter_id"
+    t.string   "recipients_name"
+    t.string   "recipients_email"
+    t.string   "invitation_token"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -17,8 +17,7 @@ feature 'Reset password via email' do
   end
 
   def go_to_the_forgot_password_page
-    visit('/')
-    click_link('Sign In')
+    visit login_path
     click_link('Forgot Password?')
     expect(page).to have_content('reset your password')
   end

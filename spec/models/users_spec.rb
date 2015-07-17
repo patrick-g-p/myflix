@@ -8,6 +8,9 @@ describe User do
   it do
     should have_many(:leading_relationships).class_name('Relationship').with_foreign_key('leader_id')
   end
+  it do
+    should have_many(:invitations).with_foreign_key('inviter_id')
+  end
 
   it { should validate_presence_of(:email) }
   it { should validate_presence_of(:full_name) }
