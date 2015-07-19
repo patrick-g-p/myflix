@@ -4,7 +4,7 @@ Myflix::Application.routes.draw do
   root to: 'pages#welcome'
 
   get 'register', to: 'users#new'
-  get 'register/:id', to: 'users#register_by_token'
+  get 'register/:token', to: 'users#register_with_token', as: 'register_with_token'
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy'

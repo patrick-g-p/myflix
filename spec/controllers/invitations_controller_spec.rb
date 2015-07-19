@@ -15,8 +15,8 @@ describe InvitationsController do
 
   describe 'POST create' do
     context 'with valid input' do
-      let(:shulk) {Fabricate(:user)}
-      let(:an_invitation) {Fabricate.build(:invitation)}
+      let(:shulk) { Fabricate(:user) }
+      let(:an_invitation) { Fabricate.build(:invitation) }
 
       before(:each) do
         set_current_user(shulk)
@@ -44,8 +44,8 @@ describe InvitationsController do
     end
 
     context 'with invalid input' do
-      let(:dunban) {Fabricate(:user)}
-      let(:an_invitation) {Fabricate.build(:invitation)}
+      let(:dunban) { Fabricate(:user) }
+      let(:an_invitation) { Fabricate.build(:invitation) }
 
       before(:each) do
         set_current_user(dunban)

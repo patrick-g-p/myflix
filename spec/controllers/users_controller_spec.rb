@@ -42,6 +42,28 @@ describe UsersController do
       end
     end
 
+    context 'with invitation token' do
+      let(:inviter) { Fabricate(:user) }
+      let(:invited_user) { Fabricate.build(:user) }
+      let(:an_invitation) { Fabricate(:invitation, inviter: inviter) }
+
+      before(:each) do
+        post :create, user: {email: an_invitation.recipients_email, password: invited_user.password, full_name: invited_user.full_name}, invitation_token: an_invitation.invitation_token
+      end
+
+      it 'has the new invited user follow the inviter' do
+        expect(Relationship.first.follower).to eq(current_user)
+      end
+
+      it 'has the inviter automatically follow the new user' do
+        expect(Relationship.last.follower).to eq(inviter)
+      end
+
+      it 'deletes the invitation from the database' do
+        expect(Invitation.all.count).to eq(0)
+      end
+    end
+
     context 'when invalid' do
       before(:each) do
         post :create, user: { email: 'geralt@rivia.com', password: 'yennefer' }
@@ -75,6 +97,43 @@ describe UsersController do
 
     it_behaves_like 'require_logged_in_user' do
       let(:action) { get :show, id: 42 }
+    end
+  end
+
+  describe 'GET register_with_token' do
+    let(:myflix_user) { Fabricate(:user) }
+    let(:an_invitation) { Fabricate(:invitation, inviter: myflix_user) }
+
+    context 'with valid token' do
+      before(:each) do
+        get :register_with_token, token: an_invitation.invitation_token
+      end
+
+      it 'renders the new template' do
+        expect(response).to render_template :new
+      end
+
+      it 'sets the user instance variable, with the invited persons email' do
+        expect(assigns(:user).email).to eq(an_invitation.recipients_email)
+      end
+
+      it 'sets the token variable' do
+        expect(assigns(:token)).to eq(an_invitation.invitation_token)
+      end
+    end
+
+    context 'with invalid token' do
+      before(:each) do
+        get :register_with_token, token: 'n0tarea1t0k3n'
+      end
+
+      it 'redirects to the root path' do
+        expect(response).to redirect_to root_path
+      end
+
+      it 'sets a message that the token is invalid' do
+        expect(flash[:warning]).to be_present
+      end
     end
   end
 end

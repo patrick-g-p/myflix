@@ -36,6 +36,10 @@ class User < ActiveRecord::Base
     !(self.already_following?(another_user) || self == another_user)
   end
 
+  def follow(another_user)
+    following_relationships.create(leader: another_user) if can_follow?(another_user)
+  end
+
   def send_password_reset_email
     generate_token!
     UserMailer.password_reset_email(self).deliver
