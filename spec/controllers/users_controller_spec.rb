@@ -48,19 +48,19 @@ describe UsersController do
       let(:an_invitation) { Fabricate(:invitation, inviter: inviter) }
 
       before(:each) do
-        post :create, user: {email: an_invitation.recipients_email, password: invited_user.password, full_name: invited_user.full_name}, invitation_token: an_invitation.invitation_token
+        post :create, user: {email: an_invitation.recipients_email, password: invited_user.password, full_name: invited_user.full_name}, token: an_invitation.invitation_token
       end
 
       it 'has the new invited user follow the inviter' do
-        expect(Relationship.first.follower).to eq(current_user)
+        expect(current_user.reload.already_following?(inviter)).to be_truthy
       end
 
       it 'has the inviter automatically follow the new user' do
-        expect(Relationship.last.follower).to eq(inviter)
+        expect(inviter.reload.already_following?(current_user)).to be_truthy
       end
 
-      it 'deletes the invitation from the database' do
-        expect(Invitation.all.count).to eq(0)
+      it 'removes the invitation token when done' do
+        expect(Invitation.first.invitation_token).to be_nil
       end
     end
 

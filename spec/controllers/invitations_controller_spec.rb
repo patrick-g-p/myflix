@@ -14,16 +14,20 @@ describe InvitationsController do
   end
 
   describe 'POST create' do
-    context 'with valid input' do
-      let(:shulk) { Fabricate(:user) }
-      let(:an_invitation) { Fabricate.build(:invitation) }
+    let(:shulk) { Fabricate(:user) }
+    let(:an_invitation) { Fabricate.build(:invitation) }
 
+    after { ActionMailer::Base.deliveries.clear }
+
+    context 'with valid input' do
       before(:each) do
         set_current_user(shulk)
         post :create, invitation: {recipients_name: an_invitation.recipients_name, recipients_email: an_invitation.recipients_email, message: an_invitation.message}
       end
 
-      after { ActionMailer::Base.deliveries.clear }
+      it 'redirects to the new invitation page' do
+        expect(response).to redirect_to invite_path
+      end
 
       it 'creates an invitation' do
         expect(Invitation.all.count).to eq(1)
@@ -44,12 +48,13 @@ describe InvitationsController do
     end
 
     context 'with invalid input' do
-      let(:dunban) { Fabricate(:user) }
-      let(:an_invitation) { Fabricate.build(:invitation) }
-
       before(:each) do
-        set_current_user(dunban)
+        set_current_user(shulk)
         post :create, invitation: {recipients_name: '', recipients_email: an_invitation.recipients_email, message: an_invitation.message}
+      end
+
+      it 'does not create an invitation' do
+        expect(Invitation.all.count).to eq(0)
       end
 
       it 'does not send an email' do
@@ -58,6 +63,12 @@ describe InvitationsController do
 
       it 'renders the invite page/form' do
         expect(response).to render_template :new
+      end
+    end
+
+    it_behaves_like 'require_logged_in_user' do
+      let(:action) do
+        post :create, invitation: {recipients_name: an_invitation.recipients_name, recipients_email: an_invitation.recipients_email, message: an_invitation.message}
       end
     end
   end

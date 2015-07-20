@@ -5,14 +5,11 @@ feature 'MyFlix users can invite people to use the site' do
   let(:terrys_invitation) { Fabricate.build(:invitation) }
   let(:future_myflix_user) { Fabricate.build(:user) }
 
-  background do
-    clear_emails
-  end
-
   scenario 'A user sends out an invitation, and the recipient accepts' do
     new_invitation_is_sent_out(terry, terrys_invitation)
     recipient_recieves_invitation(terrys_invitation)
     new_user_registers(future_myflix_user)
+    clear_emails
   end
 
   def new_invitation_is_sent_out(user, invitation)

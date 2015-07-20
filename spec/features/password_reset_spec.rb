@@ -4,16 +4,13 @@ feature 'Reset password via email' do
   let!(:gary) { Fabricate(:user) }
   let(:new_password) { 'abrandnewpassword' }
 
-  background do
-    clear_emails
-  end
-
   scenario 'An existing user has forgotten their password' do
     go_to_the_forgot_password_page
     enter_email_address(gary)
     check_inbox_and_follow_the_reset_link(gary)
     pick_a_new_password(new_password)
     login_with_new_password(gary, new_password)
+    clear_emails
   end
 
   def go_to_the_forgot_password_page

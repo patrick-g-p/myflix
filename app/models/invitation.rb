@@ -11,6 +11,10 @@ class Invitation < ActiveRecord::Base
     self.invitation_token = SecureRandom.urlsafe_base64
   end
 
+  def clear_token!
+    self.update_column(:invitation_token, nil)
+  end
+
   def send_invitation
     UserMailer.send_invitation_email(self).deliver
   end

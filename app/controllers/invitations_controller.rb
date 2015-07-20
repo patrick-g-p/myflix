@@ -12,7 +12,7 @@ class InvitationsController < ApplicationController
     if @invitation.save
       @invitation.send_invitation
       flash[:success] = 'Your invite has been sent!'
-      redirect_to root_path
+      redirect_to invite_path
     else
       flash[:danger] = 'Some of the fields below contain errors.'
       render :new
