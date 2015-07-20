@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_many :queue_items, -> {order(:list_position)}
   has_many :following_relationships, class_name: 'Relationship', foreign_key: 'follower_id'
   has_many :leading_relationships, class_name: 'Relationship', foreign_key: 'leader_id'
+  has_many :invitations, foreign_key: 'inviter_id'
 
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, on: [:create, :update], length: {minimum: 5}
@@ -33,6 +34,10 @@ class User < ActiveRecord::Base
 
   def can_follow?(another_user)
     !(self.already_following?(another_user) || self == another_user)
+  end
+
+  def follow(another_user)
+    following_relationships.create(leader: another_user) if can_follow?(another_user)
   end
 
   def send_password_reset_email

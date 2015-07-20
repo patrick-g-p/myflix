@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe ReviewsController do
   describe 'POST create' do
-    let(:video) {Fabricate(:video)}
+    let(:video) { Fabricate(:video) }
 
     context 'user is logged in' do
-      before(:each) {set_current_user}
+      before(:each) { set_current_user }
 
       context 'the input is valid' do
         before(:each) do
@@ -54,7 +54,9 @@ describe ReviewsController do
       end
 
       it_behaves_like "require_logged_in_user" do
-        let(:action) {post :create, video_id: video.id, review: Fabricate.attributes_for(:review)}
+        let(:action) do
+          post :create, video_id: video.id, review: Fabricate.attributes_for(:review)
+        end
       end
     end
   end

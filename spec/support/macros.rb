@@ -19,6 +19,11 @@ def login(a_user=nil)
   click_button("Login")
 end
 
+def logout(a_user)
+  click_link("Welcome #{a_user.full_name.titleize}")
+  click_link("Sign Out")
+end
+
 def click_video_on_the_homepage(video)
   find("a[href='/videos/#{video.id}']").click
 end

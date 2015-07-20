@@ -11,6 +11,8 @@ gem 'jquery-rails'
 gem 'pg'
 gem 'bcrypt'
 gem 'bootstrap_form'
+gem 'fabrication'
+gem 'faker'
 
 group :development do
   gem 'thin'
@@ -23,9 +25,8 @@ group :development, :test do
   gem 'pry'
   gem 'pry-nav'
   gem 'rspec-rails', '2.99'
-  gem 'fabrication'
-  gem 'faker'
   gem 'capybara'
+  gem 'capybara-email'
 end
 
 group :test do

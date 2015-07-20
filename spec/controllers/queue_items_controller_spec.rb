@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe QueueItemsController do
-  let(:adam) {Fabricate(:user, full_name: "Adam Jensen")}
+  let(:adam) { Fabricate(:user, full_name: "Adam Jensen") }
 
   describe 'GET index' do
     context 'authenticated user' do
-      before {set_current_user(adam)}
+      before { set_current_user(adam) }
 
       it 'sets the @queue_items variable' do
         video = Fabricate(:video)
@@ -16,15 +16,15 @@ describe QueueItemsController do
     end
 
     it_behaves_like 'require_logged_in_user' do
-      let(:action) {get :index}
+      let(:action) { get :index }
     end
   end
 
   describe 'POST create' do
     context 'authenticated_user' do
-      before(:each) {set_current_user(adam)}
+      before(:each) { set_current_user(adam) }
 
-      let(:video) {Fabricate(:video)}
+      let(:video) { Fabricate(:video) }
 
       it 'redirects to the queue path when successful' do
         post :create, video_id: video.id
@@ -55,16 +55,18 @@ describe QueueItemsController do
     end
 
     it_behaves_like 'require_logged_in_user' do
-      let(:action) {post :create, video_id: 1}
+      let(:action) { post :create, video_id: 1 }
     end
   end
 
   describe 'DELETE destroy' do
     context 'authenticated_user' do
-      before(:each) {set_current_user(adam)}
+      before(:each) { set_current_user(adam) }
 
-      let(:video) {Fabricate(:video)}
-      let(:a_queue_item) {Fabricate(:queue_item, list_position: 1, video: video, user: adam)}
+      let(:video) { Fabricate(:video) }
+      let(:a_queue_item) do
+        Fabricate(:queue_item, list_position: 1, video: video, user: adam)
+      end
 
       it 'redirects back to my queue' do
         delete :destroy, id: a_queue_item.id
@@ -92,26 +94,28 @@ describe QueueItemsController do
     end
 
     it_behaves_like 'require_logged_in_user' do
-      let(:action) {post :destroy, id: 1}
+      let(:action) { post :destroy, id: 1 }
     end
   end
 
   describe 'POST update_queue' do
     context 'authenticated user' do
-      before(:each) {set_current_user(adam)}
+      before(:each) { set_current_user(adam) }
 
-      let(:queue_item1) {Fabricate(:queue_item, user: adam, list_position: 1)}
-      let(:queue_item2) {Fabricate(:queue_item, user: adam, list_position: 2)}
+      let(:queue_item1) { Fabricate(:queue_item, user: adam, list_position: 1) }
+      let(:queue_item2) { Fabricate(:queue_item, user: adam, list_position: 2) }
 
       context 'with valid input' do
         it 'redirects to my queue' do
           post :update_queue, queue_items: [{id: queue_item1.id, list_position: 1}, {id: queue_item2.id, list_position: 2}]
           expect(response).to redirect_to my_queue_path
         end
+
         it 'updates the list position of the queue items' do
           post :update_queue, queue_items: [{id: queue_item1.id, list_position: 2}, {id: queue_item2.id, list_position: 1}]
           expect(adam.queue_items).to eq([queue_item2, queue_item1])
         end
+
         it 'normalizes the list position numbers' do
           post :update_queue, queue_items: [{id: queue_item1.id, list_position: 1}, {id: queue_item2.id, list_position: 11}]
           expect(adam.queue_items.map(&:list_position)).to eq([1, 2])
@@ -123,10 +127,12 @@ describe QueueItemsController do
           post :update_queue, queue_items: [{id: queue_item1.id, list_position: 1.9}, {id: queue_item2.id, list_position: 2}]
           expect(response).to redirect_to my_queue_path
         end
+
         it 'shows a flash error message' do
           post :update_queue, queue_items: [{id: queue_item1.id, list_position: 1.9}, {id: queue_item2.id, list_position: 2}]
           expect(flash[:danger]).to be_present
         end
+
         it 'does not update the queue items' do
           post :update_queue, queue_items: [{id: queue_item1.id, list_position: 11}, {id: queue_item2.id, list_position: 42.11}]
           expect(queue_item1.reload.list_position).to eq(1)
@@ -142,7 +148,9 @@ describe QueueItemsController do
     end
 
     it_behaves_like 'require_logged_in_user' do
-      let(:action) {post :update_queue, queue_items: [{id: 1, list_position: 1}, {id: 2, list_position: 2}]}
+      let(:action) do
+        post :update_queue, queue_items: [{id: 1, list_position: 1}, {id: 2, list_position: 2}]
+      end
     end
   end
 end

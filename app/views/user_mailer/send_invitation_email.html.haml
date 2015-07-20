@@ -1,0 +1,11 @@
+!!! 5
+%html(lang="en-US")
+  %body
+    %p #{@invitation.recipients_name.titleize}, your friend #{@invitation.inviter.full_name.titleize} has invited you to check out MyFlix!
+    %p= "Their message: '#{@invitation.message}'"
+    %p
+      Sound intresting?
+      = link_to 'Click here to sign up', register_with_token_url(@invitation.invitation_token)
+    %p
+      Regards,
+      = mail_to ENV['TA_EMAIL'], 'MyFlix Support'

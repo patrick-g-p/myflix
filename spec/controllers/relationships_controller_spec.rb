@@ -11,15 +11,17 @@ describe RelationshipsController do
     end
 
     it_behaves_like 'require_logged_in_user' do
-      let(:action) {get :index}
+      let(:action) { get :index }
     end
   end
 
   describe 'DELETE destroy' do
     context 'logged in user' do
-      let(:a_user) {Fabricate(:user)}
-      let(:another_user) {Fabricate(:user)}
-      let(:a_relationship) {Fabricate(:relationship, follower: a_user, leader: another_user)}
+      let(:a_user) { Fabricate(:user) }
+      let(:another_user) { Fabricate(:user) }
+      let(:a_relationship) do
+        Fabricate(:relationship, follower: a_user, leader: another_user)
+      end
 
       it 'redirects to the people page' do
         set_current_user(a_user)
@@ -42,13 +44,13 @@ describe RelationshipsController do
     end
 
     it_behaves_like 'require_logged_in_user' do
-      let(:action) {delete :destroy, id: 42}
+      let(:action) { delete :destroy, id: 42 }
     end
   end
 
   describe 'POST create' do
-    let(:a_user) {Fabricate(:user)}
-    let(:an_intresting_user) {Fabricate(:user)}
+    let(:a_user) { Fabricate(:user) }
+    let(:an_intresting_user) { Fabricate(:user) }
 
     it 'redirects to the people path' do
       set_current_user(a_user)
@@ -76,7 +78,7 @@ describe RelationshipsController do
     end
 
     it_behaves_like 'require_logged_in_user' do
-      let(:action) {post :create, followed_user_id: 42}
+      let(:action) { post :create, followed_user_id: 42 }
     end
   end
 end

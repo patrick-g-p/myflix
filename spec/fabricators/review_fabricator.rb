@@ -1,4 +1,4 @@
-Fabricator(:review) do
-  rating {rand(1..5)}
-  body {Faker::Lorem.paragraph}
+Fabricator(:review) do |f|
+  f.rating { rand(1..5) }
+  f.body { Faker::Lorem.paragraph }
 end

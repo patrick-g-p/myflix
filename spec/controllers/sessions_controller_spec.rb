@@ -16,7 +16,7 @@ describe SessionsController do
   end
 
   describe 'POST create' do
-    let(:geralt) {Fabricate(:user)}
+    let(:geralt) { Fabricate(:user) }
 
     context 'when valid' do
       before(:each) do
@@ -39,7 +39,7 @@ describe SessionsController do
       end
 
       it_behaves_like "require_logged_in_user" do
-        let(:action) {post :create, {email: geralt.email, password: '123'}}
+        let(:action) { post :create, {email: geralt.email, password: '123'} }
       end
     end
   end
@@ -51,7 +51,7 @@ describe SessionsController do
     end
 
     it 'sets the session user_id to nil' do
-      expect(session[:user_id]).to be nil
+      expect(session[:user_id]).to be_nil
     end
     it 'redirects to the welcome page/root' do
       expect(response).to redirect_to root_path
