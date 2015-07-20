@@ -1,2 +1,2 @@
-Fabricator(:relationship) do  
+Fabricator(:relationship) do |f|
 end
