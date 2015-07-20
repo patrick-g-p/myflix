@@ -33,10 +33,6 @@ describe InvitationsController do
         expect(Invitation.all.count).to eq(1)
       end
 
-      it 'sets the invitation token' do
-        expect(Invitation.first.invitation_token).to be_present
-      end
-
       it 'sends out the invite email' do
         expect(ActionMailer::Base.deliveries).to be_present
       end
