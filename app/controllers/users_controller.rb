@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      UserMailer.registration_welcome_email(current_user).deliver
+      UserMailer.delay.registration_welcome_email(current_user.id)
       if invitation
         handle_invitation(invitation)
       end

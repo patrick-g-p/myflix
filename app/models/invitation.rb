@@ -12,7 +12,7 @@ class Invitation < ActiveRecord::Base
   end
 
   def send_invitation
-    UserMailer.send_invitation_email(self).deliver
+    UserMailer.delay.send_invitation_email(self.id)
   end
 
   private
