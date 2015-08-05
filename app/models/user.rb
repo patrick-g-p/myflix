@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
 
   def send_password_reset_email
     generate_token!
-    UserMailer.password_reset_email(self).deliver
+    UserMailer.delay.password_reset_email(self.id)
   end
 
   def generate_token!
