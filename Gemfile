@@ -14,9 +14,9 @@ gem 'bootstrap_form'
 gem 'fabrication'
 gem 'faker'
 gem 'sidekiq'
+gem 'unicorn'
 
 group :development do
-  gem 'thin'
   gem "better_errors"
   gem "binding_of_caller"
   gem 'letter_opener'
@@ -25,14 +25,14 @@ end
 group :development, :test do
   gem 'pry'
   gem 'pry-nav'
-  gem 'rspec-rails', '2.99'
-  gem 'capybara'
-  gem 'capybara-email'
 end
 
 group :test do
   gem 'database_cleaner', '1.2.0'
   gem 'shoulda-matchers'
+  gem 'rspec-rails', '2.99'
+  gem 'capybara'
+  gem 'capybara-email'
 end
 
 group :production do
