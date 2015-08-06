@@ -1,0 +1,19 @@
+machine:
+  ruby:
+    version: 2.1.6
+deployment:
+  production:
+    branch: master
+    commands:
+      - heroku maintenance:on --app thawing-taiga-2029
+      - heroku pg:backups capture --app thawing-taiga-2029
+      - git push git@heroku.com:thawing-taiga-2029.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app thawing-taiga-2029
+      - heroku maintenance:off --app thawing-taiga-2029
+  staging:
+    branch: staging
+    commands:
+      - heroku maintenance:on --app thawing-taiga-2029
+      - git push git@heroku.com:thawing-taiga-2029.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app thawing-taiga-2029
+      - heroku maintenance:off --app thawing-taiga-2029
