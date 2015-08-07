@@ -15,6 +15,8 @@ gem 'fabrication'
 gem 'faker'
 gem 'sidekiq'
 gem 'unicorn'
+gem 'carrierwave'
+gem 'mini_magick'
 
 group :development do
   gem "better_errors"
@@ -33,6 +35,10 @@ group :test do
   gem 'rspec-rails', '2.99'
   gem 'capybara'
   gem 'capybara-email'
+end
+
+group :staging, :production do
+  gem 'carrierwave-aws'
 end
 
 group :production do
