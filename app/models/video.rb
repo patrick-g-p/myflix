@@ -5,6 +5,9 @@ class Video < ActiveRecord::Base
   validates_presence_of :title, :description
   validates_uniqueness_of :title
 
+  mount_uploader :large_cover, LargeCoverUploader
+  mount_uploader :small_cover, SmallCoverUploader
+
   def self.search_by_title(search)
     return [] if search.blank?
     where("title ILIKE ?", "%#{search}%" ).order(:title)
