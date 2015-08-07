@@ -20,6 +20,10 @@ Myflix::Application.routes.draw do
   resources :invitations, only: [:create]
   get 'invite', to: 'invitations#new'
 
+  namespace :admin do
+    resources :videos, only: [:new, :create]
+  end
+
   resources :videos, only: [:index, :show] do
     collection do
       get 'search', to: 'videos#search'

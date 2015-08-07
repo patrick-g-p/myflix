@@ -10,6 +10,10 @@ class User < ActiveRecord::Base
   validates :password, presence: true, on: [:create, :update], length: {minimum: 5}
   validates :full_name, presence: true, length: {maximum: 30}
 
+  def admin?
+    self.role == 'admin'
+  end
+
   def owns_queue_item?(queue_item)
     queue_items.include?(queue_item)
   end
