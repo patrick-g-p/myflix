@@ -2,6 +2,7 @@ require 'spec_helper'
 
 feature 'add video' do
   let(:jennifer) { Fabricate(:admin) }
+  let(:normal_user) { Fabricate(:user) }
   let(:new_release) { Fabricate.build(:video) }
   let!(:new_release_category) { Fabricate(:category) }
 
@@ -10,14 +11,17 @@ feature 'add video' do
   end
 
   scenario 'Admin creates a new video release for MyFlix' do
-    new_video_page
+    admin_new_video_page
     fill_out_video_information(new_release, new_release_category)
     add_cover_images
     copy_paste_as3_link
-    submit_new_video
+    submit_new_video_and_logout(jennifer)
+
+    login(normal_user)
+    views_new_video
   end
 
-  def new_video_page
+  def admin_new_video_page
     visit(new_admin_video_path)
   end
 
@@ -33,11 +37,17 @@ feature 'add video' do
   end
 
   def copy_paste_as3_link
-    fill_in('Amazon S3 Link', with: Faker::Internet.url('s3.amazoaws.com'))
+    fill_in('Amazon S3 Link', with: 's3.amazoaws.com/example/video.mp4')
   end
 
-  def submit_new_video
+  def submit_new_video_and_logout(admin)
     click_on('Add New Video')
-    expect(page).to have_content("#{new_release.title} was added to MyFlix successfully.")
+    logout(admin)
+  end
+
+  def views_new_video
+    visit video_path(Video.last)
+    expect(page).to have_selector("a[href='s3.amazoaws.com/example/video.mp4']")
+    expect(page).to have_selector("img[src='/uploads/archer_large.jpg']")
   end
 end
