@@ -14,4 +14,5 @@
           = f.text_area :description
           = f.file_field :large_cover, label: 'Large Cover'
           = f.file_field :small_cover, label: 'Small Cover'
+          = f.url_field :video_url, label: 'Amazon S3 Link'
           = f.submit 'Add New Video', class: 'btn btn-info'

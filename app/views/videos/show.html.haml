@@ -9,7 +9,10 @@
           %span= proper_rating(@video.average_rating)
         %p= @video.description
         .actions
-          %a.btn.btn-primary(href="") Watch Now
+          - if @video.video_url
+            = link_to 'Watch Now', @video.video_url, class: 'btn btn-primary'
+          - else
+            = link_to 'Watch Now', '#', class: 'btn btn-warning'
           = link_to 'Add to Queue', queue_items_path(video_id: @video.id), method: 'post', class: 'btn btn-default' unless current_user.video_in_queue?(@video)
 
 %section.reviews.container
