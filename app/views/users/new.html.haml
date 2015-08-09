@@ -8,4 +8,9 @@
         = f.text_field :full_name, label: 'Full Name'
         - if @token
           = hidden_field_tag :token, @token
-        = f.submit 'Register'
+        %script(src="https://checkout.stripe.com/checkout.js"
+        class="stripe-button"
+        data-key="pk_test_hUOd4Tbs1BCRX4yuX9eri9L2"
+        data-name="MyFlix.com"
+        data-description="A video on demand service"
+        data-amount="999")
