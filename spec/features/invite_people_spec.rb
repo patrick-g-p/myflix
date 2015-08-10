@@ -30,6 +30,8 @@ feature 'MyFlix users can invite people to use the site' do
   def new_user_registers(user)
     fill_in('Password', with: user.password)
     fill_in('Full Name', with: user.full_name)
+    # find("input[data-stripe='number']").set(4242424242424242)
+    # find("input[data-stripe='cvc']").set(123)
     click_on('Register')
     expect(page).to have_content('Your account was set up. Welcome to MyFlix!')
   end
