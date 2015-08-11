@@ -32,6 +32,16 @@ describe SessionsController do
       end
     end
 
+    context 'valid with admin' do
+      let(:triss) { Fabricate(:admin) }
+
+      it 'redirects to the admin dashboard' do
+        set_current_admin(triss)
+        post :create, {email: triss.email, password: triss.password}
+        expect(response).to redirect_to new_admin_video_path
+      end
+    end
+
     context 'when invalid' do
       it 'has a value of nil in the session' do
         post :create, {email: geralt.email, password: geralt.password + 'lovesyen'}

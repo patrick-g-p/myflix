@@ -23,3 +23,13 @@
   position: relative;
   top: -15px;
 }
+
+.payment-errors-container {
+  display: none;
+  background-color: #f2dede;
+  border-radius: 2px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 18px;
+  text-align: center;
+}
