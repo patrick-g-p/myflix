@@ -9,19 +9,27 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     invitation = Invitation.find_by(invitation_token: params[:token])
 
-    if @user.save
-      stripe_payment(params[:stripeToken], @user.email)
+    if @user.valid?
+      StripeWrapper.set_api_key
+      charge = StripeWrapper::Charge.create(amount: 999, token: params[:stripeToken], user_email: @user.email)
 
-      session[:user_id] = @user.id
-      UserMailer.delay.registration_welcome_email(current_user.id)
+      if charge.successful?
+        @user.save
+        session[:user_id] = @user.id
+        UserMailer.delay.registration_welcome_email(current_user.id)
 
-      if invitation
-        handle_invitation(invitation)
+        if invitation
+          handle_invitation(invitation)
+        end
+
+        flash[:success] = 'Your account was set up. Welcome to MyFlix!'
+        redirect_to home_path
+      else
+        flash[:danger] = charge.error_message
+        render :new
       end
-
-      flash[:success] = 'Your account was set up. Welcome to MyFlix!'
-      redirect_to home_path
     else
+      flash[:danger] = 'Please fix any errors below'
       render :new
     end
   end
@@ -53,20 +61,5 @@ class UsersController < ApplicationController
     current_user.follow(invitation.inviter)
     invitation.inviter.follow(current_user)
     invitation.clear_token!
-  end
-
-  def stripe_payment(passed_in_token, users_email)
-    Stripe.api_key = ENV.fetch('STRIPE_TEST_SK')
-
-    begin
-      charge = Stripe::Charge.create(
-        :amount => 999,
-        :currency => "usd",
-        :source => passed_in_token,
-        :description => "Registration charge for #{users_email}"
-      )
-    rescue Stripe::CardError => e
-      flash[:danger] = e.message
-    end
   end
 end
