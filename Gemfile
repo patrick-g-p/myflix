@@ -17,6 +17,9 @@ gem 'sidekiq'
 gem 'unicorn'
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'figaro'
+gem 'stripe'
+gem 'stripe-ruby-mock', '~> 2.1.1', :require => 'stripe_mock'
 
 group :development do
   gem "better_errors"
