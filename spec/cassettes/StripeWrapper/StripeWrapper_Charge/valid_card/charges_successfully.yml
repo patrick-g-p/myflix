@@ -1,0 +1,214 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/tokens
+    body:
+      encoding: US-ASCII
+      string: card[number]=4242424242424242&card[exp_month]=8&card[exp_year]=2016&card[cvc]=314
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.20.1
+      Authorization:
+      - Bearer sk_test_aHOa6eoJJjnQPRDIPLzYaM70
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.20.1","lang":"ruby","lang_version":"2.1.6 p336 (2015-04-13)","platform":"x86_64-linux","publisher":"stripe","uname":"Linux
+        source-11-xu 3.16.0-45-generic #60~14.04.1-Ubuntu SMP Fri Jul 24 21:16:23
+        UTC 2015 x86_64 x86_64 x86_64 GNU/Linux"}'
+      Content-Length:
+      - '81'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 13 Aug 2015 20:48:09 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '780'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_6n2hrkFqvKQ2pD
+      Stripe-Version:
+      - '2015-07-28'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "tok_16ZScPKUdRrCs1Lrh4ICuSch",
+          "livemode": false,
+          "created": 1439498889,
+          "used": false,
+          "object": "token",
+          "type": "card",
+          "card": {
+            "id": "card_16ZScPKUdRrCs1LrLHTpb0n7",
+            "object": "card",
+            "last4": "4242",
+            "brand": "Visa",
+            "funding": "credit",
+            "exp_month": 8,
+            "exp_year": 2016,
+            "fingerprint": "kuqCAfzAp21fifIi",
+            "country": "US",
+            "name": null,
+            "address_line1": null,
+            "address_line2": null,
+            "address_city": null,
+            "address_state": null,
+            "address_zip": null,
+            "address_country": null,
+            "cvc_check": "unchecked",
+            "address_line1_check": null,
+            "address_zip_check": null,
+            "tokenization_method": null,
+            "dynamic_last4": null,
+            "metadata": {}
+          },
+          "client_ip": "24.190.115.87"
+        }
+    http_version: 
+  recorded_at: Thu, 13 Aug 2015 20:48:09 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/charges
+    body:
+      encoding: US-ASCII
+      string: amount=999&currency=usd&source=tok_16ZScPKUdRrCs1Lrh4ICuSch&description=Registration%20charge%20for%20stripetest%40example.com
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.20.1
+      Authorization:
+      - Bearer sk_test_aHOa6eoJJjnQPRDIPLzYaM70
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.20.1","lang":"ruby","lang_version":"2.1.6 p336 (2015-04-13)","platform":"x86_64-linux","publisher":"stripe","uname":"Linux
+        source-11-xu 3.16.0-45-generic #60~14.04.1-Ubuntu SMP Fri Jul 24 21:16:23
+        UTC 2015 x86_64 x86_64 x86_64 GNU/Linux"}'
+      Content-Length:
+      - '126'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 13 Aug 2015 20:48:09 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1467'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_6n2hepB7NhXkNW
+      Stripe-Version:
+      - '2015-07-28'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "ch_16ZScPKUdRrCs1LrrXVK7QmK",
+          "object": "charge",
+          "created": 1439498889,
+          "livemode": false,
+          "paid": true,
+          "status": "succeeded",
+          "amount": 999,
+          "currency": "usd",
+          "refunded": false,
+          "source": {
+            "id": "card_16ZScPKUdRrCs1LrLHTpb0n7",
+            "object": "card",
+            "last4": "4242",
+            "brand": "Visa",
+            "funding": "credit",
+            "exp_month": 8,
+            "exp_year": 2016,
+            "fingerprint": "kuqCAfzAp21fifIi",
+            "country": "US",
+            "name": null,
+            "address_line1": null,
+            "address_line2": null,
+            "address_city": null,
+            "address_state": null,
+            "address_zip": null,
+            "address_country": null,
+            "cvc_check": "pass",
+            "address_line1_check": null,
+            "address_zip_check": null,
+            "tokenization_method": null,
+            "dynamic_last4": null,
+            "metadata": {},
+            "customer": null
+          },
+          "captured": true,
+          "balance_transaction": "txn_16ZScPKUdRrCs1LrdVI8PwUK",
+          "failure_message": null,
+          "failure_code": null,
+          "amount_refunded": 0,
+          "customer": null,
+          "invoice": null,
+          "description": "Registration charge for stripetest@example.com",
+          "dispute": null,
+          "metadata": {},
+          "statement_descriptor": null,
+          "fraud_details": {},
+          "receipt_email": null,
+          "receipt_number": null,
+          "shipping": null,
+          "destination": null,
+          "application_fee": null,
+          "refunds": {
+            "object": "list",
+            "total_count": 0,
+            "has_more": false,
+            "url": "/v1/charges/ch_16ZScPKUdRrCs1LrrXVK7QmK/refunds",
+            "data": []
+          }
+        }
+    http_version: 
+  recorded_at: Thu, 13 Aug 2015 20:48:10 GMT
+recorded_with: VCR 2.9.3

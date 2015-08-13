@@ -27,7 +27,7 @@ describe StripeWrapper do
     context 'valid card' do
       let(:card_number) { '4242424242424242' }
 
-      it 'charges successfully' do
+      it 'charges successfully', :vcr do
         response = StripeWrapper::Charge.create(amount: 999, token: token, user_email: 'stripetest@example.com')
         expect(response).to be_successful
       end
@@ -36,12 +36,12 @@ describe StripeWrapper do
     context 'invalid card' do
       let(:card_number) { '4000000000000002' }
 
-      it 'does not charge the card' do
+      it 'does not charge the card', :vcr do
         response = StripeWrapper::Charge.create(amount: 999, token: token, user_email: 'stripetest@example.com')
         expect(response).to_not be_successful
       end
 
-      it 'has an error message for the end user' do
+      it 'has an error message for the end user', :vcr do
         response = StripeWrapper::Charge.create(amount: 999, token: token, user_email: 'stripetest@example.com')
         expect(response.error_message).to be_present
       end
