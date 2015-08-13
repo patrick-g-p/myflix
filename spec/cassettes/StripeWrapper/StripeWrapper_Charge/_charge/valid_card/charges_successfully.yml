@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/tokens
     body:
       encoding: US-ASCII
-      string: card[number]=4000000000000002&card[exp_month]=8&card[exp_year]=2016&card[cvc]=314
+      string: card[number]=4242424242424242&card[exp_month]=8&card[exp_year]=2016&card[cvc]=314
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -31,7 +31,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 13 Aug 2015 20:48:11 GMT
+      - Thu, 13 Aug 2015 21:54:29 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -49,7 +49,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6n2h6gr5x3LYop
+      - req_6n3meynlC0Gg0N
       Stripe-Version:
       - '2015-07-28'
       Strict-Transport-Security:
@@ -58,21 +58,21 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_16ZScRKUdRrCs1Lr3rguBQy3",
+          "id": "tok_16ZTebKUdRrCs1LrQTsQm9j5",
           "livemode": false,
-          "created": 1439498891,
+          "created": 1439502869,
           "used": false,
           "object": "token",
           "type": "card",
           "card": {
-            "id": "card_16ZScRKUdRrCs1Lr1FKTcSwm",
+            "id": "card_16ZTebKUdRrCs1LriwkLr8kn",
             "object": "card",
-            "last4": "0002",
+            "last4": "4242",
             "brand": "Visa",
             "funding": "credit",
             "exp_month": 8,
             "exp_year": 2016,
-            "fingerprint": "PWocUSQI88M9o1BB",
+            "fingerprint": "kuqCAfzAp21fifIi",
             "country": "US",
             "name": null,
             "address_line1": null,
@@ -91,13 +91,13 @@ http_interactions:
           "client_ip": "24.190.115.87"
         }
     http_version: 
-  recorded_at: Thu, 13 Aug 2015 20:48:11 GMT
+  recorded_at: Thu, 13 Aug 2015 21:54:30 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/charges
     body:
       encoding: US-ASCII
-      string: amount=999&currency=usd&source=tok_16ZScRKUdRrCs1Lr3rguBQy3&description=Registration%20charge%20for%20stripetest%40example.com
+      string: amount=999&currency=usd&source=tok_16ZTebKUdRrCs1LrQTsQm9j5&description=Registration%20charge%20for%20stripetest%40example.com
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -117,17 +117,17 @@ http_interactions:
       - '126'
   response:
     status:
-      code: 402
-      message: Payment Required
+      code: 200
+      message: OK
     headers:
       Server:
       - nginx
       Date:
-      - Thu, 13 Aug 2015 20:48:12 GMT
+      - Thu, 13 Aug 2015 21:54:30 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '162'
+      - '1467'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -141,20 +141,74 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6n2hSRLSXXVkmz
+      - req_6n3mWcnlmAfERu
       Stripe-Version:
       - '2015-07-28'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
     body:
       encoding: UTF-8
       string: |
         {
-          "error": {
-            "message": "Your card was declined.",
-            "type": "card_error",
-            "code": "card_declined",
-            "charge": "ch_16ZScSKUdRrCs1LrYwKuCQtU"
+          "id": "ch_16ZTecKUdRrCs1LrAl3jRMqH",
+          "object": "charge",
+          "created": 1439502870,
+          "livemode": false,
+          "paid": true,
+          "status": "succeeded",
+          "amount": 999,
+          "currency": "usd",
+          "refunded": false,
+          "source": {
+            "id": "card_16ZTebKUdRrCs1LriwkLr8kn",
+            "object": "card",
+            "last4": "4242",
+            "brand": "Visa",
+            "funding": "credit",
+            "exp_month": 8,
+            "exp_year": 2016,
+            "fingerprint": "kuqCAfzAp21fifIi",
+            "country": "US",
+            "name": null,
+            "address_line1": null,
+            "address_line2": null,
+            "address_city": null,
+            "address_state": null,
+            "address_zip": null,
+            "address_country": null,
+            "cvc_check": "pass",
+            "address_line1_check": null,
+            "address_zip_check": null,
+            "tokenization_method": null,
+            "dynamic_last4": null,
+            "metadata": {},
+            "customer": null
+          },
+          "captured": true,
+          "balance_transaction": "txn_16ZTecKUdRrCs1LrAisOcBUl",
+          "failure_message": null,
+          "failure_code": null,
+          "amount_refunded": 0,
+          "customer": null,
+          "invoice": null,
+          "description": "Registration charge for stripetest@example.com",
+          "dispute": null,
+          "metadata": {},
+          "statement_descriptor": null,
+          "fraud_details": {},
+          "receipt_email": null,
+          "receipt_number": null,
+          "shipping": null,
+          "destination": null,
+          "application_fee": null,
+          "refunds": {
+            "object": "list",
+            "total_count": 0,
+            "has_more": false,
+            "url": "/v1/charges/ch_16ZTecKUdRrCs1LrAl3jRMqH/refunds",
+            "data": []
           }
         }
     http_version: 
-  recorded_at: Thu, 13 Aug 2015 20:48:12 GMT
+  recorded_at: Thu, 13 Aug 2015 21:54:30 GMT
 recorded_with: VCR 2.9.3
