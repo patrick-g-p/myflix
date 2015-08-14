@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'MyFlix users can invite people to use the site' do
+feature 'MyFlix users can invite people to use the site', {js: true, vcr: true} do
   let(:terry) { Fabricate(:user, full_name: 'Terry McGinnis') }
   let(:terrys_invitation) { Fabricate.build(:invitation) }
   let(:future_myflix_user) { Fabricate.build(:user) }
@@ -30,6 +30,8 @@ feature 'MyFlix users can invite people to use the site' do
   def new_user_registers(user)
     fill_in('Password', with: user.password)
     fill_in('Full Name', with: user.full_name)
+    fill_in('Credit Card', with: "4242424242424242")
+    fill_in('CVC', with: '123')
     click_on('Register')
     expect(page).to have_content('Your account was set up. Welcome to MyFlix!')
   end
