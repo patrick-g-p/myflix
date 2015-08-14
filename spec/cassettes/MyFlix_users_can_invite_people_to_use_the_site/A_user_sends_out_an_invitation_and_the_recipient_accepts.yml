@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/charges
     body:
       encoding: US-ASCII
-      string: amount=999&currency=usd&source=tok_16Zq3rKUdRrCs1LrIXLD1dQH&description=Registration%20charge%20for%20eladio%40emmerich.org
+      string: amount=999&currency=usd&source=tok_16ZqpnKUdRrCs1LriLxZHzOj&description=Registration%20charge%20for%20isabell.maggio%40bradtkemills.name
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -22,7 +22,7 @@ http_interactions:
         source-11-xu 3.16.0-45-generic #60~14.04.1-Ubuntu SMP Fri Jul 24 21:16:23
         UTC 2015 x86_64 x86_64 x86_64 GNU/Linux"}'
       Content-Length:
-      - '123'
+      - '136'
   response:
     status:
       code: 200
@@ -31,11 +31,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Fri, 14 Aug 2015 21:50:04 GMT
+      - Fri, 14 Aug 2015 22:39:37 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1464'
+      - '1477'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -49,7 +49,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6nQvLblRdyCuPh
+      - req_6nRjPFlGm3pxTF
       Stripe-Version:
       - '2015-07-28'
       Strict-Transport-Security:
@@ -58,9 +58,9 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "ch_16Zq3sKUdRrCs1LrlyNhaKtW",
+          "id": "ch_16ZqpoKUdRrCs1Lr275yzlw3",
           "object": "charge",
-          "created": 1439589004,
+          "created": 1439591976,
           "livemode": false,
           "paid": true,
           "status": "succeeded",
@@ -68,7 +68,7 @@ http_interactions:
           "currency": "usd",
           "refunded": false,
           "source": {
-            "id": "card_16Zq3rKUdRrCs1LruDoVwbpF",
+            "id": "card_16ZqpnKUdRrCs1LrY1sUmzR4",
             "object": "card",
             "last4": "4242",
             "brand": "Visa",
@@ -93,13 +93,13 @@ http_interactions:
             "customer": null
           },
           "captured": true,
-          "balance_transaction": "txn_16Zq3sKUdRrCs1LrbbuQZt5B",
+          "balance_transaction": "txn_16ZqpoKUdRrCs1LrVW8W2RsY",
           "failure_message": null,
           "failure_code": null,
           "amount_refunded": 0,
           "customer": null,
           "invoice": null,
-          "description": "Registration charge for eladio@emmerich.org",
+          "description": "Registration charge for isabell.maggio@bradtkemills.name",
           "dispute": null,
           "metadata": {},
           "statement_descriptor": null,
@@ -113,10 +113,10 @@ http_interactions:
             "object": "list",
             "total_count": 0,
             "has_more": false,
-            "url": "/v1/charges/ch_16Zq3sKUdRrCs1LrlyNhaKtW/refunds",
+            "url": "/v1/charges/ch_16ZqpoKUdRrCs1Lr275yzlw3/refunds",
             "data": []
           }
         }
     http_version: 
-  recorded_at: Fri, 14 Aug 2015 21:50:05 GMT
+  recorded_at: Fri, 14 Aug 2015 22:39:37 GMT
 recorded_with: VCR 2.9.3
