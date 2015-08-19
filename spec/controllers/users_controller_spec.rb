@@ -10,11 +10,15 @@ describe UsersController do
   end
 
   describe 'POST create' do
+    let(:charge) { double('charge', successful?: true) }
+    let(:bad_charge) { double('charge', successful?: false, error_message: 'Your card was declined') }
+
     after { ActionMailer::Base.deliveries.clear }
 
-    context 'when valid' do
+    context 'with valid user and successful card charge' do
       before(:each) do
-        post :create, user: { email: 'geralt@rivia.com', password: 'yennefer', full_name: 'Geralt of Rivia' }
+        expect(StripeWrapper::Charge).to receive(:create).and_return(charge)
+        post :create, user: { email: 'geralt@rivia.com', password: 'yennefer', full_name: 'Geralt of Rivia' }, stripeToken: 'tokeny'
       end
 
       it 'creates a user' do
@@ -25,46 +29,68 @@ describe UsersController do
         expect(response).to redirect_to home_path
       end
 
-      context 'email sending' do
-        it 'sends the email' do
-          expect(ActionMailer::Base.deliveries).to be_present
-        end
+      it 'sends the email' do
+        expect(ActionMailer::Base.deliveries).to be_present
+      end
 
-        it 'send the email to the correct user' do
-          email = ActionMailer::Base.deliveries.last
-          expect(email.to).to eq([User.first.email])
-        end
+      it 'send the email to the correct user' do
+        email = ActionMailer::Base.deliveries.last
+        expect(email.to).to eq([User.first.email])
+      end
 
-        it 'has the right content in the email body' do
-          email = ActionMailer::Base.deliveries.last
-          expect(email.body).to include("You've successfully registered for a MyFlix account")
-        end
+      it 'has the right content in the email body' do
+        email = ActionMailer::Base.deliveries.last
+        expect(email.body).to include("You've successfully registered for a MyFlix account")
       end
     end
 
-    context 'with invitation token' do
-      let(:inviter) { Fabricate(:user) }
-      let(:invited_user) { Fabricate.build(:user) }
-      let(:an_invitation) { Fabricate(:invitation, inviter: inviter) }
+      context 'with invitation token' do
+        let(:inviter) { Fabricate(:user) }
+        let(:invited_user) { Fabricate.build(:user) }
+        let(:an_invitation) { Fabricate(:invitation, inviter: inviter) }
 
+        before(:each) do
+          expect(StripeWrapper::Charge).to receive(:create).and_return(charge)
+          post :create, user: {email: an_invitation.recipients_email, password: invited_user.password, full_name: invited_user.full_name}, token: an_invitation.invitation_token, stripeToken: 'tokeny'
+        end
+
+        it 'has the new invited user follow the inviter' do
+          expect(current_user.reload.already_following?(inviter)).to be_truthy
+        end
+
+        it 'has the inviter automatically follow the new user' do
+          expect(inviter.reload.already_following?(current_user)).to be_truthy
+        end
+
+        it 'removes the invitation token when done' do
+          expect(Invitation.first.invitation_token).to be_nil
+        end
+      end
+
+    context 'with valid user and declined card' do
       before(:each) do
-        post :create, user: {email: an_invitation.recipients_email, password: invited_user.password, full_name: invited_user.full_name}, token: an_invitation.invitation_token
+        expect(StripeWrapper::Charge).to receive(:create).and_return(bad_charge)
+        post :create, user: { email: 'geralt@rivia.com', password: 'yennefer', full_name: 'Geralt of Rivia' }, stripeToken: 'tokeny'
       end
 
-      it 'has the new invited user follow the inviter' do
-        expect(current_user.reload.already_following?(inviter)).to be_truthy
+      it 'renders the new template' do
+        expect(response).to render_template :new
       end
 
-      it 'has the inviter automatically follow the new user' do
-        expect(inviter.reload.already_following?(current_user)).to be_truthy
+      it 'does not create a new user' do
+        expect(User.count).to eq(0)
       end
 
-      it 'removes the invitation token when done' do
-        expect(Invitation.first.invitation_token).to be_nil
+      it 'does not send out an email' do
+        expect(ActionMailer::Base.deliveries).to be_empty
+      end
+
+      it 'sets the flash message with the card error' do
+        expect(flash[:danger]).to eq('Your card was declined')
       end
     end
 
-    context 'when invalid' do
+    context 'with invalid user' do
       before(:each) do
         post :create, user: { email: 'geralt@rivia.com', password: 'yennefer' }
       end
@@ -83,6 +109,10 @@ describe UsersController do
 
       it 'does not send out an email' do
         expect(ActionMailer::Base.deliveries).to be_empty
+      end
+
+      it 'does not attempt to charge the card' do
+        expect(StripeWrapper::Charge).not_to receive(:create)
       end
     end
   end
