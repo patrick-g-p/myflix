@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/charges
     body:
       encoding: US-ASCII
-      string: amount=999&currency=usd&source=tok_16bZcPKUdRrCs1LrkpdIzJLm&description=Registration%20charge%20for%20ellie.parker%40schroeder.info
+      string: amount=999&currency=usd&source=tok_16baQAKUdRrCs1LrTexuGjV9&description=Registration%20charge%20for%20reie%40king.biz
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -22,7 +22,7 @@ http_interactions:
         source-11-xu 3.16.0-46-generic #62~14.04.1-Ubuntu SMP Tue Aug 11 16:27:16
         UTC 2015 x86_64 x86_64 x86_64 GNU/Linux"}'
       Content-Length:
-      - '131'
+      - '117'
   response:
     status:
       code: 200
@@ -31,11 +31,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 19 Aug 2015 16:40:54 GMT
+      - Wed, 19 Aug 2015 17:32:19 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1472'
+      - '1458'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -49,7 +49,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6pE4g406NAux0A
+      - req_6pEtqOJ8NkbOAH
       Stripe-Version:
       - '2015-07-28'
       Strict-Transport-Security:
@@ -58,9 +58,9 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "ch_16bZcQKUdRrCs1LrQH2V1Wmn",
+          "id": "ch_16baQBKUdRrCs1Lr9iTbozNx",
           "object": "charge",
-          "created": 1440002454,
+          "created": 1440005539,
           "livemode": false,
           "paid": true,
           "status": "succeeded",
@@ -68,7 +68,7 @@ http_interactions:
           "currency": "usd",
           "refunded": false,
           "source": {
-            "id": "card_16bZcPKUdRrCs1LrUvb5L0Gi",
+            "id": "card_16baQAKUdRrCs1LrmuX5X4rq",
             "object": "card",
             "last4": "4242",
             "brand": "Visa",
@@ -93,13 +93,13 @@ http_interactions:
             "customer": null
           },
           "captured": true,
-          "balance_transaction": "txn_16bZcQKUdRrCs1LrVQCrZIFB",
+          "balance_transaction": "txn_16baQBKUdRrCs1LrU1nNs5sd",
           "failure_message": null,
           "failure_code": null,
           "amount_refunded": 0,
           "customer": null,
           "invoice": null,
-          "description": "Registration charge for ellie.parker@schroeder.info",
+          "description": "Registration charge for reie@king.biz",
           "dispute": null,
           "metadata": {},
           "statement_descriptor": null,
@@ -113,10 +113,10 @@ http_interactions:
             "object": "list",
             "total_count": 0,
             "has_more": false,
-            "url": "/v1/charges/ch_16bZcQKUdRrCs1LrQH2V1Wmn/refunds",
+            "url": "/v1/charges/ch_16baQBKUdRrCs1Lr9iTbozNx/refunds",
             "data": []
           }
         }
     http_version: 
-  recorded_at: Wed, 19 Aug 2015 16:40:54 GMT
+  recorded_at: Wed, 19 Aug 2015 17:32:19 GMT
 recorded_with: VCR 2.9.3

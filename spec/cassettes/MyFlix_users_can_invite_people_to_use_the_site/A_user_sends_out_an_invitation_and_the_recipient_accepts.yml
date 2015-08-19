@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/charges
     body:
       encoding: US-ASCII
-      string: amount=999&currency=usd&source=tok_16bZcIKUdRrCs1Lrdaw13yX4&description=Registration%20charge%20for%20luna%40satterfieldrosenbaum.com
+      string: amount=999&currency=usd&source=tok_16baQKKUdRrCs1LrzstzKCq0&description=Registration%20charge%20for%20alexandre_tremblay%40rohan.name
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -31,7 +31,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 19 Aug 2015 16:40:47 GMT
+      - Wed, 19 Aug 2015 17:32:28 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -49,7 +49,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6pE4OBwWz5pYWD
+      - req_6pEuDeyw14cNQQ
       Stripe-Version:
       - '2015-07-28'
       Strict-Transport-Security:
@@ -58,9 +58,9 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "ch_16bZcJKUdRrCs1LrhTD7wNv9",
+          "id": "ch_16baQKKUdRrCs1LrPT1VitFo",
           "object": "charge",
-          "created": 1440002447,
+          "created": 1440005548,
           "livemode": false,
           "paid": true,
           "status": "succeeded",
@@ -68,7 +68,7 @@ http_interactions:
           "currency": "usd",
           "refunded": false,
           "source": {
-            "id": "card_16bZcIKUdRrCs1LrbeXKZBwT",
+            "id": "card_16baQKKUdRrCs1Lr9494iksU",
             "object": "card",
             "last4": "4242",
             "brand": "Visa",
@@ -93,13 +93,13 @@ http_interactions:
             "customer": null
           },
           "captured": true,
-          "balance_transaction": "txn_16bZcJKUdRrCs1LrTOP2x71n",
+          "balance_transaction": "txn_16baQKKUdRrCs1LrmO2TAXRb",
           "failure_message": null,
           "failure_code": null,
           "amount_refunded": 0,
           "customer": null,
           "invoice": null,
-          "description": "Registration charge for luna@satterfieldrosenbaum.com",
+          "description": "Registration charge for alexandre_tremblay@rohan.name",
           "dispute": null,
           "metadata": {},
           "statement_descriptor": null,
@@ -113,10 +113,10 @@ http_interactions:
             "object": "list",
             "total_count": 0,
             "has_more": false,
-            "url": "/v1/charges/ch_16bZcJKUdRrCs1LrhTD7wNv9/refunds",
+            "url": "/v1/charges/ch_16baQKKUdRrCs1LrPT1VitFo/refunds",
             "data": []
           }
         }
     http_version: 
-  recorded_at: Wed, 19 Aug 2015 16:40:47 GMT
+  recorded_at: Wed, 19 Aug 2015 17:32:29 GMT
 recorded_with: VCR 2.9.3

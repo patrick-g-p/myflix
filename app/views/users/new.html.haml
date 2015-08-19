@@ -14,6 +14,8 @@
         - if @token
           = hidden_field_tag :token, @token
         %fieldset.credit_card
+          .form-group.stripe-errors-container
+            %p.stripe-errors
           .form-group
             %label.control-label.col-sm-2(for='credit-card-number') Credit Card Number
             .col-sm-6

@@ -9,8 +9,15 @@ jQuery(function($) {
 
 function stripeResponseHandler(status, response) {
   var $form = $('#payment-form');
+  var $paymentContainer = $form.find('.stripe-errors-container')
 
   if (response.error) {
+    $paymentContainer.css('display', 'block');
+    $paymentContainer.on('click', function() {
+      $(this).css('display', 'none')
+    });
+
+    $form.find('.stripe-errors').text(response.error.message);
     $form.find("input[type='submit']").prop('disabled', false);
   } else {
     var token = response.id;
