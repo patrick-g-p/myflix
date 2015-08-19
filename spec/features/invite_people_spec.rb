@@ -30,7 +30,7 @@ feature 'MyFlix users can invite people to use the site', {js: true, vcr: true} 
   def new_user_registers(user)
     fill_in('Password', with: user.password)
     fill_in('Full Name', with: user.full_name)
-    fill_in('Credit Card', with: "4242424242424242")
+    fill_in('Credit Card Number', with: "4242424242424242")
     fill_in('CVC', with: '123')
     click_on('Register')
     expect(page).to have_content('Your account was set up. Welcome to MyFlix!')

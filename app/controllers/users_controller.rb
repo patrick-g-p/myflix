@@ -29,7 +29,7 @@ class UsersController < ApplicationController
         render :new
       end
     else
-      flash[:danger] = 'Please fix any errors below'
+      flash[:danger] = 'Please fix any errors below. Your card was not charged.'
       render :new
     end
   end

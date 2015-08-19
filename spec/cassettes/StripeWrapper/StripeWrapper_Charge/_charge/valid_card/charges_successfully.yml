@@ -19,7 +19,7 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.20.1","lang":"ruby","lang_version":"2.1.6 p336 (2015-04-13)","platform":"x86_64-linux","publisher":"stripe","uname":"Linux
-        source-11-xu 3.16.0-45-generic #60~14.04.1-Ubuntu SMP Fri Jul 24 21:16:23
+        source-11-xu 3.16.0-46-generic #62~14.04.1-Ubuntu SMP Tue Aug 11 16:27:16
         UTC 2015 x86_64 x86_64 x86_64 GNU/Linux"}'
       Content-Length:
       - '81'
@@ -31,7 +31,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Fri, 14 Aug 2015 22:39:39 GMT
+      - Wed, 19 Aug 2015 16:40:49 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -49,7 +49,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6nRj6559YtOain
+      - req_6pE4z7VgOEYOWX
       Stripe-Version:
       - '2015-07-28'
       Strict-Transport-Security:
@@ -58,14 +58,14 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_16ZqprKUdRrCs1LrjwVPJQNO",
+          "id": "tok_16bZcLKUdRrCs1Lr4X50Mgo0",
           "livemode": false,
-          "created": 1439591979,
+          "created": 1440002449,
           "used": false,
           "object": "token",
           "type": "card",
           "card": {
-            "id": "card_16ZqprKUdRrCs1Lr3QnPIdht",
+            "id": "card_16bZcLKUdRrCs1Lr4AZdkB7y",
             "object": "card",
             "last4": "4242",
             "brand": "Visa",
@@ -91,13 +91,13 @@ http_interactions:
           "client_ip": "24.190.115.87"
         }
     http_version: 
-  recorded_at: Fri, 14 Aug 2015 22:39:39 GMT
+  recorded_at: Wed, 19 Aug 2015 16:40:49 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/charges
     body:
       encoding: US-ASCII
-      string: amount=999&currency=usd&source=tok_16ZqprKUdRrCs1LrjwVPJQNO&description=Registration%20charge%20for%20stripetest%40example.com
+      string: amount=999&currency=usd&source=tok_16bZcLKUdRrCs1Lr4X50Mgo0&description=Registration%20charge%20for%20stripetest%40example.com
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -111,7 +111,7 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.20.1","lang":"ruby","lang_version":"2.1.6 p336 (2015-04-13)","platform":"x86_64-linux","publisher":"stripe","uname":"Linux
-        source-11-xu 3.16.0-45-generic #60~14.04.1-Ubuntu SMP Fri Jul 24 21:16:23
+        source-11-xu 3.16.0-46-generic #62~14.04.1-Ubuntu SMP Tue Aug 11 16:27:16
         UTC 2015 x86_64 x86_64 x86_64 GNU/Linux"}'
       Content-Length:
       - '126'
@@ -123,7 +123,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Fri, 14 Aug 2015 22:39:39 GMT
+      - Wed, 19 Aug 2015 16:40:50 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -141,7 +141,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6nRjROgz9NpVnD
+      - req_6pE4ds8iDInapL
       Stripe-Version:
       - '2015-07-28'
       Strict-Transport-Security:
@@ -150,9 +150,9 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "ch_16ZqprKUdRrCs1LrMebNZ9gn",
+          "id": "ch_16bZcLKUdRrCs1Lr5P6M3Mov",
           "object": "charge",
-          "created": 1439591979,
+          "created": 1440002449,
           "livemode": false,
           "paid": true,
           "status": "succeeded",
@@ -160,7 +160,7 @@ http_interactions:
           "currency": "usd",
           "refunded": false,
           "source": {
-            "id": "card_16ZqprKUdRrCs1Lr3QnPIdht",
+            "id": "card_16bZcLKUdRrCs1Lr4AZdkB7y",
             "object": "card",
             "last4": "4242",
             "brand": "Visa",
@@ -185,7 +185,7 @@ http_interactions:
             "customer": null
           },
           "captured": true,
-          "balance_transaction": "txn_16ZqprKUdRrCs1Lr3RwCSsRV",
+          "balance_transaction": "txn_16bZcLKUdRrCs1LrMb3Zw5uh",
           "failure_message": null,
           "failure_code": null,
           "amount_refunded": 0,
@@ -205,10 +205,10 @@ http_interactions:
             "object": "list",
             "total_count": 0,
             "has_more": false,
-            "url": "/v1/charges/ch_16ZqprKUdRrCs1LrMebNZ9gn/refunds",
+            "url": "/v1/charges/ch_16bZcLKUdRrCs1Lr5P6M3Mov/refunds",
             "data": []
           }
         }
     http_version: 
-  recorded_at: Fri, 14 Aug 2015 22:39:40 GMT
+  recorded_at: Wed, 19 Aug 2015 16:40:50 GMT
 recorded_with: VCR 2.9.3

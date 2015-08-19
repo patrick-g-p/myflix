@@ -37,6 +37,7 @@ group :test do
   gem 'rspec-rails', '2.99'
   gem 'capybara'
   gem 'capybara-email'
+  gem 'capybara-webkit'
   gem 'vcr'
   gem 'webmock'
   gem 'selenium-webdriver'

@@ -25,6 +25,12 @@ Sidekiq::Testing.inline!
 
 #Capybara
 Capybara.server_port = 52662
+Capybara.javascript_driver = :webkit
+
+#Capybara webkit config
+Capybara::Webkit.configure do |config|
+  config.allow_url("*.stripe.com")
+end
 
 #VCR Config
 VCR.configure do |c|

@@ -19,7 +19,7 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.20.1","lang":"ruby","lang_version":"2.1.6 p336 (2015-04-13)","platform":"x86_64-linux","publisher":"stripe","uname":"Linux
-        source-11-xu 3.16.0-45-generic #60~14.04.1-Ubuntu SMP Fri Jul 24 21:16:23
+        source-11-xu 3.16.0-46-generic #62~14.04.1-Ubuntu SMP Tue Aug 11 16:27:16
         UTC 2015 x86_64 x86_64 x86_64 GNU/Linux"}'
       Content-Length:
       - '81'
@@ -31,7 +31,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Fri, 14 Aug 2015 22:39:41 GMT
+      - Wed, 19 Aug 2015 16:40:51 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -49,7 +49,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6nRj9xkFRiHyFZ
+      - req_6pE4xDw1obEPd4
       Stripe-Version:
       - '2015-07-28'
       Strict-Transport-Security:
@@ -58,14 +58,14 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_16ZqptKUdRrCs1LrfKnQZfOL",
+          "id": "tok_16bZcNKUdRrCs1LrPXmLJnwL",
           "livemode": false,
-          "created": 1439591981,
+          "created": 1440002451,
           "used": false,
           "object": "token",
           "type": "card",
           "card": {
-            "id": "card_16ZqptKUdRrCs1LrIfuxhqEx",
+            "id": "card_16bZcNKUdRrCs1LrcSNyktVV",
             "object": "card",
             "last4": "0002",
             "brand": "Visa",
@@ -91,13 +91,13 @@ http_interactions:
           "client_ip": "24.190.115.87"
         }
     http_version: 
-  recorded_at: Fri, 14 Aug 2015 22:39:42 GMT
+  recorded_at: Wed, 19 Aug 2015 16:40:52 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/charges
     body:
       encoding: US-ASCII
-      string: amount=999&currency=usd&source=tok_16ZqptKUdRrCs1LrfKnQZfOL&description=Registration%20charge%20for%20stripetest%40example.com
+      string: amount=999&currency=usd&source=tok_16bZcNKUdRrCs1LrPXmLJnwL&description=Registration%20charge%20for%20stripetest%40example.com
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -111,7 +111,7 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.20.1","lang":"ruby","lang_version":"2.1.6 p336 (2015-04-13)","platform":"x86_64-linux","publisher":"stripe","uname":"Linux
-        source-11-xu 3.16.0-45-generic #60~14.04.1-Ubuntu SMP Fri Jul 24 21:16:23
+        source-11-xu 3.16.0-46-generic #62~14.04.1-Ubuntu SMP Tue Aug 11 16:27:16
         UTC 2015 x86_64 x86_64 x86_64 GNU/Linux"}'
       Content-Length:
       - '126'
@@ -123,7 +123,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Fri, 14 Aug 2015 22:39:42 GMT
+      - Wed, 19 Aug 2015 16:40:52 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -141,7 +141,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6nRjIePOpqNpcR
+      - req_6pE4lvnbjEnFDo
       Stripe-Version:
       - '2015-07-28'
     body:
@@ -152,9 +152,9 @@ http_interactions:
             "message": "Your card was declined.",
             "type": "card_error",
             "code": "card_declined",
-            "charge": "ch_16ZqpuKUdRrCs1LrsOpTmpYf"
+            "charge": "ch_16bZcOKUdRrCs1LrrZ4OTCzZ"
           }
         }
     http_version: 
-  recorded_at: Fri, 14 Aug 2015 22:39:43 GMT
+  recorded_at: Wed, 19 Aug 2015 16:40:52 GMT
 recorded_with: VCR 2.9.3
