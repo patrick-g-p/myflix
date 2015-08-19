@@ -14,7 +14,7 @@ function stripeResponseHandler(status, response) {
   if (response.error) {
     $paymentContainer.css('display', 'block');
     $paymentContainer.on('click', function() {
-      $(this).css('display', 'none')
+      $(this).css('display', 'none');
     });
 
     $form.find('.stripe-errors').text(response.error.message);

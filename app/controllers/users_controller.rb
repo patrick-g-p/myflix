@@ -10,7 +10,6 @@ class UsersController < ApplicationController
     invitation = Invitation.find_by(invitation_token: params[:token])
 
     if @user.valid?
-      StripeWrapper.set_api_key
       charge = StripeWrapper::Charge.create(amount: 999, token: params[:stripeToken], user_email: @user.email)
 
       if charge.successful?
@@ -25,11 +24,11 @@ class UsersController < ApplicationController
         flash[:success] = 'Your account was set up. Welcome to MyFlix!'
         redirect_to home_path
       else
-        flash[:danger] = charge.error_message
+        flash.now[:danger] = charge.error_message
         render :new
       end
     else
-      flash[:danger] = 'Please fix any errors below. Your card was not charged.'
+      flash.now[:danger] = 'Please fix any errors below. Your card was not charged.'
       render :new
     end
   end
