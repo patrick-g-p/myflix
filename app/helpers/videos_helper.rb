@@ -1,6 +1,6 @@
 module VideosHelper
-  def proper_rating(average_rating)
-    average_rating ? "#{average_rating} / 5.0" : "Has not been rated yet"
+  def review_author(review)
+    review.creator == current_user ? 'you' : "#{review.creator.full_name.titleize}"
   end
 
   def already_reviewed?(video, user)
@@ -9,9 +9,5 @@ module VideosHelper
     else
       false
     end
-  end
-
-  def review_author(review)
-    review.creator == current_user ? 'you' : "#{review.creator.full_name.titleize}"
   end
 end
