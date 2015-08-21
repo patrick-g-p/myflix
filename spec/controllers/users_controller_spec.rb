@@ -18,13 +18,9 @@ describe UsersController do
         post :create, user: Fabricate.attributes_for(:user), stripeToken: 'tokeny'
       end
 
-      it 'redirects to the home path' do
-        expect(response).to redirect_to home_path
-      end
-
-      it 'sets the flash message' do
-        expect(flash[:success]).to be_present
-      end
+      it { should redirect_to(home_path) }
+      it { should set_flash[:success] }
+      it { should set_session[:user_id] }
     end
 
     context 'failed registration' do
@@ -35,13 +31,8 @@ describe UsersController do
         post :create, user: Fabricate.attributes_for(:user, email: ''), stripeToken: 'tokeny'
       end
 
-      it 'renders the new form/template' do
-        expect(response).to render_template :new
-      end
-
-      it 'sets the flash.now message' do
-        expect(flash.now[:danger]).to be_present
-      end
+      it { should render_template('new') }
+      it { should set_flash[:danger].now }
     end
   end
 

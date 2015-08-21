@@ -18,17 +18,15 @@ class UserRegistration
 
         UserMailer.delay.registration_welcome_email(@user.id)
         @status = :successful
-        self
       else
         @status = :failed
         @error_message = charge.error_message
-        self
       end
     else
       @status = :failed
       @error_message = 'Please fix any errors below. Your card was not charged.'
-      self
     end
+    self
   end
 
   def successful?
@@ -39,7 +37,7 @@ class UserRegistration
 
   def handle_invitation(new_user, invitation_token)
     invitation = Invitation.find_by(invitation_token: invitation_token)
-    
+
     new_user.follow(invitation.inviter)
     invitation.inviter.follow(new_user)
     invitation.clear_token!

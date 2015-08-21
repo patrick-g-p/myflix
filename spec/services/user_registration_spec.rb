@@ -1,15 +1,12 @@
 require 'spec_helper'
 
 describe UserRegistration do
-  let(:a_registration) { UserRegistration.new(Fabricate.build(:user)) }
-
   describe '#register_new_user' do
-    let(:charge) { double('charge', successful?: true) }
-    let(:bad_charge) { double('charge', successful?: false, error_message: 'Your card was declined') }
-
     after { ActionMailer::Base.deliveries.clear }
 
     context 'with valid user and valid card' do
+      let(:charge) { double(:charge, successful?: true) }
+
       before(:each) do
         expect(StripeWrapper::Charge).to receive(:create).and_return(charge)
       end
@@ -56,14 +53,11 @@ describe UserRegistration do
           expect(an_invitation.reload.invitation_token).to be_nil
         end
       end
-
-      it 'sets the @status instance variable to successful' do
-        registration = UserRegistration.new(Fabricate.build(:user)).register_new_user('benderisgreat')
-        expect(registration.instance_variable_get(:@status)).to eq(:successful)
-      end
     end
 
     context 'with valid user and invalid card' do
+      let(:bad_charge) { double(:charge, successful?: false, error_message: 'An Error') }
+
       before(:each) do
         expect(StripeWrapper::Charge).to receive(:create).and_return(bad_charge)
       end
@@ -76,11 +70,6 @@ describe UserRegistration do
       it 'does not send out an email' do
         UserRegistration.new(Fabricate.build(:user)).register_new_user('benderisgreat')
         expect(ActionMailer::Base.deliveries).to be_empty
-      end
-
-      it 'sets the @status instance variable to failed' do
-        registration = UserRegistration.new(Fabricate.build(:user)).register_new_user('benderisgreat')
-        expect(registration.instance_variable_get(:@status)).to eq(:failed)
       end
     end
 
@@ -98,11 +87,6 @@ describe UserRegistration do
       it 'does not charge the card' do
         UserRegistration.new(Fabricate.build(:user, email: '')).register_new_user('benderisgreat')
         expect(StripeWrapper::Charge).not_to receive(:create)
-      end
-
-      it 'sets the @status instance variable to failed' do
-        register = UserRegistration.new(Fabricate.build(:user, email: '')).register_new_user('benderisgreat')
-        expect(register.instance_variable_get(:@status)).to eq(:failed)
       end
     end
   end
