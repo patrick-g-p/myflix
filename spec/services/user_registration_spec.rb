@@ -5,10 +5,10 @@ describe UserRegistration do
     after { ActionMailer::Base.deliveries.clear }
 
     context 'with valid user and valid card' do
-      let(:charge) { double(:charge, successful?: true) }
+      let(:create_results) { double(:create_results, successful?: true) }
 
       before(:each) do
-        expect(StripeWrapper::Charge).to receive(:create).and_return(charge)
+        expect(StripeWrapper::Charge).to receive(:create).and_return(create_results)
       end
 
       it 'creates a user' do
@@ -56,10 +56,10 @@ describe UserRegistration do
     end
 
     context 'with valid user and invalid card' do
-      let(:bad_charge) { double(:charge, successful?: false, error_message: 'An Error') }
+      let(:create_results) { double(:create_results, successful?: false, error_message: 'An Error') }
 
       before(:each) do
-        expect(StripeWrapper::Charge).to receive(:create).and_return(bad_charge)
+        expect(StripeWrapper::Charge).to receive(:create).and_return(create_results)
       end
 
       it 'does not create a new user' do
