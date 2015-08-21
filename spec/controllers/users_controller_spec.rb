@@ -15,7 +15,7 @@ describe UsersController do
 
       before(:each) do
         expect_any_instance_of(UserRegistration).to receive(:register_new_user).and_return(valid_registration)
-        post :create, user: Fabricate.attributes_for(:user)
+        post :create, user: Fabricate.attributes_for(:user), stripeToken: 'tokeny'
       end
 
       it 'redirects to the home path' do
@@ -32,7 +32,7 @@ describe UsersController do
 
       before(:each) do
         expect_any_instance_of(UserRegistration).to receive(:register_new_user).and_return(invalid_registration)
-        post :create, user: Fabricate.attributes_for(:user, email: '')
+        post :create, user: Fabricate.attributes_for(:user, email: ''), stripeToken: 'tokeny'
       end
 
       it 'renders the new form/template' do

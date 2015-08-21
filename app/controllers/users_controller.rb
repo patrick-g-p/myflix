@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    registration = UserRegistration.new(@user).register_new_user(params[:stripeToken], params[:token])
+    registration = UserRegistration.new(@user).register_new_user(params[:stripeToken], params[:invitation_token])
 
     if registration.successful?
       session[:user_id] = @user.id

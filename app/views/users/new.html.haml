@@ -12,7 +12,7 @@
         = f.password_field :password, help: '5 character minimum'
         = f.text_field :full_name, label: 'Full Name'
         - if @token
-          = hidden_field_tag :token, @token
+          = hidden_field_tag :invitation_token, @token
         %fieldset.credit_card
           .form-group.stripe-errors-container
             %p.stripe-errors
