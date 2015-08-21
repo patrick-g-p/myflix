@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/charges
     body:
       encoding: US-ASCII
-      string: amount=999&currency=usd&source=tok_16bdLdKUdRrCs1LrESCkYeaJ&description=Registration%20charge%20for%20jared.langosh%40buckridge.name
+      string: amount=999&currency=usd&source=tok_16cK6cKUdRrCs1LrwdPO5XXh&description=Registration%20charge%20for%20michael%40stroman.net
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -22,7 +22,7 @@ http_interactions:
         source-11-xu 3.16.0-46-generic #62~14.04.1-Ubuntu SMP Tue Aug 11 16:27:16
         UTC 2015 x86_64 x86_64 x86_64 GNU/Linux"}'
       Content-Length:
-      - '132'
+      - '123'
   response:
     status:
       code: 402
@@ -31,7 +31,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 19 Aug 2015 20:39:50 GMT
+      - Fri, 21 Aug 2015 18:19:12 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -49,7 +49,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6pHvRL8TQoir4x
+      - req_6q06m8lqG0yllN
       Stripe-Version:
       - '2015-07-28'
     body:
@@ -60,9 +60,9 @@ http_interactions:
             "message": "Your card was declined.",
             "type": "card_error",
             "code": "card_declined",
-            "charge": "ch_16bdLeKUdRrCs1LrnplY2Lr2"
+            "charge": "ch_16cK6dKUdRrCs1LriJcJX87G"
           }
         }
     http_version: 
-  recorded_at: Wed, 19 Aug 2015 20:39:50 GMT
+  recorded_at: Fri, 21 Aug 2015 18:19:12 GMT
 recorded_with: VCR 2.9.3
