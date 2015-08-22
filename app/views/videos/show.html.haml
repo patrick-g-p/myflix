@@ -6,7 +6,7 @@
       .video_info.col-sm-3
         %header
           %h3= @video.title
-          %span= proper_rating(@video.average_rating)
+          %span= @video.proper_rating
         %p= @video.description
         .actions
           - if @video.video_url
