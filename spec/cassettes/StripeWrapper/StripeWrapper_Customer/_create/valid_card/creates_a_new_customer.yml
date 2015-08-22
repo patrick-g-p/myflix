@@ -2,10 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.stripe.com/v1/customers
+    uri: https://api.stripe.com/v1/tokens
     body:
       encoding: US-ASCII
-      string: source=tok_16cg2HKUdRrCs1LrYFv98sQg&plan=myflix_base&email=chad%40weimannmoriette.info&description=Monthly%20charge%20for%208%2F2015
+      string: card[number]=4242424242424242&card[exp_month]=8&card[exp_year]=2016&card[cvc]=314
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -22,7 +22,7 @@ http_interactions:
         source-11-xu 3.16.0-46-generic #62~14.04.1-Ubuntu SMP Tue Aug 11 16:27:16
         UTC 2015 x86_64 x86_64 x86_64 GNU/Linux"}'
       Content-Length:
-      - '132'
+      - '81'
   response:
     status:
       code: 200
@@ -31,11 +31,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sat, 22 Aug 2015 17:44:10 GMT
+      - Sat, 22 Aug 2015 17:44:13 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '2427'
+      - '780'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -49,7 +49,99 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6qMl37FHRkFHpF
+      - req_6qMlXTMpWpT3ye
+      Stripe-Version:
+      - '2015-07-28'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "tok_16cg2LKUdRrCs1LrVcXuDizb",
+          "livemode": false,
+          "created": 1440265453,
+          "used": false,
+          "object": "token",
+          "type": "card",
+          "card": {
+            "id": "card_16cg2LKUdRrCs1Lrqavvk7FJ",
+            "object": "card",
+            "last4": "4242",
+            "brand": "Visa",
+            "funding": "credit",
+            "exp_month": 8,
+            "exp_year": 2016,
+            "fingerprint": "kuqCAfzAp21fifIi",
+            "country": "US",
+            "name": null,
+            "address_line1": null,
+            "address_line2": null,
+            "address_city": null,
+            "address_state": null,
+            "address_zip": null,
+            "address_country": null,
+            "cvc_check": "unchecked",
+            "address_line1_check": null,
+            "address_zip_check": null,
+            "tokenization_method": null,
+            "dynamic_last4": null,
+            "metadata": {}
+          },
+          "client_ip": "24.190.115.87"
+        }
+    http_version: 
+  recorded_at: Sat, 22 Aug 2015 17:44:13 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/customers
+    body:
+      encoding: US-ASCII
+      string: source=tok_16cg2LKUdRrCs1LrVcXuDizb&plan=myflix_base&email=stripetest%40example.com&description=Monthly%20charge%20for%208%2F2015
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.20.1
+      Authorization:
+      - Bearer sk_test_aHOa6eoJJjnQPRDIPLzYaM70
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.20.1","lang":"ruby","lang_version":"2.1.6 p336 (2015-04-13)","platform":"x86_64-linux","publisher":"stripe","uname":"Linux
+        source-11-xu 3.16.0-46-generic #62~14.04.1-Ubuntu SMP Tue Aug 11 16:27:16
+        UTC 2015 x86_64 x86_64 x86_64 GNU/Linux"}'
+      Content-Length:
+      - '129'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sat, 22 Aug 2015 17:44:14 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '2424'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_6qMlX3sJR7iCdZ
       Stripe-Version:
       - '2015-07-28'
       Strict-Transport-Security:
@@ -59,11 +151,11 @@ http_interactions:
       string: |
         {
           "object": "customer",
-          "created": 1440265450,
-          "id": "cus_6qMlh1ppptsLjS",
+          "created": 1440265453,
+          "id": "cus_6qMlNWxdmFwulI",
           "livemode": false,
           "description": "Monthly charge for 8/2015",
-          "email": "chad@weimannmoriette.info",
+          "email": "stripetest@example.com",
           "shipping": null,
           "delinquent": false,
           "metadata": {},
@@ -71,10 +163,10 @@ http_interactions:
             "object": "list",
             "total_count": 1,
             "has_more": false,
-            "url": "/v1/customers/cus_6qMlh1ppptsLjS/subscriptions",
+            "url": "/v1/customers/cus_6qMlNWxdmFwulI/subscriptions",
             "data": [
               {
-                "id": "sub_6qMlSDH8OpsFP2",
+                "id": "sub_6qMlcZ7iP83sAE",
                 "plan": {
                   "interval": "month",
                   "name": "MyFlix Base Subscription",
@@ -90,12 +182,12 @@ http_interactions:
                   "statement_descriptor": "MyFlix Monthly Charge"
                 },
                 "object": "subscription",
-                "start": 1440265450,
+                "start": 1440265454,
                 "status": "active",
-                "customer": "cus_6qMlh1ppptsLjS",
+                "customer": "cus_6qMlNWxdmFwulI",
                 "cancel_at_period_end": false,
-                "current_period_start": 1440265450,
-                "current_period_end": 1442943850,
+                "current_period_start": 1440265454,
+                "current_period_end": 1442943854,
                 "ended_at": null,
                 "trial_start": null,
                 "trial_end": null,
@@ -115,16 +207,16 @@ http_interactions:
             "object": "list",
             "total_count": 1,
             "has_more": false,
-            "url": "/v1/customers/cus_6qMlh1ppptsLjS/sources",
+            "url": "/v1/customers/cus_6qMlNWxdmFwulI/sources",
             "data": [
               {
-                "id": "card_16cg2HKUdRrCs1Lr7lR7BJq0",
+                "id": "card_16cg2LKUdRrCs1Lrqavvk7FJ",
                 "object": "card",
                 "last4": "4242",
                 "brand": "Visa",
                 "funding": "credit",
                 "exp_month": 8,
-                "exp_year": 2015,
+                "exp_year": 2016,
                 "fingerprint": "kuqCAfzAp21fifIi",
                 "country": "US",
                 "name": null,
@@ -140,12 +232,12 @@ http_interactions:
                 "tokenization_method": null,
                 "dynamic_last4": null,
                 "metadata": {},
-                "customer": "cus_6qMlh1ppptsLjS"
+                "customer": "cus_6qMlNWxdmFwulI"
               }
             ]
           },
-          "default_source": "card_16cg2HKUdRrCs1Lr7lR7BJq0"
+          "default_source": "card_16cg2LKUdRrCs1Lrqavvk7FJ"
         }
     http_version: 
-  recorded_at: Sat, 22 Aug 2015 17:44:10 GMT
+  recorded_at: Sat, 22 Aug 2015 17:44:14 GMT
 recorded_with: VCR 2.9.3
