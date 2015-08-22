@@ -1,4 +1,8 @@
 module StripeWrapper
+  def self.set_api_key
+    Stripe.api_key = ENV.fetch('STRIPE_TEST_SK')
+  end
+
   class Charge
     attr_reader :response, :status
 
@@ -30,7 +34,30 @@ module StripeWrapper
     end
   end
 
-  def self.set_api_key
-    Stripe.api_key = ENV.fetch('STRIPE_TEST_SK')
+  class Customer
+    attr_reader :response, :error_message
+
+    def initialize(options={})
+      @response = options[:response]
+      @error_message = options[:errors]
+    end
+
+    def self.create(options={})
+      begin
+        response = Stripe::Customer.create(
+          :source => options[:token],
+          :plan => 'myflix_base',
+          :email => options[:user].email,
+          :description => "Monthly charge for #{Time.now.month}/#{Time.now.year}"
+        )
+        new(response: response)
+      rescue Stripe::CardError => e
+        new(errors: e.message)
+      end
+    end
+
+    def successful?
+      response.present?
+    end
   end
 end

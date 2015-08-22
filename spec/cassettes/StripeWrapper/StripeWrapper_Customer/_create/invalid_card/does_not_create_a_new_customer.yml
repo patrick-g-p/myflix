@@ -31,7 +31,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sat, 22 Aug 2015 17:44:18 GMT
+      - Sat, 22 Aug 2015 17:44:15 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -49,7 +49,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6qMl4ZqWsd8JUC
+      - req_6qMlGgMz70rvuo
       Stripe-Version:
       - '2015-07-28'
       Strict-Transport-Security:
@@ -58,14 +58,14 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_16cg2QKUdRrCs1LrbEFm1x7u",
+          "id": "tok_16cg2NKUdRrCs1Lr95ZWAcJ5",
           "livemode": false,
-          "created": 1440265458,
+          "created": 1440265455,
           "used": false,
           "object": "token",
           "type": "card",
           "card": {
-            "id": "card_16cg2QKUdRrCs1LrhQwOs4dX",
+            "id": "card_16cg2MKUdRrCs1LrpMR1FSrn",
             "object": "card",
             "last4": "0002",
             "brand": "Visa",
@@ -91,13 +91,13 @@ http_interactions:
           "client_ip": "24.190.115.87"
         }
     http_version: 
-  recorded_at: Sat, 22 Aug 2015 17:44:18 GMT
+  recorded_at: Sat, 22 Aug 2015 17:44:15 GMT
 - request:
     method: post
-    uri: https://api.stripe.com/v1/charges
+    uri: https://api.stripe.com/v1/customers
     body:
       encoding: US-ASCII
-      string: amount=999&currency=usd&source=tok_16cg2QKUdRrCs1LrbEFm1x7u&description=Registration%20charge%20for%20stripetest%40example.com
+      string: source=tok_16cg2NKUdRrCs1Lr95ZWAcJ5&plan=myflix_base&email=stripetest%40example.com&description=Monthly%20charge%20for%208%2F2015
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -114,7 +114,7 @@ http_interactions:
         source-11-xu 3.16.0-46-generic #62~14.04.1-Ubuntu SMP Tue Aug 11 16:27:16
         UTC 2015 x86_64 x86_64 x86_64 GNU/Linux"}'
       Content-Length:
-      - '126'
+      - '129'
   response:
     status:
       code: 402
@@ -123,11 +123,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sat, 22 Aug 2015 17:44:19 GMT
+      - Sat, 22 Aug 2015 17:44:15 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '162'
+      - '134'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -141,7 +141,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6qMlOJP6Tvg0tY
+      - req_6qMlvyfNCRLPPG
       Stripe-Version:
       - '2015-07-28'
     body:
@@ -151,10 +151,10 @@ http_interactions:
           "error": {
             "message": "Your card was declined.",
             "type": "card_error",
-            "code": "card_declined",
-            "charge": "ch_16cg2RKUdRrCs1LrU2gX2o59"
+            "param": "",
+            "code": "card_declined"
           }
         }
     http_version: 
-  recorded_at: Sat, 22 Aug 2015 17:44:19 GMT
+  recorded_at: Sat, 22 Aug 2015 17:44:15 GMT
 recorded_with: VCR 2.9.3
