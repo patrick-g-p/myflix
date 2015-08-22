@@ -7,9 +7,9 @@ class UserRegistration
 
   def register_new_user(stripe_token, invitation_token=nil)
     if @user.valid?
-      charge = StripeWrapper::Charge.create(amount: 999, token: stripe_token, user_email: @user.email)
+      customer_creation = StripeWrapper::Customer.create(token: stripe_token, user: @user)
 
-      if charge.successful?
+      if customer_creation.successful?
         @user.save
 
         if invitation_token
@@ -20,7 +20,7 @@ class UserRegistration
         @status = :successful
       else
         @status = :failed
-        @error_message = charge.error_message
+        @error_message = customer_creation.error_message
       end
     else
       @status = :failed
