@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/customers
     body:
       encoding: US-ASCII
-      string: source=tok_16cg2YKUdRrCs1LrDyNhItCJ&plan=myflix_base&email=kayley_ziemann%40jast.org&description=Monthly%20charge%20for%208%2F2015
+      string: source=tok_16cmd1KUdRrCs1LrGBHPs1Q3&plan=myflix_base&email=hardy%40beatty.net&description=Monthly%20charge%20for%208%2F2015
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -22,7 +22,7 @@ http_interactions:
         source-11-xu 3.16.0-46-generic #62~14.04.1-Ubuntu SMP Tue Aug 11 16:27:16
         UTC 2015 x86_64 x86_64 x86_64 GNU/Linux"}'
       Content-Length:
-      - '130'
+      - '123'
   response:
     status:
       code: 402
@@ -31,7 +31,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sat, 22 Aug 2015 17:44:27 GMT
+      - Sun, 23 Aug 2015 00:46:32 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -49,7 +49,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6qMmYD5EO96zde
+      - req_6qTay6bumaGcp9
       Stripe-Version:
       - '2015-07-28'
     body:
@@ -64,5 +64,5 @@ http_interactions:
           }
         }
     http_version: 
-  recorded_at: Sat, 22 Aug 2015 17:44:27 GMT
+  recorded_at: Sun, 23 Aug 2015 00:46:33 GMT
 recorded_with: VCR 2.9.3

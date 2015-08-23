@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/customers
     body:
       encoding: US-ASCII
-      string: source=tok_16cg2HKUdRrCs1LrYFv98sQg&plan=myflix_base&email=chad%40weimannmoriette.info&description=Monthly%20charge%20for%208%2F2015
+      string: source=tok_16cmdIKUdRrCs1LrXBTQd1Nc&plan=myflix_base&email=ryley%40kuphal.com&description=Monthly%20charge%20for%208%2F2015
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -22,7 +22,7 @@ http_interactions:
         source-11-xu 3.16.0-46-generic #62~14.04.1-Ubuntu SMP Tue Aug 11 16:27:16
         UTC 2015 x86_64 x86_64 x86_64 GNU/Linux"}'
       Content-Length:
-      - '132'
+      - '123'
   response:
     status:
       code: 200
@@ -31,11 +31,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sat, 22 Aug 2015 17:44:10 GMT
+      - Sun, 23 Aug 2015 00:46:49 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '2427'
+      - '2418'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -49,7 +49,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6qMl37FHRkFHpF
+      - req_6qTaVQDaPSCs29
       Stripe-Version:
       - '2015-07-28'
       Strict-Transport-Security:
@@ -59,11 +59,11 @@ http_interactions:
       string: |
         {
           "object": "customer",
-          "created": 1440265450,
-          "id": "cus_6qMlh1ppptsLjS",
+          "created": 1440290808,
+          "id": "cus_6qTaS1qRGqGr1v",
           "livemode": false,
           "description": "Monthly charge for 8/2015",
-          "email": "chad@weimannmoriette.info",
+          "email": "ryley@kuphal.com",
           "shipping": null,
           "delinquent": false,
           "metadata": {},
@@ -71,10 +71,10 @@ http_interactions:
             "object": "list",
             "total_count": 1,
             "has_more": false,
-            "url": "/v1/customers/cus_6qMlh1ppptsLjS/subscriptions",
+            "url": "/v1/customers/cus_6qTaS1qRGqGr1v/subscriptions",
             "data": [
               {
-                "id": "sub_6qMlSDH8OpsFP2",
+                "id": "sub_6qTajl1QkxGsIm",
                 "plan": {
                   "interval": "month",
                   "name": "MyFlix Base Subscription",
@@ -90,12 +90,12 @@ http_interactions:
                   "statement_descriptor": "MyFlix Monthly Charge"
                 },
                 "object": "subscription",
-                "start": 1440265450,
+                "start": 1440290808,
                 "status": "active",
-                "customer": "cus_6qMlh1ppptsLjS",
+                "customer": "cus_6qTaS1qRGqGr1v",
                 "cancel_at_period_end": false,
-                "current_period_start": 1440265450,
-                "current_period_end": 1442943850,
+                "current_period_start": 1440290808,
+                "current_period_end": 1442969208,
                 "ended_at": null,
                 "trial_start": null,
                 "trial_end": null,
@@ -115,10 +115,10 @@ http_interactions:
             "object": "list",
             "total_count": 1,
             "has_more": false,
-            "url": "/v1/customers/cus_6qMlh1ppptsLjS/sources",
+            "url": "/v1/customers/cus_6qTaS1qRGqGr1v/sources",
             "data": [
               {
-                "id": "card_16cg2HKUdRrCs1Lr7lR7BJq0",
+                "id": "card_16cmdIKUdRrCs1LrrJ7KKOI5",
                 "object": "card",
                 "last4": "4242",
                 "brand": "Visa",
@@ -140,12 +140,12 @@ http_interactions:
                 "tokenization_method": null,
                 "dynamic_last4": null,
                 "metadata": {},
-                "customer": "cus_6qMlh1ppptsLjS"
+                "customer": "cus_6qTaS1qRGqGr1v"
               }
             ]
           },
-          "default_source": "card_16cg2HKUdRrCs1Lr7lR7BJq0"
+          "default_source": "card_16cmdIKUdRrCs1LrrJ7KKOI5"
         }
     http_version: 
-  recorded_at: Sat, 22 Aug 2015 17:44:10 GMT
+  recorded_at: Sun, 23 Aug 2015 00:46:49 GMT
 recorded_with: VCR 2.9.3

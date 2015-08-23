@@ -19,6 +19,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'figaro'
 gem 'stripe'
+gem 'stripe_event'
 gem 'draper'
 
 group :development do
