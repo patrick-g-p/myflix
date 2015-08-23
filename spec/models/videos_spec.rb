@@ -87,5 +87,27 @@ describe Video do
         expect(Video.search("star").records.to_a).to eq [star_trek, star_wars]
       end
     end
+    
+    context "with title and description" do
+      it "returns an array of many videos based for title and description match" do
+        star_wars = Fabricate(:video, title: "Star Wars")
+        about_sun = Fabricate(:video, description: "sun is a star")
+        refresh_index
+
+        expect(Video.search("star").records.to_a).to eq [star_wars, about_sun]
+      end
+    end
+
+    context "multiple words must match" do
+      it "returns an array of videos where 2 words match title" do
+        star_wars1 = Fabricate(:video, title: "Star Wars: Episode I")
+        star_wars2 = Fabricate(:video, title: "Star Wars: Episode II")
+        bride_wars = Fabricate(:video, title: "Bride Wars")
+        star_trek = Fabricate(:video, title: "Star Trek")
+        refresh_index
+
+        expect(Video.search("Star Wars").records.to_a).to eq [star_wars1, star_wars2]
+      end
+    end
   end
 end

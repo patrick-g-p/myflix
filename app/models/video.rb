@@ -20,4 +20,21 @@ class Video < ActiveRecord::Base
     return nil if reviews.count == 0
     reviews.average(:rating).to_f.round(1)
   end
+
+  def as_indexed_json(options={})
+    as_json(only: [:title, :description])
+  end
+
+  def self.search(query)
+  search_parameters = {
+    query: {
+      multi_match: {
+        query: query,
+        fields: ["title", "description"],
+        operator: "AND"
+      }
+    }
+  }
+  __elasticsearch__.search(search_parameters)
+end
 end
