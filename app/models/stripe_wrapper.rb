@@ -1,8 +1,4 @@
 module StripeWrapper
-  def self.set_api_key
-    Stripe.api_key = ENV.fetch('STRIPE_TEST_SK')
-  end
-
   class Charge
     attr_reader :response, :status
 

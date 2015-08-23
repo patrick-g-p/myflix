@@ -41,4 +41,5 @@ Myflix::Application.routes.draw do
   get 'my_queue', to: 'queue_items#index'
   post 'update_queue', to: 'queue_items#update_queue'
 
+  mount StripeEvent::Engine, at: '/stripe-events'
 end
