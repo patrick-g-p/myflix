@@ -8,7 +8,6 @@ StripeEvent.configure do |events|
 
   events.subscribe 'charge.failed' do |event|
     user = User.find_by_customer_token(event.data.object.customer)
-    user.update_column(:account_status, 'locked')
-    UserMailer.delay.send_failed_payment_notice(user.id)
+    user.lock_account!
   end
 end

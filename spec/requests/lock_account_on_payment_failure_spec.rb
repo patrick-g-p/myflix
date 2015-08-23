@@ -81,7 +81,7 @@ describe 'lock account on payment spec failure', {vcr: true} do
   it 'it locks out the customer on payment failure' do
     ross = Fabricate(:user, full_name: 'ross', customer_token: "cus_6qVm0p7pJaJHJm")
     post '/stripe-events', fail_event_data
-    expect(ross.reload.account_status).to eq('locked')
+    expect(ross.reload.locked_account?).to be_truthy
   end
 
   it 'send the customer an email informing them of the bad transaction' do

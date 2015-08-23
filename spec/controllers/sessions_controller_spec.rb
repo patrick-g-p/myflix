@@ -44,11 +44,13 @@ describe SessionsController do
     context 'valid with admin' do
       let(:triss) { Fabricate(:admin) }
 
-      it 'redirects to the admin dashboard' do
+      before(:each) do
         set_current_admin(triss)
         post :create, {email: triss.email, password: triss.password}
-        expect(response).to redirect_to new_admin_video_path
       end
+
+      it { should redirect_to(new_admin_video_path) }
+      it { should set_flash[:success] }
     end
 
     context 'when invalid' do

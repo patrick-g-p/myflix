@@ -19,6 +19,11 @@ class User < ActiveRecord::Base
     self.account_status == 'locked'
   end
 
+  def lock_account!
+    self.update_column(:account_status, 'locked')
+    UserMailer.delay.send_failed_payment_notice(self.id)
+  end
+
   def owns_queue_item?(queue_item)
     queue_items.include?(queue_item)
   end
