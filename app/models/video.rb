@@ -1,4 +1,7 @@
 class Video < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
   belongs_to :category
   has_many :reviews, -> { order('created_at DESC') }
 
