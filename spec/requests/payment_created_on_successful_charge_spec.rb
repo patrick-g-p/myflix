@@ -80,4 +80,20 @@ describe 'payment created on successful card charge', {vcr: true} do
     post '/stripe-events', event_data
     expect(Payment.count).to eq(1)
   end
+
+  it 'creates a payment with the correct amount' do
+    post '/stripe-events', event_data
+    expect(Payment.last.amount).to eq(999)
+  end
+
+  it 'creates a payment with the a reference id' do
+    post '/stripe-events', event_data
+    expect(Payment.last.reference_id).to eq("ch_16cnIEKUdRrCs1LrI9Q45EsF")
+  end
+
+  it 'creates a payment that is associated with a user in the database' do
+    danny = Fabricate(:user, customer_token: "cus_6qUGSkaiO56683")
+    post '/stripe-events', event_data
+    expect(Payment.last.user).to eq(danny)
+  end
 end
