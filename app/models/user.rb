@@ -15,6 +15,10 @@ class User < ActiveRecord::Base
     self.role == 'admin'
   end
 
+  def locked_account?
+    self.account_status == 'locked'
+  end
+
   def owns_queue_item?(queue_item)
     queue_items.include?(queue_item)
   end

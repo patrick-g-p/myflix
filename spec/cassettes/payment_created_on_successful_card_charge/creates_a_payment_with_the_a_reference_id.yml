@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.stripe.com/v1/events/evt_16cnIEKUdRrCs1LrCevUYGpR
+    uri: https://api.stripe.com/v1/events/evt_16cphPKUdRrCs1LrLozYaoBL
     body:
       encoding: US-ASCII
       string: ''
@@ -29,11 +29,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sun, 23 Aug 2015 02:08:09 GMT
+      - Sun, 23 Aug 2015 04:07:02 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1997'
+      - '1991'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -47,7 +47,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6qUt6vXHGn1rTK
+      - req_6qWoyzvSWP1vrV
       Stripe-Version:
       - '2015-07-28'
       Strict-Transport-Security:
@@ -56,15 +56,15 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "evt_16cnIEKUdRrCs1LrCevUYGpR",
-          "created": 1440293346,
+          "id": "evt_16cphPKUdRrCs1LrLozYaoBL",
+          "created": 1440302595,
           "livemode": false,
           "type": "charge.succeeded",
           "data": {
             "object": {
-              "id": "ch_16cnIEKUdRrCs1LrI9Q45EsF",
+              "id": "ch_16cphPKUdRrCs1LrUEyolkfX",
               "object": "charge",
-              "created": 1440293346,
+              "created": 1440302595,
               "livemode": false,
               "paid": true,
               "status": "succeeded",
@@ -72,13 +72,13 @@ http_interactions:
               "currency": "usd",
               "refunded": false,
               "source": {
-                "id": "card_16cnIDKUdRrCs1LrrDvYsKsU",
+                "id": "card_16cpgwKUdRrCs1LrBOngrNEx",
                 "object": "card",
                 "last4": "4242",
                 "brand": "Visa",
                 "funding": "credit",
                 "exp_month": 8,
-                "exp_year": 2015,
+                "exp_year": 2016,
                 "fingerprint": "kuqCAfzAp21fifIi",
                 "country": "US",
                 "name": null,
@@ -94,19 +94,19 @@ http_interactions:
                 "tokenization_method": null,
                 "dynamic_last4": null,
                 "metadata": {},
-                "customer": "cus_6qUGSkaiO56683"
+                "customer": "cus_6qWk5c28L1PVFx"
               },
               "captured": true,
-              "balance_transaction": "txn_16cnIEKUdRrCs1LrSYu8y1nX",
+              "balance_transaction": "txn_16cphPKUdRrCs1Lrch4NudJW",
               "failure_message": null,
               "failure_code": null,
               "amount_refunded": 0,
-              "customer": "cus_6qUGSkaiO56683",
-              "invoice": "in_16cnIEKUdRrCs1LrAyAam0JY",
-              "description": null,
+              "customer": "cus_6qWk5c28L1PVFx",
+              "invoice": null,
+              "description": "myflix monthly charge",
               "dispute": null,
               "metadata": {},
-              "statement_descriptor": "Myflix Monthly Charge",
+              "statement_descriptor": "myflix monthly charge",
               "fraud_details": {},
               "receipt_email": null,
               "receipt_number": null,
@@ -117,16 +117,16 @@ http_interactions:
                 "object": "list",
                 "total_count": 0,
                 "has_more": false,
-                "url": "/v1/charges/ch_16cnIEKUdRrCs1LrI9Q45EsF/refunds",
+                "url": "/v1/charges/ch_16cphPKUdRrCs1LrUEyolkfX/refunds",
                 "data": []
               }
             }
           },
           "object": "event",
           "pending_webhooks": 0,
-          "request": "req_6qUGgUSsJRLt9A",
+          "request": "req_6qWkrSrf3XfTvm",
           "api_version": "2015-07-28"
         }
     http_version: 
-  recorded_at: Sun, 23 Aug 2015 02:08:10 GMT
+  recorded_at: Sun, 23 Aug 2015 04:07:03 GMT
 recorded_with: VCR 2.9.3

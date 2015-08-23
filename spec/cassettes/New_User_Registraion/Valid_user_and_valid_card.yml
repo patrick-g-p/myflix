@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/customers
     body:
       encoding: US-ASCII
-      string: source=tok_16cntyKUdRrCs1LrxTYwohas&plan=myflix_base&email=elmore%40schuppe.com&description=Monthly%20charge%20for%208%2F2015
+      string: source=tok_16cplFKUdRrCs1LrZIa3P5uw&plan=myflix_base&email=leonardo%40flatleyruecker.org&description=Monthly%20charge%20for%208%2F2015
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -22,7 +22,7 @@ http_interactions:
         source-11-xu 3.16.0-46-generic #62~14.04.1-Ubuntu SMP Tue Aug 11 16:27:16
         UTC 2015 x86_64 x86_64 x86_64 GNU/Linux"}'
       Content-Length:
-      - '125'
+      - '134'
   response:
     status:
       code: 200
@@ -31,11 +31,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sun, 23 Aug 2015 02:08:07 GMT
+      - Sun, 23 Aug 2015 04:07:14 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '2420'
+      - '2429'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -49,7 +49,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6qUtMK0vefguGZ
+      - req_6qWogKzrmRsnxn
       Stripe-Version:
       - '2015-07-28'
       Strict-Transport-Security:
@@ -59,11 +59,11 @@ http_interactions:
       string: |
         {
           "object": "customer",
-          "created": 1440295686,
-          "id": "cus_6qUtrHQFLUXDSJ",
+          "created": 1440302834,
+          "id": "cus_6qWoREKWumWLq8",
           "livemode": false,
           "description": "Monthly charge for 8/2015",
-          "email": "elmore@schuppe.com",
+          "email": "leonardo@flatleyruecker.org",
           "shipping": null,
           "delinquent": false,
           "metadata": {},
@@ -71,14 +71,14 @@ http_interactions:
             "object": "list",
             "total_count": 1,
             "has_more": false,
-            "url": "/v1/customers/cus_6qUtrHQFLUXDSJ/subscriptions",
+            "url": "/v1/customers/cus_6qWoREKWumWLq8/subscriptions",
             "data": [
               {
-                "id": "sub_6qUt0GdNaBp6ew",
+                "id": "sub_6qWoClN5gJtq1r",
                 "plan": {
                   "interval": "month",
                   "name": "Myflix Base Subscription",
-                  "created": 1440293286,
+                  "created": 1440298812,
                   "amount": 999,
                   "currency": "usd",
                   "id": "myflix_base",
@@ -90,12 +90,12 @@ http_interactions:
                   "statement_descriptor": "Myflix Monthly Charge"
                 },
                 "object": "subscription",
-                "start": 1440295686,
+                "start": 1440302834,
                 "status": "active",
-                "customer": "cus_6qUtrHQFLUXDSJ",
+                "customer": "cus_6qWoREKWumWLq8",
                 "cancel_at_period_end": false,
-                "current_period_start": 1440295686,
-                "current_period_end": 1442974086,
+                "current_period_start": 1440302834,
+                "current_period_end": 1442981234,
                 "ended_at": null,
                 "trial_start": null,
                 "trial_end": null,
@@ -115,10 +115,10 @@ http_interactions:
             "object": "list",
             "total_count": 1,
             "has_more": false,
-            "url": "/v1/customers/cus_6qUtrHQFLUXDSJ/sources",
+            "url": "/v1/customers/cus_6qWoREKWumWLq8/sources",
             "data": [
               {
-                "id": "card_16cntyKUdRrCs1Lrz5qLPRFf",
+                "id": "card_16cplFKUdRrCs1LrQImWwn4y",
                 "object": "card",
                 "last4": "4242",
                 "brand": "Visa",
@@ -140,12 +140,12 @@ http_interactions:
                 "tokenization_method": null,
                 "dynamic_last4": null,
                 "metadata": {},
-                "customer": "cus_6qUtrHQFLUXDSJ"
+                "customer": "cus_6qWoREKWumWLq8"
               }
             ]
           },
-          "default_source": "card_16cntyKUdRrCs1Lrz5qLPRFf"
+          "default_source": "card_16cplFKUdRrCs1LrQImWwn4y"
         }
     http_version: 
-  recorded_at: Sun, 23 Aug 2015 02:08:07 GMT
+  recorded_at: Sun, 23 Aug 2015 04:07:15 GMT
 recorded_with: VCR 2.9.3

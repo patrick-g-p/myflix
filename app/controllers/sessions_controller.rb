@@ -8,6 +8,11 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:email])
 
+    if user.locked_account?
+      flash[:warning] = "Sorry, your account is locked. Please fix or update your subscription."
+      return redirect_to root_path
+    end
+
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:success] = 'Welcome back to MyFlix!'

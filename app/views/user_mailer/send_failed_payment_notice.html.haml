@@ -1,0 +1,9 @@
+!!! 5
+%html(lang="en-US")
+  %body
+    %p #{@user.full_name.titleize}! Something unfortunatley went with your subscription payment.
+    %p Those crazy credit cards, getting in between you and MyFlix's huge selection of movies and tv shows.
+    %p You just need to fix the issue with you card and we'll unlock your account.
+    %p
+      Need any help? Feel free to send us an email:
+      = mail_to ENV['TA_EMAIL'], 'MyFlix Support'

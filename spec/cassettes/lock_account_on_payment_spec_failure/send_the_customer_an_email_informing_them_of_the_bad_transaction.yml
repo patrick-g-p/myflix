@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.stripe.com/v1/events/evt_16cphPKUdRrCs1LrLozYaoBL
+    uri: https://api.stripe.com/v1/events/evt_16comgKUdRrCs1LrKlF6k8pb
     body:
       encoding: US-ASCII
       string: ''
@@ -29,11 +29,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sun, 23 Aug 2015 04:07:03 GMT
+      - Sun, 23 Aug 2015 04:07:06 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1991'
+      - '1993'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -47,7 +47,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6qWoimTCkZbZul
+      - req_6qWo1KfpEFTfbG
       Stripe-Version:
       - '2015-07-28'
       Strict-Transport-Security:
@@ -56,30 +56,30 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "evt_16cphPKUdRrCs1LrLozYaoBL",
-          "created": 1440302595,
+          "id": "evt_16comgKUdRrCs1LrKlF6k8pb",
+          "created": 1440299078,
           "livemode": false,
-          "type": "charge.succeeded",
+          "type": "charge.failed",
           "data": {
             "object": {
-              "id": "ch_16cphPKUdRrCs1LrUEyolkfX",
+              "id": "ch_16comgKUdRrCs1Lr9jM7FUvO",
               "object": "charge",
-              "created": 1440302595,
+              "created": 1440299078,
               "livemode": false,
-              "paid": true,
-              "status": "succeeded",
+              "paid": false,
+              "status": "failed",
               "amount": 999,
               "currency": "usd",
               "refunded": false,
               "source": {
-                "id": "card_16cpgwKUdRrCs1LrBOngrNEx",
+                "id": "card_16comAKUdRrCs1LrjiubpDHY",
                 "object": "card",
-                "last4": "4242",
+                "last4": "0341",
                 "brand": "Visa",
                 "funding": "credit",
                 "exp_month": 8,
-                "exp_year": 2016,
-                "fingerprint": "kuqCAfzAp21fifIi",
+                "exp_year": 2019,
+                "fingerprint": "Y1aIepUQrAX0qSGo",
                 "country": "US",
                 "name": null,
                 "address_line1": null,
@@ -94,19 +94,19 @@ http_interactions:
                 "tokenization_method": null,
                 "dynamic_last4": null,
                 "metadata": {},
-                "customer": "cus_6qWk5c28L1PVFx"
+                "customer": "cus_6qVm0p7pJaJHJm"
               },
-              "captured": true,
-              "balance_transaction": "txn_16cphPKUdRrCs1Lrch4NudJW",
-              "failure_message": null,
-              "failure_code": null,
+              "captured": false,
+              "balance_transaction": null,
+              "failure_message": "Your card was declined.",
+              "failure_code": "card_declined",
               "amount_refunded": 0,
-              "customer": "cus_6qWk5c28L1PVFx",
+              "customer": "cus_6qVm0p7pJaJHJm",
               "invoice": null,
-              "description": "myflix monthly charge",
+              "description": "Myflix Monthly Charge",
               "dispute": null,
               "metadata": {},
-              "statement_descriptor": "myflix monthly charge",
+              "statement_descriptor": "Myflix Monthly Charge",
               "fraud_details": {},
               "receipt_email": null,
               "receipt_number": null,
@@ -117,16 +117,16 @@ http_interactions:
                 "object": "list",
                 "total_count": 0,
                 "has_more": false,
-                "url": "/v1/charges/ch_16cphPKUdRrCs1LrUEyolkfX/refunds",
+                "url": "/v1/charges/ch_16comgKUdRrCs1Lr9jM7FUvO/refunds",
                 "data": []
               }
             }
           },
           "object": "event",
           "pending_webhooks": 0,
-          "request": "req_6qWkrSrf3XfTvm",
+          "request": "req_6qVoItLhThONJi",
           "api_version": "2015-07-28"
         }
     http_version: 
-  recorded_at: Sun, 23 Aug 2015 04:07:04 GMT
+  recorded_at: Sun, 23 Aug 2015 04:07:07 GMT
 recorded_with: VCR 2.9.3
