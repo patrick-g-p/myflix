@@ -15,7 +15,7 @@ feature "User interacts with advanced search", :elasticsearch do
   scenario "user searches with title" do
     within(".advanced_search") do
       fill_in "query", with: "Star Wars"
-      click_button "Search"
+      click_on "Advanced Search"
     end
 
     expect(page).to have_content("2 videos found")
@@ -27,7 +27,7 @@ feature "User interacts with advanced search", :elasticsearch do
   scenario "user searches with title and description" do
     within(".advanced_search") do
       fill_in "query", with: "wedding movie"
-      click_button "Search"
+      click_on "Advanced Search"
     end
     expect(page).to have_content("Bride Wars")
     expect(page).to have_no_content("Star")
