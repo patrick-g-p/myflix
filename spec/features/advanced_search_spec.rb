@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature "User interacts with advanced search", :elasticsearch, js: true, driver: :selenium do
+feature "User interacts with advanced search", :elasticsearch do
 
   background do
     star_wars_1 = Fabricate(:video, title: "Star Wars: Episode 1")
