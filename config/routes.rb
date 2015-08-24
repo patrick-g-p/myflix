@@ -12,6 +12,8 @@ Myflix::Application.routes.draw do
 
   resources :users, only: [:new, :create, :show]
 
+  get 'my_plan_and_billing', to: 'payments#show'
+
   get 'forgot_password', to: 'forgotten_passwords#new'
   get 'forgot_password/confirm', to: 'forgotten_passwords#confirm'
   resources :forgotten_passwords, only: [:create]

@@ -20,7 +20,7 @@
           %ul.dropdown-menu(role="menu" aria-labelledby="dlabel")
             %li
               = link_to 'Account', current_user
-              %a(href="#") Plan and Billing
+              = link_to 'Plan and Billing', my_plan_and_billing_path
               %a(href="/logout") Sign Out
   - else
     .pull-right

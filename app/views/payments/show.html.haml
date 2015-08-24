@@ -1,0 +1,19 @@
+%section.user.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      %article
+        %header
+          %h2 Plan and Billing
+          %h3 You are current enrolled in the Myflix Monthly Plan
+        %table.table
+          %thead
+            %tr
+              %th(width="15%") Plan
+              %th(width="15%") Amount
+              %th(width="15%") Payment Date
+          %tbody
+            - @payments.each do |payment|
+              %tr
+                %td MyFlix Monthly
+                %td= number_to_currency( payment.amount / 100.0)
+                %td= payment.created_at

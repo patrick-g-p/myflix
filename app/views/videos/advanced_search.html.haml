@@ -24,6 +24,6 @@
           = link_to video do
             %p= video.title
             = image_tag video.small_cover
-            %p= "#{video.reviews.count} reviews" unless video.reviews.empty?
+            %p= "#{video.reviews.count} reviews" if params[:reviews]
     - else
       %p No videos found
