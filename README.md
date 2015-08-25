@@ -13,3 +13,5 @@ Built with Ruby 2 and Rails 4. Tested with RSpec.
 - Video ratings and Reviews
 - Admin Panel: view user payments and add new videos
 - Advanced video searching with Elasticsearch
+
+[![Circle CI](https://circleci.com/gh/patrick-g-pavesi/myflix.svg?style=svg)](https://circleci.com/gh/patrick-g-pavesi/myflix)
