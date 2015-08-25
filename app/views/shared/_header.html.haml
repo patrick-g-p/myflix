@@ -9,7 +9,8 @@
       %li= link_to "Invite Friends", invite_path
     = bootstrap_form_tag url: search_videos_path, method: 'get' do |f|
       = f.text_field :search, hide_label: true, placeholder: "Search for a video!"
-      = f.submit 'Submit Search', class: 'btn btn-default'
+      = f.submit 'Search', class: 'btn btn-default'
+    = link_to 'Advanced Search', advanced_search_videos_path, class: 'advanced-search-link'
     #user_links.pull-right.name_dropdown
       %ul
         %li.dropdown
@@ -19,7 +20,7 @@
           %ul.dropdown-menu(role="menu" aria-labelledby="dlabel")
             %li
               = link_to 'Account', current_user
-              %a(href="#") Plan and Billing
+              = link_to 'Plan and Billing', my_plan_and_billing_path
               %a(href="/logout") Sign Out
   - else
     .pull-right

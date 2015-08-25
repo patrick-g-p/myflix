@@ -31,7 +31,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sat, 22 Aug 2015 17:44:15 GMT
+      - Sun, 23 Aug 2015 04:07:17 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -49,7 +49,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6qMlGgMz70rvuo
+      - req_6qWoB4LSAlxUnv
       Stripe-Version:
       - '2015-07-28'
       Strict-Transport-Security:
@@ -58,14 +58,14 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_16cg2NKUdRrCs1Lr95ZWAcJ5",
+          "id": "tok_16cplJKUdRrCs1Lr8L8Q2lsm",
           "livemode": false,
-          "created": 1440265455,
+          "created": 1440302837,
           "used": false,
           "object": "token",
           "type": "card",
           "card": {
-            "id": "card_16cg2MKUdRrCs1LrpMR1FSrn",
+            "id": "card_16cplJKUdRrCs1LrhfbLyzRB",
             "object": "card",
             "last4": "0002",
             "brand": "Visa",
@@ -91,13 +91,13 @@ http_interactions:
           "client_ip": "24.190.115.87"
         }
     http_version: 
-  recorded_at: Sat, 22 Aug 2015 17:44:15 GMT
+  recorded_at: Sun, 23 Aug 2015 04:07:18 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/customers
     body:
       encoding: US-ASCII
-      string: source=tok_16cg2NKUdRrCs1Lr95ZWAcJ5&plan=myflix_base&email=stripetest%40example.com&description=Monthly%20charge%20for%208%2F2015
+      string: source=tok_16cplJKUdRrCs1Lr8L8Q2lsm&plan=myflix_base&email=stripetest%40example.com&description=Monthly%20charge%20for%208%2F2015
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -123,7 +123,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sat, 22 Aug 2015 17:44:15 GMT
+      - Sun, 23 Aug 2015 04:07:18 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -141,7 +141,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6qMlvyfNCRLPPG
+      - req_6qWo3MmfoDfzT7
       Stripe-Version:
       - '2015-07-28'
     body:
@@ -156,5 +156,5 @@ http_interactions:
           }
         }
     http_version: 
-  recorded_at: Sat, 22 Aug 2015 17:44:15 GMT
+  recorded_at: Sun, 23 Aug 2015 04:07:19 GMT
 recorded_with: VCR 2.9.3

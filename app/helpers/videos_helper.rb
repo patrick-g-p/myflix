@@ -10,4 +10,8 @@ module VideosHelper
       false
     end
   end
+
+  def average_ratings
+    (10..50).map { |number| number / 10.0 }
+  end
 end

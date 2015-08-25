@@ -16,4 +16,10 @@ class UserMailer < ActionMailer::Base
 
     mail from: 'support@myflix.com', to: @invitation.recipients_email, subject: "You're invited to join MyFlix!!"
   end
+
+  def send_failed_payment_notice(user_id)
+    @user = User.find(user_id)
+
+    mail from: 'support@myflix.com', to: @user.email, subject: 'Oh no! Payment failure!'
+  end
 end

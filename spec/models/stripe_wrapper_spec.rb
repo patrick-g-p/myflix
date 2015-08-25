@@ -1,13 +1,6 @@
 require 'spec_helper'
 
 describe StripeWrapper do
-  describe '.set_api_key' do
-    it 'sets the api key' do
-      StripeWrapper.set_api_key
-      expect(Stripe.api_key).to be_present
-    end
-  end
-
   let(:valid_token) do
     Stripe::Token.create(
       :card => {
@@ -33,10 +26,6 @@ describe StripeWrapper do
   let(:stripe_test_user) { Fabricate(:user, email: 'stripetest@example.com') }
 
   describe StripeWrapper::Charge, {vcr: true} do
-    before(:each) do
-      StripeWrapper.set_api_key
-    end
-
     describe '.charge' do
       context 'valid card' do
         it 'charges successfully' do
@@ -60,10 +49,6 @@ describe StripeWrapper do
   end
 
   describe StripeWrapper::Customer, {vcr: true} do
-    before(:each) do
-      StripeWrapper.set_api_key
-    end
-
     describe '.create' do
       context 'valid card' do
         it 'creates a new customer' do

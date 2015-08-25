@@ -10,6 +10,7 @@ class UserRegistration
       customer_creation = StripeWrapper::Customer.create(token: stripe_token, user: @user)
 
       if customer_creation.successful?
+        @user.customer_token = customer_creation.customer_token
         @user.save
 
         if invitation_token

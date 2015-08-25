@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :following_relationships, class_name: 'Relationship', foreign_key: 'follower_id'
   has_many :leading_relationships, class_name: 'Relationship', foreign_key: 'leader_id'
   has_many :invitations, foreign_key: 'inviter_id'
+  has_many :payments
 
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, on: [:create, :update], length: {minimum: 5}
@@ -12,6 +13,15 @@ class User < ActiveRecord::Base
 
   def admin?
     self.role == 'admin'
+  end
+
+  def locked_account?
+    self.account_status == 'locked'
+  end
+
+  def lock_account!
+    self.update_column(:account_status, 'locked')
+    UserMailer.delay.send_failed_payment_notice(self.id)
   end
 
   def owns_queue_item?(queue_item)

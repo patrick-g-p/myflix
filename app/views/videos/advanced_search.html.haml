@@ -1,0 +1,29 @@
+%section.container
+  .well
+    = form_tag advanced_search_videos_path, class: 'advanced_search', method: :get do
+      .form-group
+        = label_tag :query, 'Advanced Search - Enter Query'
+        = search_field_tag :query, params[:query], class: 'form-control', placeholder: 'By title or description'
+      .form-group
+        = label_tag :reviews, "Include Reviews"
+        = check_box_tag :reviews, 'yes', params[:reviews] == 'yes'
+      .form-group
+        = label_tag "Rating"
+        %br
+        = select_tag :rating_from, options_for_select(average_ratings, params[:rating_from]), prompt: "From"
+        = select_tag :rating_to, options_for_select(average_ratings, params[:rating_to]), prompt: "To"
+      .form-group
+        = submit_tag 'Advanced Search', class: 'btn btn-info'
+  - if params[:query].present?
+    %hr
+    - if @search_results
+      %h1.advanced-search-counter= "#{@search_results.count} videos found"
+      .videos.row
+      - @search_results.each do |video|
+        .video.col-sm-3
+          = link_to video do
+            %p= video.title
+            = image_tag video.small_cover
+            %p= "#{video.reviews.count} reviews" if params[:reviews]
+    - else
+      %p No videos found

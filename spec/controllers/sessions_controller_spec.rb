@@ -32,14 +32,25 @@ describe SessionsController do
       end
     end
 
+    context 'when account is locked' do
+      let(:ciri) { Fabricate(:user, account_status: 'locked') }
+
+      before(:each) { post :create, email: ciri.email, password: ciri.password }
+
+      it { should redirect_to(root_path) }
+      it { should set_flash[:warning] }
+    end
+
     context 'valid with admin' do
       let(:triss) { Fabricate(:admin) }
 
-      it 'redirects to the admin dashboard' do
+      before(:each) do
         set_current_admin(triss)
         post :create, {email: triss.email, password: triss.password}
-        expect(response).to redirect_to new_admin_video_path
       end
+
+      it { should redirect_to(new_admin_video_path) }
+      it { should set_flash[:success] }
     end
 
     context 'when invalid' do

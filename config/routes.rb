@@ -12,6 +12,8 @@ Myflix::Application.routes.draw do
 
   resources :users, only: [:new, :create, :show]
 
+  get 'my_plan_and_billing', to: 'payments#show'
+
   get 'forgot_password', to: 'forgotten_passwords#new'
   get 'forgot_password/confirm', to: 'forgotten_passwords#confirm'
   resources :forgotten_passwords, only: [:create]
@@ -22,11 +24,13 @@ Myflix::Application.routes.draw do
 
   namespace :admin do
     resources :videos, only: [:new, :create]
+    resources :payments, only: [:index]
   end
 
   resources :videos, only: [:index, :show] do
     collection do
       get 'search', to: 'videos#search'
+      get 'advanced_search', to: 'videos#advanced_search'
     end
 
     resources :reviews, only: [:create]
@@ -41,4 +45,5 @@ Myflix::Application.routes.draw do
   get 'my_queue', to: 'queue_items#index'
   post 'update_queue', to: 'queue_items#update_queue'
 
+  mount StripeEvent::Engine, at: '/stripe-events'
 end
