@@ -2,7 +2,7 @@ require 'spec_helper'
 
 feature 'user payment and billing' do
   let(:brian) { Fabricate(:user, full_name: 'Ninja Brian') }
-  let!(:brians_registration_payment) { Fabricate(:payment, user: brian) }
+  let!(:brians_registration_payment) { Fabricate(:payment, user: brian, reference_id: 'notonthepage') }
 
   scenario 'a user logs in and check their billing page' do
     login(brian)
