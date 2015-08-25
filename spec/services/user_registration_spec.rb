@@ -5,7 +5,7 @@ describe UserRegistration do
     after { ActionMailer::Base.deliveries.clear }
 
     context 'with valid user and valid card' do
-      let(:customer_results) { double(:customer_results, successful?: true) }
+      let(:customer_results) { double(:customer_results, successful?: true, customer_token: 'hk47') }
 
       before(:each) do
         expect(StripeWrapper::Customer).to receive(:create).and_return(customer_results)
@@ -31,6 +31,11 @@ describe UserRegistration do
         UserRegistration.new(Fabricate.build(:user)).register_new_user('benderisgreat')
         last_sent_email_content = ActionMailer::Base.deliveries.last.body
         expect(last_sent_email_content).to include("You've successfully registered for a MyFlix account")
+      end
+
+      it 'sets the users customer token' do
+        UserRegistration.new(Fabricate.build(:user)).register_new_user('benderisgreat')
+        expect(User.last.customer_token).to eq('hk47')
       end
 
       context 'with invitation token' do

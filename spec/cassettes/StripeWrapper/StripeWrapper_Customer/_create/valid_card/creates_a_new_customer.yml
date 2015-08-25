@@ -31,7 +31,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sat, 22 Aug 2015 17:44:13 GMT
+      - Sun, 23 Aug 2015 04:07:19 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -49,7 +49,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6qMlXTMpWpT3ye
+      - req_6qWoxal7DaAI7q
       Stripe-Version:
       - '2015-07-28'
       Strict-Transport-Security:
@@ -58,14 +58,14 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_16cg2LKUdRrCs1LrVcXuDizb",
+          "id": "tok_16cplLKUdRrCs1LrxJAiHBsm",
           "livemode": false,
-          "created": 1440265453,
+          "created": 1440302839,
           "used": false,
           "object": "token",
           "type": "card",
           "card": {
-            "id": "card_16cg2LKUdRrCs1Lrqavvk7FJ",
+            "id": "card_16cplLKUdRrCs1LrJiqwiqe6",
             "object": "card",
             "last4": "4242",
             "brand": "Visa",
@@ -91,13 +91,13 @@ http_interactions:
           "client_ip": "24.190.115.87"
         }
     http_version: 
-  recorded_at: Sat, 22 Aug 2015 17:44:13 GMT
+  recorded_at: Sun, 23 Aug 2015 04:07:19 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/customers
     body:
       encoding: US-ASCII
-      string: source=tok_16cg2LKUdRrCs1LrVcXuDizb&plan=myflix_base&email=stripetest%40example.com&description=Monthly%20charge%20for%208%2F2015
+      string: source=tok_16cplLKUdRrCs1LrxJAiHBsm&plan=myflix_base&email=stripetest%40example.com&description=Monthly%20charge%20for%208%2F2015
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -123,7 +123,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sat, 22 Aug 2015 17:44:14 GMT
+      - Sun, 23 Aug 2015 04:07:20 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -141,7 +141,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6qMlX3sJR7iCdZ
+      - req_6qWohcd94Mj62d
       Stripe-Version:
       - '2015-07-28'
       Strict-Transport-Security:
@@ -151,8 +151,8 @@ http_interactions:
       string: |
         {
           "object": "customer",
-          "created": 1440265453,
-          "id": "cus_6qMlNWxdmFwulI",
+          "created": 1440302839,
+          "id": "cus_6qWop7saoV1oJj",
           "livemode": false,
           "description": "Monthly charge for 8/2015",
           "email": "stripetest@example.com",
@@ -163,14 +163,14 @@ http_interactions:
             "object": "list",
             "total_count": 1,
             "has_more": false,
-            "url": "/v1/customers/cus_6qMlNWxdmFwulI/subscriptions",
+            "url": "/v1/customers/cus_6qWop7saoV1oJj/subscriptions",
             "data": [
               {
-                "id": "sub_6qMlcZ7iP83sAE",
+                "id": "sub_6qWo18QMJvMVR1",
                 "plan": {
                   "interval": "month",
-                  "name": "MyFlix Base Subscription",
-                  "created": 1440264674,
+                  "name": "Myflix Base Subscription",
+                  "created": 1440298812,
                   "amount": 999,
                   "currency": "usd",
                   "id": "myflix_base",
@@ -179,15 +179,15 @@ http_interactions:
                   "interval_count": 1,
                   "trial_period_days": null,
                   "metadata": {},
-                  "statement_descriptor": "MyFlix Monthly Charge"
+                  "statement_descriptor": "Myflix Monthly Charge"
                 },
                 "object": "subscription",
-                "start": 1440265454,
+                "start": 1440302839,
                 "status": "active",
-                "customer": "cus_6qMlNWxdmFwulI",
+                "customer": "cus_6qWop7saoV1oJj",
                 "cancel_at_period_end": false,
-                "current_period_start": 1440265454,
-                "current_period_end": 1442943854,
+                "current_period_start": 1440302839,
+                "current_period_end": 1442981239,
                 "ended_at": null,
                 "trial_start": null,
                 "trial_end": null,
@@ -207,10 +207,10 @@ http_interactions:
             "object": "list",
             "total_count": 1,
             "has_more": false,
-            "url": "/v1/customers/cus_6qMlNWxdmFwulI/sources",
+            "url": "/v1/customers/cus_6qWop7saoV1oJj/sources",
             "data": [
               {
-                "id": "card_16cg2LKUdRrCs1Lrqavvk7FJ",
+                "id": "card_16cplLKUdRrCs1LrJiqwiqe6",
                 "object": "card",
                 "last4": "4242",
                 "brand": "Visa",
@@ -232,12 +232,12 @@ http_interactions:
                 "tokenization_method": null,
                 "dynamic_last4": null,
                 "metadata": {},
-                "customer": "cus_6qMlNWxdmFwulI"
+                "customer": "cus_6qWop7saoV1oJj"
               }
             ]
           },
-          "default_source": "card_16cg2LKUdRrCs1Lrqavvk7FJ"
+          "default_source": "card_16cplLKUdRrCs1LrJiqwiqe6"
         }
     http_version: 
-  recorded_at: Sat, 22 Aug 2015 17:44:14 GMT
+  recorded_at: Sun, 23 Aug 2015 04:07:20 GMT
 recorded_with: VCR 2.9.3
