@@ -1,8 +1,6 @@
-Myflix
-===
-> 'A Video On Demand Service'
+A Netflix clone I built as a bootcamp student at [Tealeaf Academy](https://gotealeaf.com) (which has rebranded as [Launch School](https://launchschool.com/))
 
-A production quality application built for the third course at [Tealeaf Academy](http://gotealeaf.com)
+![MyFlix](https://i.imgur.com/uZbAp1a.png)
 
 Built with Ruby 2 and Rails 4. Tested with RSpec.
 
@@ -14,4 +12,4 @@ Built with Ruby 2 and Rails 4. Tested with RSpec.
 - Admin Panel: view user payments and add new videos
 - Advanced video searching with Elasticsearch
 
-[![Circle CI](https://circleci.com/gh/patrick-g-pavesi/myflix.svg?style=svg)](https://circleci.com/gh/patrick-g-pavesi/myflix)
+I plan on revisiting this project during the summer of 2018 and updating it to Rails 5 using React on the Front End.
